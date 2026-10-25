@@ -1,0 +1,22 @@
+{
+  "name": "sathish-media-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sathish Media website and admin backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-pg-simple": "^10.0.0",
+    "dotenv": "^16.6.1",
+    "express": "^5.3.0",
+    "express-session": "^1.19.0",
+    "helmet": "^8.1.0",
+    "pg": "^8.23.1"
+  }
+}

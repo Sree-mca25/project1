@@ -1,0 +1,3835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sathish Media — Static Website Management Panel</title>
+  <meta name="description" content="Manage products, services, arts, and site settings locally." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" />
+  <style>
+    /* ─── VARIABLES & STYLING SYSTEM ─────────────────────────── */
+    :root {
+      --bg: #0a0a0a;
+      --bg-sidebar: #111111;
+      --bg-card: #1f1f1f;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f0f0f0;
+      --text-dim: #999;
+      --text-muted: #555;
+      --accent: #FF4E00;
+      --accent-glow: rgba(255, 78, 0, 0.15);
+      --green: #25D366;
+      --green-glow: rgba(37, 211, 102, 0.15);
+      --gold: #f5c842;
+      --gold-glow: rgba(245, 200, 66, 0.15);
+      --radius: 12px;
+      --radius-lg: 18px;
+      --radius-sm: 8px;
+      --shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      --font: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body.light-theme {
+      --bg: #f8fafc;
+      --bg-sidebar: #0f172a;
+      --bg-card: #ffffff;
+      --border: rgba(15, 23, 42, 0.08);
+      --text: #0f172a;
+      --text-dim: #475569;
+      --text-muted: #94a3b8;
+      --shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    /* ─── BASE RESET ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow: hidden;
+      transition: background var(--transition), color var(--transition);
+      height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    /* ─── SCROLLBAR ──────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+
+    /* ─── AUTH LOGIN SCREEN ──────────────────────────────────────── */
+    .auth-container {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, var(--bg-card) 0%, var(--bg) 100%);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+      animation: zoomIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.92) translateY(12px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .auth-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .auth-logo {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    .auth-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .auth-subtitle {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-top: 0.25rem;
+    }
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .auth-btn {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 0.9rem;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 6px 20px var(--accent-glow);
+      transition: transform var(--transition), opacity var(--transition);
+      margin-top: 0.5rem;
+    }
+    .auth-btn:hover { opacity: 0.95; transform: translateY(-1px); }
+
+    /* ─── DASHBOARD LAYOUT ────────────────────────────────────────── */
+    .dashboard {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    /* ─── SIDEBAR ────────────────────────────────────────────────── */
+    .sidebar {
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.5rem;
+    }
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 3rem;
+    }
+    .brand-icon {
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, rgba(255,78,0,0.2), rgba(236,72,153,0.3));
+      border: 1px solid var(--border);
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .brand-name { font-weight: 800; font-size: 0.95rem; }
+    .brand-tag { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; font-weight: 700; }
+    
+    .sidebar-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      flex: 1;
+    }
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      color: var(--text-dim);
+      font-size: 13px;
+      font-weight: 600;
+      transition: color var(--transition), background var(--transition);
+      width: 100%;
+    }
+    .menu-item:hover, .menu-item.active {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .menu-item.active {
+      color: var(--text);
+      background: var(--accent-glow);
+      border-left: 3px solid var(--accent);
+    }
+    .menu-item-icon { font-size: 1.1rem; width: 20px; text-align: center; }
+
+    /* ─── MAIN PANELS ────────────────────────────────────────────── */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .main-header {
+      height: 70px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      background: var(--bg-card);
+    }
+    .panel-title-area h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .panel-title-area p {
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .theme-toggle-btn {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dim);
+      font-size: 1.1rem;
+      transition: all var(--transition);
+    }
+    .theme-toggle-btn:hover {
+      background: var(--bg);
+      color: var(--text);
+    }
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .user-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--gold));
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800;
+      font-size: 12px;
+    }
+    .user-info { display: flex; flex-direction: column; line-height: 1.1; }
+    .user-name { font-weight: 700; font-size: 12px; }
+    .user-role { font-size: 10px; color: var(--text-dim); font-family: var(--font-mono); }
+
+    /* ─── MODULE PANELS ───────────────────────────────────────────── */
+    .panel-viewport {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2.5rem;
+    }
+    .viewport-panel {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .viewport-panel.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Table & Card Controls */
+    .controls-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .search-input-wrap {
+      position: relative;
+      max-width: 320px;
+      width: 100%;
+    }
+    .search-icon {
+      position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%);
+      color: var(--text-dim); font-size: 0.95rem; pointer-events: none;
+    }
+    .search-input-wrap input {
+      padding-left: 2.3rem;
+    }
+    .btn-add {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex; align-items: center; gap: 0.5rem;
+      box-shadow: 0 6px 15px var(--accent-glow);
+      transition: transform var(--transition), opacity var(--transition);
+    }
+    .btn-add:hover { transform: translateY(-1px); opacity: 0.95; }
+
+    /* Cards / Tables styling */
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .data-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      display: flex;
+      gap: 1rem;
+      position: relative;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .data-card:hover {
+      border-color: var(--text-dim);
+      transform: translateY(-2px);
+    }
+    .card-img {
+      width: 80px; height: 80px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .card-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .card-id { font-family: var(--font-mono); font-size: 9px; color: var(--text-dim); letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+    .card-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card-meta { font-size: 10px; color: var(--text-dim); margin-bottom: 0.4rem; font-family: var(--font-mono); }
+    .card-desc { font-size: 11px; color: var(--text-dim); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: auto; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.75rem; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+    .card-price { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--accent); }
+    .card-actions { display: flex; gap: 0.5rem; }
+    .btn-action {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      transition: all var(--transition);
+    }
+    .btn-action:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+    }
+    .btn-action.edit:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-action.delete:hover { border-color: #ff3333; color: #ff3333; }
+    
+    .status-badge {
+      position: absolute;
+      top: 0.5rem; right: 0.5rem;
+      font-size: 8px; font-weight: 800; font-family: var(--font-mono);
+      padding: 0.15rem 0.4rem; border-radius: 99px;
+      letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .status-badge.in-stock { background: var(--green-glow); color: var(--green); border: 1px solid rgba(37,211,102,0.3); }
+    .status-badge.out-of-stock { background: rgba(255, 78, 0, 0.08); color: var(--accent); border: 1px solid rgba(255,78,0,0.3); }
+    .status-badge.upcoming-status { background: rgba(245, 200, 66, 0.08); color: var(--gold); border: 1px solid rgba(245,200,66,0.3); }
+
+    /* ─── SETTINGS PANEL ──────────────────────────────────────────── */
+    .settings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .settings-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+    .settings-section-title {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .settings-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .readonly-field {
+      padding: 0.75rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-dim);
+      font-size: 13px;
+    }
+
+    /* ─── TOAST NOTIFICATIONS ───────────────────────────────────────── */
+    .toast-container { position: fixed; bottom: 2rem; right: 2rem; z-index: 99999; display: flex; flex-direction: column; gap: 0.75rem; }
+    .toast {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.875rem 1.25rem;
+      border-radius: var(--radius-sm); border: 1px solid var(--border);
+      background: var(--bg-card); color: var(--text);
+      font-size: 13px; font-weight: 600;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      animation: toastIn 0.3s ease forwards;
+      max-width: 320px;
+    }
+    .toast.success { border-color: rgba(37,211,102,0.4); }
+    .toast.error { border-color: rgba(255,78,0,0.4); }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── FORM MODAL WINDOWS ──────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 5000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-window {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 520px;
+      box-shadow: var(--shadow);
+      animation: zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      flex-direction: column;
+      max-height: 90vh;
+      overflow: hidden;
+    }
+    .modal-header {
+      padding: 1.25rem 1.75rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+/* Fix: keep the modal form inside the window and scroll its content */
+.modal-window > #modal-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.modal-window > #modal-form > .modal-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+    .modal-title { font-size: 14px; font-weight: 800; color: var(--text); }
+    .modal-close { font-size: 1.1rem; color: var(--text-dim); transition: color var(--transition); }
+    .modal-close:hover { color: var(--text); }
+    .modal-body {
+      padding: 1.75rem;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .modal-footer {
+      padding: 1.25rem 1.75rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+    }
+    .btn-secondary {
+      border: 1px solid var(--border);
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-size: 12px; font-weight: 600;
+      color: var(--text-dim);
+      transition: all var(--transition);
+    }
+    .btn-secondary:hover { color: var(--text); border-color: var(--text-dim); }
+    .btn-submit {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-size: 12px; font-weight: 700;
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    /* ─── EMPTY MODULE STYLES ──────────────────────────────────────── */
+    .empty-state {
+      text-align: center;
+      padding: 5rem 2rem;
+      color: var(--text-dim);
+    }
+    .empty-icon { font-size: 3.5rem; opacity: 0.25; margin-bottom: 1rem; }
+    .empty-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+
+    /* ─── DYNAMIC SUBTABS FOR SERVICES ─── */
+    .modal-window.modal-large {
+      max-width: 860px;
+    }
+    .modal-body.grid-2col {
+      display: grid;
+      grid-template-columns: 1.1fr 1.2fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .modal-body.grid-2col {
+        grid-template-columns: 1fr;
+      }
+    }
+    .subtab-btn {
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      transition: all var(--transition);
+    }
+    .subtab-btn:hover, .subtab-btn.active {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .subtab-btn.active {
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+    .subtab-panel {
+      display: none;
+    }
+    .subtab-panel.active {
+      display: block;
+    }
+    .nested-field-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .nested-delete-btn {
+      position: absolute;
+      top: 0.5rem; right: 0.5rem;
+      color: var(--text-dim);
+      font-size: 8px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: color var(--transition);
+    }
+    .nested-delete-btn:hover {
+      color: #ff3333;
+    }
+
+    /* ─── AUTO-ID DISPLAY BADGE ─────────────────────────────────── */
+    .auto-id-display {
+      padding: 0.65rem 1rem;
+      background: var(--bg);
+      border: 1px dashed rgba(255, 78, 0, 0.4);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .auto-id-display::before {
+      content: '⚡';
+      font-size: 11px;
+    }
+    .auto-id-hint {
+      font-size: 9px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── IMAGE UPLOAD WIDGET ──────────────────────────────────── */
+    .img-upload-zone {
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: border-color var(--transition);
+    }
+    .img-upload-zone:hover {
+      border-color: var(--accent);
+    }
+    .img-preview-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .img-thumb {
+      width: 60px; height: 60px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg);
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--text-muted);
+    }
+    .img-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+    .img-upload-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.85rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .img-upload-label:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .img-file-input { display: none; }
+    .img-size-warning {
+      font-size: 9px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+    .img-size-warning.error { color: #ff3333; }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════
+       AUTH LOGIN OVERLAY
+       ══════════════════════════════════════════════════ -->
+  <div class="auth-container" id="auth-container" style="display: none;">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo">🎬</div>
+        <h1 class="auth-title">Sathish Media</h1>
+        <div class="auth-subtitle">Static Management Panel</div>
+      </div>
+      
+      <!-- Standard Login Form -->
+      <form class="auth-form" id="login-form" onsubmit="handleLogin(event)">
+        <div>
+          <label for="login-email">Email Address</label>
+          <input type="email" id="login-email" required placeholder="admin@sathishmedia.com" autocomplete="email" />
+        </div>
+        <div>
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" required placeholder="••••••••" autocomplete="current-password" />
+        </div>
+        <div style="text-align: right; margin-top: -0.5rem;">
+          <a href="#" onclick="showForgotPasswordForm(event)" style="font-size: 11px; color: var(--accent); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em;">Forgot Password?</a>
+        </div>
+        <button type="submit" class="auth-btn">Sign In to Dashboard</button>
+      </form>
+
+      <!-- Forgot Password Request Form -->
+      <form class="auth-form" id="forgot-form" style="display: none;" onsubmit="handleForgotRequest(event)">
+        <div style="font-size: 12px; color: var(--text-dim); text-align: center; margin-bottom: 0.5rem; line-height: 1.4;">
+          Enter your registered email address to receive a secure OTP code.
+        </div>
+        <div>
+          <label for="forgot-email">Email Address</label>
+          <input type="email" id="forgot-email" required placeholder="admin@sathishmedia.com" />
+        </div>
+        <button type="submit" class="auth-btn">Send OTP Code</button>
+        <div style="text-align: center; margin-top: 0.5rem;">
+          <a href="#" onclick="showLoginForm(event)" style="font-size: 11px; color: var(--text-dim); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em;">Back to Sign In</a>
+        </div>
+      </form>
+
+      <!-- OTP Verification Form -->
+      <form class="auth-form" id="otp-form" style="display: none;" onsubmit="handleVerifyOtp(event)">
+        <div style="font-size: 12px; color: var(--text-dim); text-align: center; margin-bottom: 0.5rem; line-height: 1.4;">
+          A 6-digit OTP code has been sent to your email. Enter it below.
+        </div>
+        <div>
+          <label for="otp-code">Verification Code</label>
+          <input type="text" id="otp-code" required placeholder="e.g. 123456" maxlength="6" style="text-align: center; font-size: 18px; font-family: var(--font-mono); letter-spacing: 0.5em; padding-left: 0.25em;" />
+        </div>
+        <button type="submit" class="auth-btn">Verify OTP</button>
+        <div style="text-align: center; margin-top: 0.5rem;">
+          <a href="#" onclick="showLoginForm(event)" style="font-size: 11px; color: var(--text-dim); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em;">Cancel &amp; Sign In</a>
+        </div>
+      </form>
+
+      <!-- New Password Form -->
+      <form class="auth-form" id="reset-form" style="display: none;" onsubmit="handleResetPassword(event)">
+        <div style="font-size: 12px; color: var(--text-dim); text-align: center; margin-bottom: 0.5rem; line-height: 1.4;">
+          Create a new secure password for your account (min. 8 characters).
+        </div>
+        <div>
+          <label for="reset-password">New Password</label>
+          <input type="password" id="reset-password" required placeholder="••••••••" />
+        </div>
+        <div>
+          <label for="reset-confirm-password">Confirm Password</label>
+          <input type="password" id="reset-confirm-password" required placeholder="••••••••" />
+        </div>
+        <button type="submit" class="auth-btn">Save New Password</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       ADMIN DASHBOARD
+       ══════════════════════════════════════════════════ -->
+  <div class="dashboard" id="dashboard-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">🎬</div>
+        <div class="brand-text">
+          <span class="brand-name">Sathish Media</span>
+          <span class="brand-tag">Static Admin</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu" aria-label="Admin Navigation">
+        <button class="menu-item active" onclick="switchPanel('products', this)">
+          <span class="menu-item-icon">🛍️</span> Products
+        </button>
+        <button class="menu-item" onclick="switchPanel('services', this)">
+          <span class="menu-item-icon">💼</span> Services
+        </button>
+        <button class="menu-item" onclick="switchPanel('arts', this)">
+          <span class="menu-item-icon">🎨</span> Arts &amp; Stationery
+        </button>
+        <button class="menu-item" onclick="switchPanel('courses', this)">
+          <span class="menu-item-icon">🎓</span> Courses
+        </button>
+        <button class="menu-item" onclick="switchPanel('portfolio', this)">
+          <span class="menu-item-icon">🖼️</span> Portfolio
+        </button>
+        <button class="menu-item" id="menu-users" onclick="switchPanel('users', this)" style="display: none;">
+          <span class="menu-item-icon">👥</span> User Management
+        </button>
+        <button class="menu-item" id="menu-logs" onclick="switchPanel('logs', this)" style="display: none;">
+          <span class="menu-item-icon">📋</span> Activity Logs
+        </button>
+        <button class="menu-item" onclick="switchPanel('settings', this)">
+          <span class="menu-item-icon">⚙️</span> Settings
+        </button>
+        <button class="menu-item" onclick="handleLogout()" style="margin-top: auto; color: var(--accent);">
+          <span class="menu-item-icon">🚪</span> Logout
+        </button>
+      </nav>
+    </aside>
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+      
+      <!-- Top header bar -->
+      <header class="main-header">
+        <div class="panel-title-area">
+          <h2 id="current-panel-title">Products Management</h2>
+          <p id="current-panel-subtitle">Create, view, update and delete gift items</p>
+        </div>
+        <div class="header-actions">
+          <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">🌓</button>
+          <div class="user-profile">
+            <div class="user-avatar">SM</div>
+            <div class="user-info">
+              <span class="user-name">Sathish Admin</span>
+              <span class="user-role">Super Admin</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Stats Header Row -->
+      <div class="dashboard-stats-row" style="display: flex; gap: 1rem; padding: 1rem 2.5rem; background: var(--bg-card); border-bottom: 1px solid var(--border); overflow-x: auto; flex-wrap: wrap;">
+        <div class="stat-card" style="flex: 1; min-width: 140px; padding: 0.75rem 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 0.2rem; transition: transform var(--transition);">
+          <span style="font-size: 8px; font-family: var(--font-mono); color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;">Total Products</span>
+          <span id="stat-products-count" style="font-size: 1.15rem; font-weight: 900; color: var(--accent);">0</span>
+        </div>
+        <div class="stat-card" style="flex: 1; min-width: 140px; padding: 0.75rem 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 0.2rem; transition: transform var(--transition);">
+          <span style="font-size: 8px; font-family: var(--font-mono); color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;">Total Services</span>
+          <span id="stat-services-count" style="font-size: 1.15rem; font-weight: 900; color: var(--accent);">0</span>
+        </div>
+        <div class="stat-card" style="flex: 1; min-width: 140px; padding: 0.75rem 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 0.2rem; transition: transform var(--transition);">
+          <span style="font-size: 8px; font-family: var(--font-mono); color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;">Total Portfolio Items</span>
+          <span id="stat-portfolio-count" style="font-size: 1.15rem; font-weight: 900; color: var(--accent);">0</span>
+        </div>
+        <div class="stat-card" style="flex: 1; min-width: 140px; padding: 0.75rem 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 0.2rem; transition: transform var(--transition);">
+          <span style="font-size: 8px; font-family: var(--font-mono); color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;">Total Courses</span>
+          <span id="stat-courses-count" style="font-size: 1.15rem; font-weight: 900; color: var(--accent);">0</span>
+        </div>
+        <div class="stat-card" style="flex: 1; min-width: 140px; padding: 0.75rem 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 0.2rem; transition: transform var(--transition);">
+          <span style="font-size: 8px; font-family: var(--font-mono); color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;">Total Categories</span>
+          <span id="stat-categories-count" style="font-size: 1.15rem; font-weight: 900; color: var(--accent);">0</span>
+        </div>
+      </div>
+
+      <!-- Panel Viewport -->
+      <div class="panel-viewport">
+
+        <!-- ─── PRODUCTS PANEL ─── -->
+        <section class="viewport-panel active" id="panel-products">
+          <div class="controls-row">
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="search" id="search-products" placeholder="Search products..." oninput="filterProducts()" />
+            </div>
+            <button class="btn-add" onclick="openAddModal('products')">➕ Add Product</button>
+          </div>
+          <div class="data-grid" id="products-list-grid"></div>
+        </section>
+
+        <!-- ─── SERVICES PANEL ─── -->
+        <section class="viewport-panel" id="panel-services">
+          <div class="controls-row">
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="search" id="search-services" placeholder="Search services..." oninput="filterServices()" />
+            </div>
+            <button class="btn-add" onclick="openAddModal('services')">➕ Add Service</button>
+          </div>
+          <div class="data-grid" id="services-list-grid"></div>
+        </section>
+
+        <!-- ─── ARTS & STATIONERY PANEL ─── -->
+        <section class="viewport-panel" id="panel-arts">
+          <div class="controls-row">
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="search" id="search-arts" placeholder="Search items..." oninput="filterArts()" />
+            </div>
+            <button class="btn-add" onclick="openAddModal('arts')">➕ Add Item</button>
+          </div>
+          <div class="data-grid" id="arts-list-grid"></div>
+        </section>
+
+        <!-- ─── COURSES PANEL ─── -->
+        <section class="viewport-panel" id="panel-courses">
+          <div class="controls-row">
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="search" id="search-courses" placeholder="Search courses..." oninput="filterCourses()" />
+            </div>
+            <button class="btn-add" onclick="openAddModal('courses')">➕ Add Course</button>
+          </div>
+          <div class="data-grid" id="courses-list-grid"></div>
+        </section>
+
+        <!-- ─── PORTFOLIO PANEL ─── -->
+        <section class="viewport-panel" id="panel-portfolio">
+          <div class="controls-row">
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="search" id="search-portfolio" placeholder="Search portfolio..." oninput="filterPortfolioAdmin()" />
+            </div>
+            <button class="btn-add" onclick="openAddModal('portfolio')">➕ Add Portfolio Item</button>
+          </div>
+          <div class="data-grid" id="portfolio-list-grid"></div>
+        </section>
+
+        <!-- ─── USER MANAGEMENT PANEL ─── -->
+        <section class="viewport-panel" id="panel-users">
+          <div class="controls-row">
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="search" id="search-users" placeholder="Search users by name, username, email..." oninput="filterUsers()" />
+            </div>
+            <button class="btn-add" onclick="openAddModal('users')">➕ Add User</button>
+          </div>
+          <div class="data-grid" id="users-list-grid"></div>
+        </section>
+
+        <!-- ─── ACTIVITY LOGS PANEL ─── -->
+        <section class="viewport-panel" id="panel-logs">
+          <div class="controls-row">
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="search" id="search-logs" placeholder="Search logs by action or username..." oninput="filterLogs()" />
+            </div>
+            <button class="btn-secondary" onclick="clearLogs()" id="btn-clear-logs" style="display: none; border-color: rgba(255, 78, 0, 0.4); color: var(--accent);">🗑️ Clear Logs</button>
+          </div>
+          <div class="settings-card" style="padding: 1.5rem; overflow-x: auto; box-shadow: var(--shadow);">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 13px;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border); font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: var(--text-dim); text-transform: uppercase;">
+                  <th style="padding: 0.75rem 1rem;">Date &amp; Time</th>
+                  <th style="padding: 0.75rem 1rem;">Username</th>
+                  <th style="padding: 0.75rem 1rem;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="logs-table-body">
+                <!-- Loaded dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ─── SETTINGS PANEL ─── -->
+        <section class="viewport-panel" id="panel-settings">
+          <div class="settings-grid">
+            <div class="settings-card">
+              <h3 class="settings-section-title">Website Configuration</h3>
+              <form class="settings-form" id="settings-form" onsubmit="saveSettings(event)">
+                <div>
+                  <label>Admin Name</label>
+                  <div class="readonly-field">Sathish Media</div>
+                </div>
+                <div>
+                  <label for="settings-email">Email Address</label>
+                  <input type="email" id="settings-email" required />
+                </div>
+                <div>
+                  <label for="settings-whatsapp">WhatsApp Number</label>
+                  <input type="text" id="settings-whatsapp" required placeholder="+91 XXXXX XXXXX" />
+                </div>
+                <div>
+                  <label>Website Name</label>
+                  <div class="readonly-field">Sathish Media</div>
+                </div>
+                <div>
+                  <label for="settings-theme">Active UI Theme</label>
+                  <select id="settings-theme">
+                    <option value="dark">Dark Theme (Premium Neon)</option>
+                    <option value="light">Light Theme (Minimalist Clean)</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="settings-phone">Business Phone *</label>
+                  <input type="text" id="settings-phone" required />
+                </div>
+                <div>
+                  <label for="settings-address">Business Address *</label>
+                  <input type="text" id="settings-address" required />
+                </div>
+                <div>
+                  <label for="settings-hours">Business Hours *</label>
+                  <input type="text" id="settings-hours" required />
+                </div>
+                <div>
+                  <label for="settings-facebook">Facebook Link</label>
+                  <input type="url" id="settings-facebook" placeholder="https://facebook.com/..." />
+                </div>
+                <div>
+                  <label for="settings-instagram">Instagram Link</label>
+                  <input type="url" id="settings-instagram" placeholder="https://instagram.com/..." />
+                </div>
+                <div>
+                  <label for="settings-youtube">YouTube Link</label>
+                  <input type="url" id="settings-youtube" placeholder="https://youtube.com/..." />
+                </div>
+                <div>
+                  <label for="settings-twitter">Twitter Link</label>
+                  <input type="url" id="settings-twitter" placeholder="https://twitter.com/..." />
+                </div>
+                <div>
+                  <label for="settings-keywords">SEO Meta Keywords</label>
+                  <input type="text" id="settings-keywords" placeholder="e.g. photography, web design, Salem" />
+                </div>
+                <div>
+                  <label for="settings-description">SEO Meta Description</label>
+                  <textarea id="settings-description" rows="3" placeholder="Brief summary of your business for search results..." style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); color: var(--text); font-size: 13px; outline: none; transition: border-color var(--transition), box-shadow var(--transition); resize: vertical;"></textarea>
+                </div>
+                <button type="submit" class="btn-add" style="margin-top: 0.5rem; justify-content: center; width: 100%;">💾 Save Configurations</button>
+              </form>
+            </div>
+            
+            <div class="settings-card">
+              <h3 class="settings-section-title">Profile &amp; Password Settings</h3>
+              <form class="settings-form" id="profile-settings-form" onsubmit="saveProfileSettings(event)">
+                <div>
+                  <label for="profile-fullname">Full Name</label>
+                  <input type="text" id="profile-fullname" required />
+                </div>
+                <div>
+                  <label for="profile-username">Username</label>
+                  <input type="text" id="profile-username" readonly class="readonly-field" style="border-style: solid; border-color: var(--border); border-width: 1px; width: 100%; border-radius: var(--radius-sm);" />
+                </div>
+                <div>
+                  <label for="profile-email">Email Address</label>
+                  <input type="email" id="profile-email" required />
+                </div>
+                <div>
+                  <label for="profile-mobile">Mobile Number</label>
+                  <input type="text" id="profile-mobile" required />
+                </div>
+                
+                <h4 style="font-size: 10px; font-family: var(--font-mono); color: var(--accent); margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 1rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Change Password</h4>
+                
+                <div>
+                  <label for="profile-current-password">Current Password</label>
+                  <input type="password" id="profile-current-password" placeholder="Leave blank if not changing" />
+                </div>
+                <div>
+                  <label for="profile-new-password">New Password</label>
+                  <input type="password" id="profile-new-password" placeholder="Leave blank if not changing" />
+                </div>
+                <div>
+                  <label for="profile-confirm-password">Confirm New Password</label>
+                  <input type="password" id="profile-confirm-password" placeholder="Leave blank if not changing" />
+                </div>
+                
+                <button type="submit" class="btn-add" style="margin-top: 0.5rem; justify-content: center; width: 100%;">💾 Update Profile &amp; Password</button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       DYNAMIC MODAL WINDOWS
+       ══════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Add New Item</h3>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <form id="modal-form" onsubmit="handleFormSubmit(event)">
+        <input type="hidden" id="form-module" />
+        <input type="hidden" id="form-edit-id" />
+        
+        <div class="modal-body" id="modal-body-content">
+          <!-- Dynamic form fields populated by JS -->
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn-submit">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast system container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ══════════════════════════════════════════════════
+       CORE JAVASCRIPT LOGIC
+       ══════════════════════════════════════════════════ -->
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/services.js"></script>
+  <script src="assets/js/courses.js"></script>
+  <script src="assets/js/portfolio.js"></script>
+  <script>
+    // ─── CRYPTO & HASHING HELPERS ──────────────────────────────────
+    async function hashPassword(password) {
+      const msgUint8 = new TextEncoder().encode(password);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // ─── USER STORAGE & SEEDING ────────────────────────────────────
+    const DEFAULT_USERS = [
+      {
+        fullName: "Sathish Admin",
+        username: "sathishadmin",
+        email: "admin@sathishmedia.com",
+        mobile: "+91 8762097098",
+        role: "Super Admin",
+        passwordHash: "d3fc50c8f714cebd16d6c827826df01205bf519529f9d34775293cf9b70a420e", 
+        status: "Active"
+      }
+    ];
+
+    function initUserDatabase() {
+      if (!localStorage.getItem('sathish_users')) {
+        localStorage.setItem('sathish_users', JSON.stringify(DEFAULT_USERS));
+      }
+      if (!localStorage.getItem('sathish_logs')) {
+        localStorage.setItem('sathish_logs', JSON.stringify([]));
+      }
+    }
+
+    // ─── AUDIT LOGGING HELPER ──────────────────────────────────────
+    function logAction(actionDescription) {
+      const logs = JSON.parse(localStorage.getItem('sathish_logs') || '[]');
+      const session = getSession();
+      const username = session ? session.username : 'Guest';
+      const logEntry = {
+        id: 'LOG-' + Date.now(),
+        username: username,
+        action: actionDescription,
+        timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+      };
+      logs.unshift(logEntry);
+      if (logs.length > 1000) logs.pop();
+      localStorage.setItem('sathish_logs', JSON.stringify(logs));
+    }
+
+    // ─── SESSION & INACTIVITY MANAGEMENT ───────────────────────────
+    const INACTIVITY_LIMIT = 15 * 60 * 1000; // 15 minutes
+    let inactivityTimer = null;
+
+    function getSession() {
+      try {
+        return JSON.parse(localStorage.getItem('sathish_admin_session'));
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function refreshSessionActivity() {
+      const session = getSession();
+      if (session) {
+        session.lastActivity = Date.now();
+        localStorage.setItem('sathish_admin_session', JSON.stringify(session));
+      }
+    }
+
+    function setupActivityListeners() {
+      const events = ['click', 'keypress', 'mousemove', 'scroll', 'touchstart'];
+      events.forEach(event => {
+        window.addEventListener(event, refreshSessionActivity, { passive: true });
+      });
+      if (inactivityTimer) clearInterval(inactivityTimer);
+      inactivityTimer = setInterval(checkInactivity, 10000);
+    }
+
+    function checkInactivity() {
+      const session = getSession();
+      if (session) {
+        const idleTime = Date.now() - session.lastActivity;
+        if (idleTime >= INACTIVITY_LIMIT) {
+          logAction('Session expired due to inactivity');
+          handleLogout(true);
+        }
+      }
+    }
+
+    // ─── ROLE-BASED ACCESS CONTROL (RBAC) ──────────────────────────
+    function hasPermission(action, module) {
+      const session = getSession();
+      if (!session) return false;
+      const role = session.role;
+
+      if (role === 'Super Admin') return true;
+
+      if (role === 'Admin') {
+        if (module === 'users') return false;
+        return true; 
+      }
+
+      if (role === 'Staff') {
+        if (module === 'users' || module === 'logs' || module === 'settings') return false;
+        if (action === 'delete') return false;
+        return true; 
+      }
+
+      return false;
+    }
+
+    // ─── AUTH & LOGIN VERIFICATION ─────────────────────────────────
+    async function checkAuth() {
+      const authOverlay = document.getElementById('auth-container');
+      const dashboard = document.getElementById('dashboard-layout');
+
+      try {
+        const response = await fetch('/api/auth/me', {
+          method: 'GET',
+          credentials: 'same-origin',
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (!response.ok) {
+          throw new Error('Not authenticated');
+        }
+
+        const data = await response.json();
+        if (!data || !data.user) {
+          throw new Error('Invalid session response');
+        }
+
+        const user = data.user;
+        const session = {
+          id: user.id,
+          username: user.username || user.email,
+          email: user.email,
+          role: user.role,
+          fullName: user.fullName || user.full_name || user.email,
+          lastActivity: Date.now()
+        };
+
+        // This cache is for rendering only. Authentication is checked by the server.
+        localStorage.setItem('sathish_admin_session', JSON.stringify(session));
+        window.sathishCurrentUser = user;
+
+        authOverlay.style.display = 'none';
+        dashboard.style.display = 'grid';
+
+        const menuUsers = document.getElementById('menu-users');
+        const menuLogs = document.getElementById('menu-logs');
+
+        if (session.role === 'Super Admin') {
+          if (menuUsers) menuUsers.style.display = 'flex';
+          if (menuLogs) menuLogs.style.display = 'flex';
+        } else if (session.role === 'Admin') {
+          if (menuUsers) menuUsers.style.display = 'none';
+          if (menuLogs) menuLogs.style.display = 'flex';
+        } else {
+          if (menuUsers) menuUsers.style.display = 'none';
+          if (menuLogs) menuLogs.style.display = 'none';
+        }
+
+        toggleDeleteButtonsVisibility(session.role !== 'Staff');
+        updateHeaderUserInfo();
+        setupActivityListeners();
+        await loadRemoteData();
+        loadAllData();
+      } catch (error) {
+        if (inactivityTimer) {
+          clearInterval(inactivityTimer);
+          inactivityTimer = null;
+        }
+
+        localStorage.removeItem('sathish_admin_session');
+        window.sathishCurrentUser = null;
+        authOverlay.style.display = 'flex';
+        dashboard.style.display = 'none';
+
+        const loginForm = document.getElementById('login-form');
+        const forgotForm = document.getElementById('forgot-form');
+        const otpForm = document.getElementById('otp-form');
+        const resetForm = document.getElementById('reset-form');
+        if (loginForm) loginForm.style.display = 'flex';
+        if (forgotForm) forgotForm.style.display = 'none';
+        if (otpForm) otpForm.style.display = 'none';
+        if (resetForm) resetForm.style.display = 'none';
+      }
+    }
+
+    // Helper to hide delete buttons when user is Staff
+    function toggleDeleteButtonsVisibility(visible) {
+      const styleId = 'staff-hide-delete-style';
+      let styleEl = document.getElementById(styleId);
+      if (!visible) {
+        if (!styleEl) {
+          styleEl = document.createElement('style');
+          styleEl.id = styleId;
+          styleEl.textContent = '.btn-action.delete, button.nested-delete-btn, button.del-img-btn, button.field-remove-btn { display: none !important; }';
+          document.head.appendChild(styleEl);
+        }
+      } else {
+        if (styleEl) {
+          if (typeof styleEl.remove === 'function') {
+            styleEl.remove();
+          } else if (styleEl.parentNode) {
+            styleEl.parentNode.removeChild(styleEl);
+          }
+        }
+      }
+    }
+
+    function updateHeaderUserInfo() {
+      const session = getSession();
+      if (!session) return;
+      
+      const avatarEl = document.querySelector('.user-avatar');
+      const nameEl = document.querySelector('.user-name');
+      const roleEl = document.querySelector('.user-role');
+      
+      if (nameEl) nameEl.textContent = session.fullName;
+      if (roleEl) roleEl.textContent = session.role;
+      if (avatarEl) {
+        const initials = session.fullName.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        avatarEl.textContent = initials || 'AD';
+      }
+    }
+     
+async function handleLogin(e) {
+      e.preventDefault();
+
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      const form = document.getElementById('login-form');
+      const button = form ? form.querySelector('button[type="submit"]') : null;
+      const originalButtonText = button ? button.textContent : '';
+
+      if (!email || !password) {
+        showToast('Please enter your email and password.', 'error');
+        return;
+      }
+
+      if (button) {
+        button.disabled = true;
+        button.textContent = 'Signing in...';
+      }
+
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          showToast(data.error || 'Invalid email or password.', 'error');
+          return;
+        }
+
+        if (!data.user) {
+          showToast('The server returned an unexpected response.', 'error');
+          return;
+        }
+
+        // checkAuth verifies the new server-side session via /api/auth/me.
+        await checkAuth();
+
+        const verifiedSession = getSession();
+        if (verifiedSession) {
+          showToast(`Welcome back, ${verifiedSession.fullName}!`, 'success');
+          logAction('Logged in successfully');
+        } else {
+          showToast('Login succeeded but the session could not be verified.', 'error');
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        showToast('Cannot connect to the server. Check that it is running.', 'error');
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.textContent = originalButtonText || 'Sign In to Dashboard';
+        }
+      }
+    }
+
+    async function handleLogout(isAuto = false) {
+      if (inactivityTimer) {
+        clearInterval(inactivityTimer);
+        inactivityTimer = null;
+      }
+
+      try {
+        await fetch('/api/auth/logout', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Accept': 'application/json' }
+        });
+      } catch (error) {
+        console.error('Logout request failed:', error);
+      } finally {
+        localStorage.removeItem('sathish_admin_session');
+        window.sathishCurrentUser = null;
+
+        if (isAuto) {
+          showToast('You have been logged out due to inactivity.', 'error');
+        } else {
+          showToast('Logged out successfully.', 'success');
+        }
+
+        await checkAuth();
+      }
+    }
+
+    // ─── FORGOT PASSWORD FLOW ──────────────────────────────────────
+    let forgotPasswordSession = null;
+
+    function showForgotPasswordForm(e) {
+      if (e) e.preventDefault();
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('forgot-form').style.display = 'flex';
+      document.getElementById('otp-form').style.display = 'none';
+      document.getElementById('reset-form').style.display = 'none';
+    }
+
+    function showLoginForm(e) {
+      if (e) e.preventDefault();
+      document.getElementById('login-form').style.display = 'flex';
+      document.getElementById('forgot-form').style.display = 'none';
+      document.getElementById('otp-form').style.display = 'none';
+      document.getElementById('reset-form').style.display = 'none';
+      forgotPasswordSession = null;
+    }
+
+    function handleForgotRequest(e) {
+      e.preventDefault();
+      showToast(
+        'Password reset is not connected to the backend yet. Please contact the Super Admin.',
+        'error'
+      );
+    }
+
+    function handleVerifyOtp(e) {
+      e.preventDefault();
+      const enteredOtp = document.getElementById('otp-code').value.trim();
+      
+      if (!forgotPasswordSession) {
+        showToast('Session expired. Please try again.', 'error');
+        showLoginForm();
+        return;
+      }
+
+      if (Date.now() > forgotPasswordSession.expires) {
+        showToast('OTP code has expired. Please request a new one.', 'error');
+        showForgotPasswordForm();
+        return;
+      }
+
+      if (enteredOtp === forgotPasswordSession.otp) {
+        showToast('OTP verified successfully! Create a new password.', 'success');
+        document.getElementById('otp-form').style.display = 'none';
+        document.getElementById('reset-form').style.display = 'flex';
+      } else {
+        showToast('Incorrect verification code.', 'error');
+      }
+    }
+
+    async function handleResetPassword(e) {
+      e.preventDefault();
+      showToast(
+        'Password reset is not connected to the backend yet. Please contact the Super Admin.',
+        'error'
+      );
+    }
+
+    // ─── TOAST NOTIFICATIONS ────────────────────────────────────────
+    function showToast(msg, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      const icon = type === 'success' ? '✓' : '✗';
+      toast.innerHTML = `<span style="color:${type==='success'?'#25D366':'#FF4E00'}; font-weight:800;">${icon}</span> ${msg}`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(8px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // ─── THEME TOGGLER ─────────────────────────────────────────────
+    function initTheme() {
+      const settings = JSON.parse(localStorage.getItem('sathish_settings') || '{}');
+      const theme = settings.theme || 'dark';
+      document.body.classList.toggle('light-theme', theme === 'light');
+    }
+
+    function toggleTheme() {
+      const settings = JSON.parse(localStorage.getItem('sathish_settings') || '{}');
+      const currentTheme = settings.theme || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      settings.theme = newTheme;
+      localStorage.setItem('sathish_settings', JSON.stringify(settings));
+      initTheme();
+      
+      const themeSelect = document.getElementById('settings-theme');
+      if (themeSelect) themeSelect.value = newTheme;
+      
+      showToast(`Switched to ${newTheme} theme.`, 'success');
+    }
+
+    // ─── PANEL SWITCHER ────────────────────────────────────────────
+    function switchPanel(panelId, btnEl) {
+      const session = getSession();
+      if (!session) return;
+
+      if (panelId === 'users' && session.role !== 'Super Admin') {
+        showToast('You do not have permission to access User Management.', 'error');
+        return;
+      }
+      if (panelId === 'logs' && session.role === 'Staff') {
+        showToast('You do not have permission to access Activity Logs.', 'error');
+        return;
+      }
+
+      document.querySelectorAll('.viewport-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.menu-item').forEach(b => b.classList.remove('active'));
+      
+      document.getElementById(`panel-${panelId}`).classList.add('active');
+      btnEl.classList.add('active');
+
+      const title = document.getElementById('current-panel-title');
+      const subtitle = document.getElementById('current-panel-subtitle');
+
+      
+async function loadProductsFromDatabase() {
+  try {
+    const response = await fetch('/api/products', {
+      credentials: 'same-origin'
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to load products from database.');
+    }
+
+    const data = await response.json();
+
+    // Keep database IDs for Edit/Delete API requests.
+    products = data.products;
+
+    renderProducts();
+
+    console.log('Products loaded from SQLite:', products.length);
+  } catch (error) {
+    console.error(error);
+    alert('Unable to load products from the database.');
+  }
+}
+
+      if (panelId === 'products') {
+        title.textContent = 'Products Management';
+        subtitle.textContent = 'Create, view, update and delete gift items';
+        renderProducts();
+      } else if (panelId === 'services') {
+        title.textContent = 'Services Catalog';
+        subtitle.textContent = 'Manage photography, video shoot, and digital editing services';
+        renderServices();
+      } else if (panelId === 'arts') {
+        title.textContent = 'Arts & Stationery Inventory';
+        subtitle.textContent = 'Configure materials, art supplies, and book assets';
+        renderArts();
+      } else if (panelId === 'courses') {
+        title.textContent = 'Courses & Training Management';
+        subtitle.textContent = 'Create, view, update and delete creative training programs and workshops';
+        renderCourses();
+      } else if (panelId === 'portfolio') {
+        title.textContent = 'Portfolio Management';
+        subtitle.textContent = 'Add, edit, delete and manage showcase works';
+        renderPortfolioAdmin();
+      } else if (panelId === 'users') {
+        title.textContent = 'User Management';
+        subtitle.textContent = 'Add, edit, delete and manage active panel users and roles';
+        renderUsers();
+      } else if (panelId === 'logs') {
+        title.textContent = 'Activity Logs';
+        subtitle.textContent = 'Audit logs and actions performed in the management panel';
+        renderLogs();
+      } else if (panelId === 'settings') {
+        title.textContent = 'System & Profile Settings';
+        subtitle.textContent = 'Edit contact information, theme preferences, and your user profile';
+        loadSettingsForm();
+        loadProfileSettingsForm();
+      }
+    }
+
+    // ─── DASHBOARD STATISTICS ──────────────────────────────────────
+    function updateDashboardStats() {
+      try {
+        const productsCount = getProducts.length + getArts().length;
+        const servicesCount = getServices().length;
+        const portfolioCount = getPortfolio().length;
+        const coursesCount = getCourses().length;
+        
+        const cats = new Set();
+        getProducts.forEach(p => { if (p.category) cats.add(p.category); });
+        getArts().forEach(a => { if (a.category) cats.add(a.category); });
+        getServices().forEach(s => { if (s.category) cats.add(s.category); });
+        getCourses().forEach(c => { if (c.category) cats.add(c.category); });
+        getPortfolio().forEach(p => { if (p.category) cats.add(p.category); });
+        const categoriesCount = cats.size;
+
+        const pEl = document.getElementById('stat-products-count');
+        const sEl = document.getElementById('stat-services-count');
+        const ptEl = document.getElementById('stat-portfolio-count');
+        const cEl = document.getElementById('stat-courses-count');
+        const catEl = document.getElementById('stat-categories-count');
+
+        if (pEl) pEl.textContent = productsCount;
+        if (sEl) sEl.textContent = servicesCount;
+        if (ptEl) ptEl.textContent = portfolioCount;
+        if (cEl) cEl.textContent = coursesCount;
+        if (catEl) catEl.textContent = categoriesCount;
+      } catch (err) {
+        console.error('Error updating dashboard stats:', err);
+      }
+    }
+
+    // ─── LOAD & SEED LOCALSTORAGE DATA ─────────────────────────────
+    function loadAllData() {
+      initTheme();
+      renderProducts();
+      renderServices();
+      renderArts();
+      renderCourses();
+      renderPortfolioAdmin();
+      
+      const session = getSession();
+      if (session) {
+        if (session.role === 'Super Admin') {
+          renderUsers();
+          renderLogs();
+        } else if (session.role === 'Admin') {
+          renderLogs();
+        }
+      }
+      updateDashboardStats();
+    }
+
+    // ─── PRODUCTS MODULE LOGIC ─────────────────────────────────────
+    Object.defineProperty(window, 'getProducts', {
+      configurable: true,
+      get() {
+        return JSON.parse(localStorage.getItem('sathish_products') || '[]');
+      }
+    });
+
+    function renderProducts(filtered = null) {
+      const list = filtered || getProducts;
+      const grid = document.getElementById('products-list-grid');
+      
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column: 1/-1;">
+            <div class="empty-icon">🎁</div>
+            <div class="empty-title">No products found</div>
+            <p>Click "Add Product" to populate your catalog.</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = list.map(p => `
+        <div class="data-card">
+          <span class="status-badge ${p.availability || 'in-stock'}">${(p.availability || 'in-stock').replace('-', ' ')}</span>
+          <div class="card-img">
+            <img src="${p.image}" alt="${p.name}" onerror="this.src='assets/images/products/sathish-royal-leather-wedding-album.jpg'" />
+          </div>
+          <div class="card-info">
+            <span class="card-id">${p.uniqueId || p.id}</span>
+            <h4 class="card-title" title="${p.name}">${p.name}</h4>
+            <span class="card-meta">${p.category} • ${p.subCategory || 'GIFT'}</span>
+            <p class="card-desc">${p.description}</p>
+            <div class="card-footer">
+              <span class="card-price">₹${parseInt(p.price).toLocaleString('en-IN')}</span>
+              <div class="card-actions">
+                <button class="btn-action edit" onclick="openEditModal('products', '${p.id}')" title="Edit">✏️</button>
+                <button class="btn-action delete" onclick="deleteItem('products', '${p.id}')" title="Delete">🗑️</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterProducts() {
+      const q = document.getElementById('search-products').value.trim().toLowerCase();
+      const filtered = getProducts.filter(p => 
+        (p.name || '').toLowerCase().includes(q) || 
+        (p.category || '').toLowerCase().includes(q) || 
+        (p.uniqueId || p.id || '').toLowerCase().includes(q)
+      );
+      renderProducts(filtered);
+    }
+
+    // ─── SERVICES MODULE LOGIC ─────────────────────────────────────
+    function getServices() {
+      return typeof smhGetServices === 'function' ? smhGetServices() : JSON.parse(localStorage.getItem('sathish_services_v2') || '[]');
+    }
+
+    function renderServices(filtered = null) {
+      const list = filtered || getServices();
+      const grid = document.getElementById('services-list-grid');
+
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column: 1/-1;">
+            <div class="empty-icon">💼</div>
+            <div class="empty-title">No services found</div>
+            <p>Click "Add Service" to populate your services catalog.</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = list.map(s => `
+        <div class="data-card">
+          <div class="card-img">
+            <img src="${s.image}" alt="${s.title || s.name}" onerror="this.src='assets/images/common/s-title-s-name.jpg'" />
+          </div>
+          <div class="card-info">
+            <span class="card-id">${s.id}</span>
+            <h4 class="card-title" title="${s.title || s.name}">${s.title || s.name}</h4>
+            <span class="card-meta">${s.category}</span>
+            <p class="card-desc">${s.description}</p>
+            <div class="card-footer" style="border:none; padding-top:0;">
+              <div></div>
+              <div class="card-actions">
+                <button class="btn-action edit" onclick="openEditModal('services', '${s.id}')" title="Edit">✏️</button>
+                <button class="btn-action delete" onclick="deleteItem('services', '${s.id}')" title="Delete">🗑️</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterServices() {
+      const q = document.getElementById('search-services').value.trim().toLowerCase();
+      const filtered = getServices().filter(s => 
+        (s.title || s.name || '').toLowerCase().includes(q) || 
+        (s.category || '').toLowerCase().includes(q) || 
+        (s.id || '').toLowerCase().includes(q)
+      );
+      renderServices(filtered);
+    }
+
+    // ─── ARTS & STATIONERY MODULE LOGIC ────────────────────────────
+    function getArts() {
+      return JSON.parse(localStorage.getItem('sathish_arts') || '[]');
+    }
+
+    function renderArts(filtered = null) {
+      const list = filtered || getArts();
+      const grid = document.getElementById('arts-list-grid');
+
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column: 1/-1;">
+            <div class="empty-icon">🎨</div>
+            <div class="empty-title">No items found</div>
+            <p>Click "Add Item" to add new arts &amp; stationery assets.</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = list.map(a => `
+        <div class="data-card">
+          <div class="card-img">
+            <img src="${a.image}" alt="${a.name}" onerror="this.src='assets/images/products/paint-brushes.jpg'" />
+          </div>
+          <div class="card-info">
+            <span class="card-id">${a.uniqueId || a.id}</span>
+            <h4 class="card-title" title="${a.name}">${a.name}</h4>
+            <span class="card-meta">${a.category} • ${a.subCategory || 'ART'}</span>
+            <p class="card-desc">${a.description}</p>
+            <div class="card-footer">
+              <span class="card-price">₹${parseInt(a.price).toLocaleString('en-IN')}</span>
+              <div class="card-actions">
+                <button class="btn-action edit" onclick="openEditModal('arts', '${a.id}')" title="Edit">✏️</button>
+                <button class="btn-action delete" onclick="deleteItem('arts', '${a.id}')" title="Delete">🗑️</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterArts() {
+      const q = document.getElementById('search-arts').value.trim().toLowerCase();
+      const filtered = getArts().filter(a => 
+        (a.name || '').toLowerCase().includes(q) || 
+        (a.category || '').toLowerCase().includes(q) || 
+        (a.uniqueId || a.id || '').toLowerCase().includes(q)
+      );
+      renderArts(filtered);
+    }
+
+    // ─── COURSES MODULE LOGIC ──────────────────────────────────────
+    function renderCourses(filtered = null) {
+      const list = filtered || getCourses();
+      const grid = document.getElementById('courses-list-grid');
+
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column: 1/-1;">
+            <div class="empty-icon">🎓</div>
+            <div class="empty-title">No courses found</div>
+            <p>Click "Add Course" to populate your catalog.</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = list.map(c => `
+        <div class="data-card">
+          <span class="status-badge ${c.status === 'active' ? 'in-stock' : (c.status === 'upcoming' ? 'upcoming-status' : 'out-of-stock')}">${c.status.toUpperCase()}</span>
+          <div class="card-img">
+            <img src="${c.image}" alt="${c.name}" onerror="this.src='assets/images/courses/workshop.jpg'" />
+          </div>
+          <div class="card-info">
+            <span class="card-id">${c.uniqueId || c.id}</span>
+            <h4 class="card-title" title="${c.name}">${c.name}</h4>
+            <span class="card-meta">${c.category.toUpperCase()} • ${c.mode.toUpperCase()}</span>
+            <p class="card-desc">${c.shortDescription || c.description}</p>
+            <div class="card-footer">
+              <span class="card-price">${c.fee && c.fee > 0 ? `₹${parseInt(c.fee).toLocaleString('en-IN')}` : 'FREE'}</span>
+              <div class="card-actions">
+                <button class="btn-action edit" onclick="openEditModal('courses', '${c.id}')" title="Edit">✏️</button>
+                <button class="btn-action delete" onclick="deleteItem('courses', '${c.id}')" title="Delete">🗑️</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterCourses() {
+      const q = document.getElementById('search-courses').value.trim().toLowerCase();
+      const filtered = getCourses().filter(c => 
+        (c.name || '').toLowerCase().includes(q) || 
+        (c.category || '').toLowerCase().includes(q) || 
+        (c.uniqueId || c.id || '').toLowerCase().includes(q)
+      );
+      renderCourses(filtered);
+    }
+
+    // ─── PORTFOLIO MODULE LOGIC ─────────────────────────────────────
+    function renderPortfolioAdmin(filtered = null) {
+      const list = filtered || getPortfolio();
+      const grid = document.getElementById('portfolio-list-grid');
+      
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column: 1/-1;">
+            <div class="empty-icon">🖼️</div>
+            <div class="empty-title">No portfolio items found</div>
+            <p>Click "Add Portfolio Item" to populate your portfolio.</p>
+          </div>`;
+        return;
+      }
+
+      // Sort by display order
+      const sortedList = [...list].sort((a, b) => (a.displayOrder || 999) - (b.displayOrder || 999));
+
+      grid.innerHTML = sortedList.map(p => {
+        const catName = getPortfolioCategoryName(p.category);
+        const visibilityText = p.visible ? 'VISIBLE' : 'HIDDEN';
+        const visibilityBadgeClass = p.visible ? 'in-stock' : 'out-of-stock';
+        const featuredText = p.featured ? '★ FEATURED' : '';
+        return `
+          <div class="data-card">
+            <span class="status-badge ${visibilityBadgeClass}">${visibilityText}</span>
+            <div class="card-img">
+              <img src="${p.image}" alt="${p.title}" onerror="this.src='assets/images/videography-photography/videography-and-photography.jpg'" />
+            </div>
+            <div class="card-info">
+              <span class="card-id">${p.id}</span>
+              <h4 class="card-title" title="${p.title}">${p.title}</h4>
+              <span class="card-meta">${catName} • Order: ${p.displayOrder || 0} ${featuredText ? `• <span style="color:var(--gold); font-weight:bold;">${featuredText}</span>` : ''}</span>
+              <p class="card-desc">${p.shortDescription || p.description}</p>
+              <div class="card-footer" style="border:none; padding-top:0;">
+                <div></div>
+                <div class="card-actions">
+                  <button class="btn-action edit" onclick="openEditModal('portfolio', '${p.id}')" title="Edit">✏️</button>
+                  <button class="btn-action delete" onclick="deleteItem('portfolio', '${p.id}')" title="Delete">🗑️</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterPortfolioAdmin() {
+      const q = document.getElementById('search-portfolio').value.trim().toLowerCase();
+      const filtered = getPortfolio().filter(p => 
+        (p.title || '').toLowerCase().includes(q) || 
+        (p.category || '').toLowerCase().includes(q) || 
+        (p.id || '').toLowerCase().includes(q)
+      );
+      renderPortfolioAdmin(filtered);
+    }
+
+    // ─── ADD/EDIT DYNAMIC MODALS ───────────────────────────────────
+    function openAddModal(moduleName, isEdit = false) {
+      if (!hasPermission(isEdit ? 'edit' : 'add', moduleName)) {
+        showToast('You do not have permission to perform this action.', 'error');
+        return;
+      }
+
+      document.getElementById('form-module').value = moduleName;
+      document.getElementById('form-edit-id').value = '';
+      
+      const modalOverlay = document.getElementById('modal-overlay');
+      const titleEl = document.getElementById('modal-title');
+      const contentEl = document.getElementById('modal-body-content');
+      
+      modalOverlay.classList.add('open');
+      
+      if (moduleName === 'courses') {
+        const nextCourseId = generateNextId('CRS', getCourses());
+        titleEl.textContent = 'Add Course / Workshop';
+        contentEl.innerHTML = `
+          <div>
+            <label>Course ID (Auto-Generated)</label>
+            <div class="auto-id-display" id="c-id-display">${nextCourseId}</div>
+            <div class="auto-id-hint">AUTO-ASSIGNED · Cannot be changed manually</div>
+          </div>
+          <div>
+            <label for="c-name">Course Title *</label>
+            <input type="text" id="c-name" required placeholder="e.g. Advanced Photography & Composition" />
+          </div>
+          <div>
+            <label for="c-category">Category *</label>
+            <select id="c-category">
+              <option value="workshops">📸 Workshops</option>
+              <option value="itg-academy">🏫 ITG Academy Programs</option>
+              <option value="summer-classes">☀️ Summer Classes</option>
+              <option value="upcoming">📅 Upcoming Courses (Placeholder)</option>
+            </select>
+          </div>
+          <div>
+            <label for="c-mode">Training Mode *</label>
+            <select id="c-mode">
+              <option value="Online">Online</option>
+              <option value="Offline">Offline</option>
+              <option value="Hybrid">Hybrid</option>
+            </select>
+          </div>
+          <div>
+            <label for="c-duration">Duration *</label>
+            <input type="text" id="c-duration" required placeholder="e.g. 2 Weeks, 3 Days" />
+          </div>
+          <div>
+            <label for="c-startdate">Starting Date *</label>
+            <input type="date" id="c-startdate" required />
+          </div>
+          <div>
+            <label for="c-fee">Course Fee (₹) *</label>
+            <input type="number" id="c-fee" required placeholder="4999" min="0" />
+          </div>
+          <div>
+            <label for="c-seats">Seats Available *</label>
+            <input type="number" id="c-seats" required placeholder="15" min="0" />
+          </div>
+          <div>
+            <label for="c-status">Active Status *</label>
+            <select id="c-status">
+              <option value="active">Active (Visible / Open)</option>
+              <option value="upcoming">Upcoming (Future Course)</option>
+              <option value="closed">Closed (Full / Completed)</option>
+            </select>
+          </div>
+          <div>
+            <label>Course Card &amp; Banner Image</label>
+            <div class="img-upload-zone" id="c-img-zone">
+              <div class="img-preview-wrap">
+                <div class="img-thumb" id="c-img-thumb">🖼️</div>
+                <div>
+                  <label class="img-upload-label" for="c-img-file">📁 Choose Image File</label>
+                  <input type="file" id="c-img-file" class="img-file-input" accept="image/*" onchange="handleImgUpload(this, 'c-img', 'c-img-thumb', 'c-img-size-warn')" />
+                  <div class="img-size-warning" id="c-img-size-warn">Max 2MB · Stored as Base64 in LocalStorage</div>
+                </div>
+              </div>
+              <div>
+                <label for="c-img" style="margin-bottom:0.3rem;">Or paste Image URL</label>
+                <input type="text" id="c-img" placeholder="assets/images/courses/workshop.jpg" oninput="updateThumbFromUrl(this.value,'c-img-thumb')" />
+              </div>
+            </div>
+          </div>
+          <div>
+            <label for="c-short-desc">Short Description (for Listing Card) *</label>
+            <input type="text" id="c-short-desc" required placeholder="Learn studio lighting, manual exposure, etc." />
+          </div>
+          <div>
+            <label for="c-desc">Detailed Overview *</label>
+            <textarea id="c-desc" rows="3" required placeholder="Detailed course description, syllabus overview, objectives..."></textarea>
+          </div>
+          <div>
+            <label for="c-eligibility">Eligibility &amp; Prerequisites</label>
+            <input type="text" id="c-eligibility" placeholder="e.g. Open to all beginners, basic computer knowledge required." />
+          </div>
+          <div>
+            <label for="c-trainer">Trainer Details *</label>
+            <input type="text" id="c-trainer" required placeholder="e.g. Sathish Kumar (Founder)" />
+          </div>
+          <div>
+            <label for="c-schedule">Class Schedule *</label>
+            <input type="text" id="c-schedule" required placeholder="e.g. Saturdays & Sundays, 10:00 AM - 1:00 PM" />
+          </div>
+          <div>
+            <label for="c-modules">Curriculum Modules (One module per line) *</label>
+            <textarea id="c-modules" rows="4" required placeholder="Introduction to DSLR&#10;Understanding Shutter Speed &amp; Aperture&#10;Studio Lighting Techniques"></textarea>
+          </div>
+        `;
+      } else if (moduleName === 'portfolio') {
+        const nextPortId = generateNextId('PORT', getPortfolio());
+        titleEl.textContent = 'Add Portfolio Item';
+        contentEl.innerHTML = `
+          <div>
+            <label>Portfolio ID (Auto-Generated)</label>
+            <div class="auto-id-display" id="pt-id-display">${nextPortId}</div>
+            <div class="auto-id-hint">AUTO-ASSIGNED · Cannot be changed manually</div>
+          </div>
+          <div>
+            <label for="pt-title">Portfolio Title *</label>
+            <input type="text" id="pt-title" required placeholder="e.g. Elegant Wedding Film" />
+          </div>
+          <div>
+            <label for="pt-category">Category *</label>
+            <select id="pt-category">
+              <option value="photography">Photography</option>
+              <option value="branding">Branding</option>
+              <option value="printing">Printing</option>
+              <option value="advertising">Advertising</option>
+              <option value="video-production">Video Production</option>
+            </select>
+          </div>
+          <div>
+            <label for="pt-short-desc">Short Description *</label>
+            <input type="text" id="pt-short-desc" required placeholder="Brief summary for catalog card..." />
+          </div>
+          <div>
+            <label for="pt-desc">Project Description (Detailed Overview) *</label>
+            <textarea id="pt-desc" rows="3" required placeholder="Detailed project overview, challenges, solution..."></textarea>
+          </div>
+          <div>
+            <label for="pt-client">Project Client Name *</label>
+            <input type="text" id="pt-client" required placeholder="e.g. Royal Banquet Salem" />
+          </div>
+          <div>
+            <label for="pt-date">Project Date *</label>
+            <input type="date" id="pt-date" required />
+          </div>
+          <div>
+            <label>Portfolio Cover Image *</label>
+            <div class="img-upload-zone" id="pt-img-zone">
+              <div class="img-preview-wrap">
+                <div class="img-thumb" id="pt-img-thumb">🖼️</div>
+                <div>
+                  <label class="img-upload-label" for="pt-img-file">📁 Choose Cover Image File</label>
+                  <input type="file" id="pt-img-file" class="img-file-input" accept="image/*" onchange="handleImgUpload(this, 'pt-img', 'pt-img-thumb', 'pt-img-size-warn')" />
+                  <div class="img-size-warning" id="pt-img-size-warn">Max 2MB · Stored in LocalStorage</div>
+                </div>
+              </div>
+              <div>
+                <label for="pt-img" style="margin-bottom:0.3rem;">Or paste Image URL/Path</label>
+                <input type="text" id="pt-img" placeholder="assets/images/portfolio/photography/custom-name.jpg" oninput="updateThumbFromUrl(this.value,'pt-img-thumb')" />
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <label>Additional Gallery Images</label>
+            <div class="img-upload-zone">
+              <div id="pt-gallery-fields-list" style="display:flex; flex-direction:column; gap:0.65rem; max-height:200px; overflow-y:auto; padding-right:5px; margin-bottom:0.5rem;"></div>
+              <button type="button" class="btn-add" style="padding:0.35rem 0.75rem; font-size:10px;" onclick="addPortGalleryField()">➕ Add Gallery Image</button>
+            </div>
+          </div>
+
+          <div>
+            <label for="pt-featured" style="display:inline-flex; align-items:center; gap:0.5rem; cursor:pointer; text-transform:none; font-family:var(--font); font-size:12px; font-weight:500; color:var(--text);">
+              <input type="checkbox" id="pt-featured" style="width:auto; margin:0;" />
+              Mark as Featured Project
+            </label>
+          </div>
+          <div>
+            <label for="pt-visible">Display Visibility *</label>
+            <select id="pt-visible">
+              <option value="true">Show Portfolio Item</option>
+              <option value="false">Hide Portfolio Item</option>
+            </select>
+          </div>
+          <div>
+            <label for="pt-order">Display Order *</label>
+            <input type="number" id="pt-order" required placeholder="e.g. 1, 2, 3" value="1" min="1" />
+          </div>
+        `;
+      } else if (moduleName === 'products') {
+        const nextPrdId = generateNextId('PRD', getProducts);
+        titleEl.textContent = 'Add Product (Gifts)';
+        contentEl.innerHTML = `
+          <div>
+            <label>Product ID (Auto-Generated)</label>
+            <div class="auto-id-display" id="p-id-display">${nextPrdId}</div>
+            <div class="auto-id-hint">AUTO-ASSIGNED · Cannot be changed manually</div>
+          </div>
+          <div>
+            <label for="p-name">Product Name *</label>
+            <input type="text" id="p-name" required placeholder="Premium Teakwood Frame" />
+          </div>
+          <div>
+            <label for="p-category">Category *</label>
+            <select id="p-category">
+              <option value="Gifts">Gifts &amp; Frames</option>
+              <option value="CAT-MCA">Mobile &amp; Computer Accessories</option>
+            </select>
+          </div>
+          <div>
+            <label for="p-subcat">Subcategory *</label>
+            <input type="text" id="p-subcat" required placeholder="e.g. PHOTO FRAMES" />
+          </div>
+          <div>
+            <label for="p-price">Price (₹) *</label>
+            <input type="number" id="p-price" required placeholder="2999" min="0" />
+          </div>
+          <div>
+            <label>Product Image</label>
+            <div class="img-upload-zone" id="p-img-zone">
+              <div class="img-preview-wrap">
+                <div class="img-thumb" id="p-img-thumb">🖼️</div>
+                <div>
+                  <label class="img-upload-label" for="p-img-file">📁 Choose Image File</label>
+                  <input type="file" id="p-img-file" class="img-file-input" accept="image/*" onchange="handleImgUpload(this, 'p-img', 'p-img-thumb', 'p-img-size-warn')" />
+                  <div class="img-size-warning" id="p-img-size-warn">Max 2MB · Stored as Base64 in LocalStorage</div>
+                </div>
+              </div>
+              <div>
+                <label for="p-img" style="margin-bottom:0.3rem;">Or paste Image URL</label>
+                <input type="text" id="p-img" placeholder="https://images.unsplash.com/..." oninput="updateThumbFromUrl(this.value,'p-img-thumb')" />
+              </div>
+            </div>
+          </div>
+          <div>
+            <label for="p-status">Availability Status *</label>
+            <select id="p-status">
+              <option value="in-stock">In Stock</option>
+              <option value="out-of-stock">Out of Stock</option>
+            </select>
+          </div>
+          <div>
+            <label for="p-desc">Description</label>
+            <textarea id="p-desc" rows="3" placeholder="Detailed product descriptions..."></textarea>
+          </div>
+        `;
+        const catSelect = document.getElementById('p-category');
+        if (catSelect) {
+          catSelect.addEventListener('change', function() {
+            const editId = document.getElementById('form-edit-id').value;
+            if (!editId) {
+              const prefix = this.value === 'CAT-MCA' ? 'MCA' : 'PRD';
+              const nextId = generateNextId(prefix, getProducts);
+              document.getElementById('p-id-display').textContent = nextId;
+              titleEl.textContent = this.value === 'CAT-MCA' ? 'Add Product (Accessories)' : 'Add Product (Gifts)';
+            }
+          });
+        }
+      } else if (moduleName === 'services') {
+        document.querySelector('.modal-window').classList.add('modal-large');
+        titleEl.textContent = 'Add Service';
+        contentEl.innerHTML = `
+          <div class="modal-body grid-2col" style="padding:0;">
+            <!-- Left column: Basic Details -->
+            <div style="display:flex; flex-direction:column; gap:1.25rem;">
+              <h4 style="font-family:var(--font-mono); font-size:10px; color:var(--accent); text-transform:uppercase; margin-bottom:-0.5rem; letter-spacing:0.1em; font-weight:700;">Basic Details</h4>
+              <div>
+                <label>Service ID (Auto-Generated)</label>
+                <div class="auto-id-display" id="s-id-display">${generateNextId('SRV', getServices())}</div>
+                <div class="auto-id-hint">AUTO-ASSIGNED · Cannot be changed manually</div>
+              </div>
+              <div>
+                <label for="s-title">Service Title *</label>
+                <input type="text" id="s-title" required placeholder="Cinematic Wedding Package" />
+              </div>
+              <div>
+                <label for="s-active">Service Status *</label>
+                <select id="s-active" style="padding:0.6rem; font-size:13px; width:100%; border:1px solid var(--border); border-radius:var(--radius-md); background:var(--bg2); color:var(--text); margin-bottom: 1rem;">
+                  <option value="true">Active (Visible in Catalog)</option>
+                  <option value="false">Disabled (Hidden from Catalog)</option>
+                </select>
+              </div>
+              <div>
+                <label for="s-category">Category *</label>
+                <input type="text" id="s-category" required placeholder="e.g. Media Production, Branding" />
+              </div>
+              <div>
+                <label for="s-subcat">Subcategory *</label>
+                <input type="text" id="s-subcat" placeholder="e.g. Photography, Logo Design" />
+              </div>
+              <div>
+                <label for="s-tagline">Tagline</label>
+                <input type="text" id="s-tagline" placeholder="e.g. Every Frame Tells A Story" />
+              </div>
+              <div>
+                <label>Main Image</label>
+                <div class="img-upload-zone" id="s-img-zone">
+                  <div class="img-preview-wrap">
+                    <div class="img-thumb" id="s-img-thumb">🖼️</div>
+                    <div>
+                      <label class="img-upload-label" for="s-img-file">📁 Choose Image File</label>
+                      <input type="file" id="s-img-file" class="img-file-input" accept="image/*" onchange="handleImgUpload(this, 's-img', 's-img-thumb', 's-img-size-warn')" />
+                      <div class="img-size-warning" id="s-img-size-warn">Max 2MB · Stored as Base64</div>
+                    </div>
+                  </div>
+                  <div>
+                    <label for="s-img" style="margin-bottom:0.3rem;">Or paste Image URL</label>
+                    <input type="text" id="s-img" placeholder="https://images.unsplash.com/..." oninput="updateThumbFromUrl(this.value,'s-img-thumb')" />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label for="s-hero-img">Hero Banner Image URL</label>
+                <input type="text" id="s-hero-img" placeholder="If left blank, main image will be used" />
+              </div>
+              <div>
+                <label for="s-whatsapp">WhatsApp Inquiry Number</label>
+                <input type="text" id="s-whatsapp" placeholder="918762097098" value="918762097098" />
+              </div>
+              <div>
+                <label for="s-phone">Contact Phone Number</label>
+                <input type="text" id="s-phone" placeholder="+91 87620 97098" value="+91 87620 97098" />
+              </div>
+              <div>
+                <label for="s-email">Contact Email Address</label>
+                <input type="text" id="s-email" placeholder="sathishmedia4u@gmail.com" value="sathishmedia4u@gmail.com" />
+              </div>
+              <div>
+                <label for="s-desc">Description</label>
+                <textarea id="s-desc" rows="4" placeholder="Service inclusions, duration details..."></textarea>
+              </div>
+            </div>
+
+            <!-- Right column: Dynamic elements -->
+            <div style="display:flex; flex-direction:column; gap:1.5rem;">
+              <div style="display:flex; border-bottom:1px solid var(--border); padding-bottom:0.5rem; gap:0.4rem; justify-content:space-between; flex-wrap:wrap;">
+                <button type="button" class="subtab-btn active" onclick="switchSubTab('subcategories', this)">Subcategories</button>
+                <button type="button" class="subtab-btn" onclick="switchSubTab('gallery', this)">Gallery</button>
+                <button type="button" class="subtab-btn" onclick="switchSubTab('features', this)">Features</button>
+                <button type="button" class="subtab-btn" onclick="switchSubTab('packages', this)">Packages</button>
+                <button type="button" class="subtab-btn" onclick="switchSubTab('reviews', this)">Reviews</button>
+              </div>
+
+              <!-- Subcategories Tab -->
+              <div class="subtab-panel active" id="subpanel-subcategories">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                  <span style="font-size:10px; font-family:var(--font-mono); font-weight:700; color:var(--text-dim);">SUBCATEGORIES</span>
+                  <button type="button" class="btn-add" style="padding:0.35rem 0.75rem; font-size:10px;" onclick="addSubcategoryField()">➕ Add Subcategory</button>
+                </div>
+                <div id="subcategories-fields-list" style="display:flex; flex-direction:column; gap:1rem; max-height:350px; overflow-y:auto; padding-right:5px;"></div>
+              </div>
+
+              <!-- Gallery Tab -->
+              <div class="subtab-panel" id="subpanel-gallery">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                  <span style="font-size:10px; font-family:var(--font-mono); font-weight:700; color:var(--text-dim);">GALLERY IMAGES</span>
+                  <button type="button" class="btn-add" style="padding:0.35rem 0.75rem; font-size:10px;" onclick="addGalleryField()">➕ Add Image</button>
+                </div>
+                <div id="gallery-fields-list" style="display:flex; flex-direction:column; gap:0.65rem; max-height:350px; overflow-y:auto; padding-right:5px;"></div>
+              </div>
+
+              <!-- Features Tab -->
+              <div class="subtab-panel" id="subpanel-features">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                  <span style="font-size:10px; font-family:var(--font-mono); font-weight:700; color:var(--text-dim);">SERVICE FEATURES</span>
+                  <button type="button" class="btn-add" style="padding:0.35rem 0.75rem; font-size:10px;" onclick="addFeatureField()">➕ Add Feature</button>
+                </div>
+                <div id="features-fields-list" style="display:flex; flex-direction:column; gap:0.85rem; max-height:350px; overflow-y:auto; padding-right:5px;"></div>
+              </div>
+
+              <!-- Packages Tab -->
+              <div class="subtab-panel" id="subpanel-packages">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                  <span style="font-size:10px; font-family:var(--font-mono); font-weight:700; color:var(--text-dim);">PRICING PACKAGES</span>
+                  <button type="button" class="btn-add" style="padding:0.35rem 0.75rem; font-size:10px;" onclick="addPackageField()">➕ Add Package</button>
+                </div>
+                <div id="packages-fields-list" style="display:flex; flex-direction:column; gap:1rem; max-height:350px; overflow-y:auto; padding-right:5px;"></div>
+              </div>
+
+              <!-- Reviews Tab -->
+              <div class="subtab-panel" id="subpanel-reviews">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                  <span style="font-size:10px; font-family:var(--font-mono); font-weight:700; color:var(--text-dim);">CLIENT REVIEWS</span>
+                  <button type="button" class="btn-add" style="padding:0.35rem 0.75rem; font-size:10px;" onclick="addReviewField()">➕ Add Review</button>
+                </div>
+                <div id="reviews-fields-list" style="display:flex; flex-direction:column; gap:1rem; max-height:350px; overflow-y:auto; padding-right:5px;"></div>
+              </div>
+            </div>
+          </div>
+        `;
+        // Seed default items
+        addGalleryField('assets/images/videography-photography/videography-and-photography.jpg');
+        addFeatureField('✓', 'Professional Quality', 'Engineered for client business outcomes with premium styling standards.');
+        addPackageField('Basic', '₹5,000', '', ['2-Hour session', '10 Edited Photos', 'Digital delivery']);
+        addReviewField('Sujith S', 'SS', 5, 'One of the best creative media and event service providers in Salem. Very professional team.');
+      } else if (moduleName === 'arts') {
+        const nextArtId = generateNextId('ART', getArts());
+        titleEl.textContent = 'Add Arts & Stationery Item';
+        contentEl.innerHTML = `
+          <div>
+            <label>Item ID (Auto-Generated)</label>
+            <div class="auto-id-display" id="a-id-display">${nextArtId}</div>
+            <div class="auto-id-hint">AUTO-ASSIGNED · Cannot be changed manually</div>
+          </div>
+          <div>
+            <label for="a-name">Item Name *</label>
+            <input type="text" id="a-name" required placeholder="Artist Grade Watercolor Palette" />
+          </div>
+          <div>
+            <label for="a-category">Category *</label>
+            <select id="a-category">
+              <option value="Art Materials">Art Materials</option>
+              <option value="Stationery">Stationery</option>
+              <option value="Craft Materials">Craft Materials</option>
+            </select>
+          </div>
+          <div>
+            <label for="a-subcat">Subcategory *</label>
+            <input type="text" id="a-subcat" required placeholder="e.g. COLOR TOOLS, PENS" />
+          </div>
+          <div>
+            <label for="a-price">Price (₹) *</label>
+            <input type="number" id="a-price" required placeholder="350" min="0" />
+          </div>
+          <div>
+            <label>Item Image</label>
+            <div class="img-upload-zone" id="a-img-zone">
+              <div class="img-preview-wrap">
+                <div class="img-thumb" id="a-img-thumb">🖼️</div>
+                <div>
+                  <label class="img-upload-label" for="a-img-file">📁 Choose Image File</label>
+                  <input type="file" id="a-img-file" class="img-file-input" accept="image/*" onchange="handleImgUpload(this, 'a-img', 'a-img-thumb', 'a-img-size-warn')" />
+                  <div class="img-size-warning" id="a-img-size-warn">Max 2MB · Stored as Base64 in LocalStorage</div>
+                </div>
+              </div>
+              <div>
+                <label for="a-img" style="margin-bottom:0.3rem;">Or paste Image URL</label>
+                <input type="text" id="a-img" placeholder="assets/images/image.png or unsplash URL" oninput="updateThumbFromUrl(this.value,'a-img-thumb')" />
+              </div>
+            </div>
+          </div>
+          <div>
+            <label for="a-desc">Description</label>
+            <textarea id="a-desc" rows="3" placeholder="Brief materials description..."></textarea>
+          </div>
+        `;
+      } else if (moduleName === 'users') {
+        titleEl.textContent = 'Add New User';
+        contentEl.innerHTML = `
+          <div>
+            <label for="u-fullname">Full Name *</label>
+            <input type="text" id="u-fullname" required placeholder="e.g. John Doe" />
+          </div>
+          <div>
+            <label for="u-username">Username *</label>
+            <input type="text" id="u-username" required placeholder="e.g. johndoe" />
+          </div>
+          <div>
+            <label for="u-email">Email Address *</label>
+            <input type="email" id="u-email" required placeholder="e.g. john@example.com" />
+          </div>
+          <div>
+            <label for="u-mobile">Mobile Number *</label>
+            <input type="text" id="u-mobile" required placeholder="e.g. +91 98765 43210" />
+          </div>
+          <div>
+            <label for="u-role">Role *</label>
+            <select id="u-role">
+              <option value="Super Admin">Super Admin</option>
+              <option value="Admin">Admin</option>
+              <option value="Staff">Staff</option>
+            </select>
+          </div>
+          <div>
+            <label for="u-password" id="lbl-u-password">Password *</label>
+            <input type="password" id="u-password" required placeholder="••••••••" />
+          </div>
+          <div>
+            <label for="u-confirm-password" id="lbl-u-confirm-password">Confirm Password *</label>
+            <input type="password" id="u-confirm-password" required placeholder="••••••••" />
+          </div>
+          <div>
+            <label for="u-status">Status *</label>
+            <select id="u-status">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        `;
+      }
+    }
+
+    // ─── EDIT MODAL: restore ID display and existing image ────────
+    function openEditModal(moduleName, itemId) {
+      if (!hasPermission('edit', moduleName)) {
+        showToast('You do not have permission to perform this action.', 'error');
+        return;
+      }
+      openAddModal(moduleName, true);
+      
+      document.getElementById('form-edit-id').value = itemId;
+      const titleEl = document.getElementById('modal-title');
+      titleEl.textContent = `Edit ${moduleName.slice(0, -1)} Detail`;
+      
+      if (moduleName === 'products') {
+        const item = getProducts.find(p => p.id === itemId);
+        if (!item) return;
+
+        // Replace auto-id display with current item's ID
+        const pIdDisp = document.getElementById('p-id-display');
+        if (pIdDisp) pIdDisp.textContent = item.uniqueId || item.id;
+        document.getElementById('p-name').value = item.name;
+        document.getElementById('p-category').value = item.category;
+        document.getElementById('p-subcat').value = item.subCategory || 'GIFT';
+        document.getElementById('p-price').value = item.price;
+        document.getElementById('p-img').value = item.image;
+        document.getElementById('p-status').value = item.availability || 'in-stock';
+        document.getElementById('p-desc').value = item.description || '';
+        updateThumbFromUrl(item.image, 'p-img-thumb');
+      } else if (moduleName === 'services') {
+        const item = getServices().find(s => s.id === itemId);
+        if (!item) return;
+
+        const sIdDisp = document.getElementById('s-id-display');
+        if (sIdDisp) sIdDisp.textContent = item.id;
+        document.getElementById('s-title').value = item.title || item.name || '';
+        document.getElementById('s-active').value = (item.active !== false) ? 'true' : 'false';
+        document.getElementById('s-category').value = item.category || '';
+        document.getElementById('s-subcat').value = item.subcategory || '';
+        document.getElementById('s-tagline').value = item.tagline || '';
+        document.getElementById('s-img').value = item.image || '';
+        document.getElementById('s-hero-img').value = item.heroImage || '';
+        document.getElementById('s-whatsapp').value = item.whatsapp || '918762097098';
+        document.getElementById('s-phone').value = item.phone || '+91 87620 97098';
+        document.getElementById('s-email').value = item.email || 'sathishmedia4u@gmail.com';
+        document.getElementById('s-desc').value = item.description || '';
+        if (item.image) updateThumbFromUrl(item.image, 's-img-thumb');
+
+        // Empty default template items
+        document.getElementById('gallery-fields-list').innerHTML = '';
+        document.getElementById('features-fields-list').innerHTML = '';
+        document.getElementById('packages-fields-list').innerHTML = '';
+        document.getElementById('reviews-fields-list').innerHTML = '';
+        document.getElementById('subcategories-fields-list').innerHTML = '';
+
+        // Load existing dynamic lists
+        (item.subcategories || []).forEach(sub => addSubcategoryField(sub.id, sub.title, sub.description, sub.image, sub.images, sub.whatsappTemplate));
+        (item.gallery || []).forEach(url => addGalleryField(url));
+        (item.features || []).forEach(f => addFeatureField(f.icon, f.title, f.desc));
+        (item.packages || []).forEach(p => addPackageField(p.name, p.price, p.badge, p.features));
+        (item.reviews || []).forEach(r => addReviewField(r.name, r.initials, r.rating, r.text));
+      } else if (moduleName === 'courses') {
+        const item = getCourses().find(c => c.id === itemId);
+        if (!item) return;
+
+        const cIdDisp = document.getElementById('c-id-display');
+        if (cIdDisp) cIdDisp.textContent = item.uniqueId || item.id;
+        document.getElementById('c-name').value = item.name;
+        document.getElementById('c-category').value = item.category;
+        document.getElementById('c-mode').value = item.mode || 'Offline';
+        document.getElementById('c-duration').value = item.duration;
+        document.getElementById('c-startdate').value = item.startDate || '';
+        document.getElementById('c-fee').value = item.fee;
+        document.getElementById('c-seats').value = item.seatsAvailable;
+        document.getElementById('c-status').value = item.status;
+        document.getElementById('c-img').value = item.image;
+        document.getElementById('c-short-desc').value = item.shortDescription || '';
+        document.getElementById('c-desc').value = item.overview || item.description || '';
+        document.getElementById('c-eligibility').value = item.eligibility || '';
+        document.getElementById('c-trainer').value = item.trainer || '';
+        document.getElementById('c-schedule').value = item.schedule || '';
+        document.getElementById('c-modules').value = (item.modules || []).join('\n');
+        updateThumbFromUrl(item.image, 'c-img-thumb');
+      } else if (moduleName === 'arts') {
+        const item = getArts().find(a => a.id === itemId);
+        if (!item) return;
+
+        const aIdDisp = document.getElementById('a-id-display');
+        if (aIdDisp) aIdDisp.textContent = item.uniqueId || item.id;
+        document.getElementById('a-name').value = item.name;
+        document.getElementById('a-category').value = item.category;
+        document.getElementById('a-subcat').value = item.subCategory || 'ART';
+        document.getElementById('a-price').value = item.price;
+        document.getElementById('a-img').value = item.image;
+        document.getElementById('a-desc').value = item.description || '';
+        updateThumbFromUrl(item.image, 'a-img-thumb');
+      } else if (moduleName === 'portfolio') {
+        const item = getPortfolio().find(p => p.id === itemId);
+        if (!item) return;
+
+        const ptIdDisp = document.getElementById('pt-id-display');
+        if (ptIdDisp) ptIdDisp.textContent = item.id;
+        document.getElementById('pt-title').value = item.title;
+        document.getElementById('pt-category').value = item.category;
+        document.getElementById('pt-short-desc').value = item.shortDescription || '';
+        document.getElementById('pt-desc').value = item.description || '';
+        document.getElementById('pt-client').value = item.client || '';
+        document.getElementById('pt-date').value = item.date || '';
+        document.getElementById('pt-img').value = item.image;
+        document.getElementById('pt-featured').checked = !!item.featured;
+        document.getElementById('pt-visible').value = item.visible !== false ? 'true' : 'false';
+        document.getElementById('pt-order').value = item.displayOrder || 1;
+        updateThumbFromUrl(item.image, 'pt-img-thumb');
+
+        // Load existing gallery fields
+        document.getElementById('pt-gallery-fields-list').innerHTML = '';
+        (item.gallery || []).forEach(url => addPortGalleryField(url));
+      } else if (moduleName === 'users') {
+        const users = getUsers();
+        const user = users.find(u => u.username === itemId);
+        if (!user) return;
+
+        document.getElementById('u-fullname').value = user.fullName;
+        document.getElementById('u-username').value = user.username;
+        document.getElementById('u-username').readOnly = true;
+        document.getElementById('u-username').style.background = 'var(--border)';
+        document.getElementById('u-email').value = user.email;
+        document.getElementById('u-mobile').value = user.mobile;
+        document.getElementById('u-role').value = user.role;
+        document.getElementById('u-status').value = user.status;
+        
+        // Passwords are not required when editing
+        document.getElementById('u-password').required = false;
+        document.getElementById('u-confirm-password').required = false;
+        document.getElementById('lbl-u-password').textContent = 'New Password (Leave blank to keep same)';
+        document.getElementById('lbl-u-confirm-password').textContent = 'Confirm New Password';
+      }
+    }
+
+    window.addPortGalleryField = function(val = '') {
+      const list = document.getElementById('pt-gallery-fields-list');
+      if (!list) return;
+      const count = list.children.length + 1;
+      const div = document.createElement('div');
+      div.className = 'gallery-field-item';
+      div.style.display = 'flex';
+      div.style.gap = '0.5rem';
+      div.style.alignItems = 'center';
+      
+      const thumbId = `pt-gal-thumb-${Date.now()}-${count}`;
+      const fileId = `pt-gal-file-${Date.now()}-${count}`;
+      const warnId = `pt-gal-warn-${Date.now()}-${count}`;
+      const inputId = `pt-gal-input-${Date.now()}-${count}`;
+      
+      div.innerHTML = `
+        <div class="thumb-preview" id="${thumbId}" style="width:34px; height:34px; border-radius:4px; overflow:hidden; border:1px solid var(--border); background:var(--bg); flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+          <img src="${val || 'data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\'></svg>'}" style="width:100%; height:100%; object-fit:cover;" onerror="this.parentElement.innerHTML='🖼️'" />
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; gap:0.25rem;">
+          <input type="text" id="${inputId}" class="port-gallery-url-input" value="${val}" placeholder="Path or Image URL..." oninput="updateThumbFromUrl(this.value, '${thumbId}')" style="padding:0.4rem 0.6rem; font-size:12px;" />
+          <div style="display:flex; gap:0.4rem; align-items:center;">
+            <label class="img-upload-label" style="padding:0.25rem 0.5rem; font-size:9px; margin:0; cursor:pointer;">
+              📁 File
+              <input type="file" id="${fileId}" accept="image/*" style="display:none;" onchange="handleImgUpload(this, '${inputId}', '${thumbId}', '${warnId}')" />
+            </label>
+            <span class="img-size-warning" id="${warnId}" style="font-size:8px; font-family:var(--font-mono); color:var(--text-muted);">Max 2MB</span>
+          </div>
+        </div>
+        <button type="button" class="btn-action delete" style="width:30px; height:30px; border-radius:4px; margin-top:-12px;" onclick="this.parentElement.remove()">🗑️</button>
+      `;
+      list.appendChild(div);
+    };
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('open');
+      document.querySelector('.modal-window').classList.remove('modal-large');
+    }
+
+    // ─── SERVICES DYNAMIC FORM FIELD ADDERS ─────────────────────────
+    window.switchSubTab = function(tabName, btnEl) {
+      const container = btnEl.parentElement;
+      container.querySelectorAll('.subtab-btn').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+      
+      const parent = container.parentElement;
+      parent.querySelectorAll('.subtab-panel').forEach(p => p.classList.remove('active'));
+      parent.querySelector(`#subpanel-${tabName}`).classList.add('active');
+    };
+
+    window.addSubcategoryField = function(id = '', title = '', desc = '', image = '', images = [], whatsappTemplate = '') {
+      const list = document.getElementById('subcategories-fields-list');
+      if (!list) return;
+      
+      const count = list.children.length + 1;
+      const subId = id || `SUB-TEMP-${Date.now()}-${count}`;
+      
+      // Ensure images array is initialized
+      let localImages = Array.isArray(images) ? [...images] : [];
+      if (localImages.length === 0 && image) {
+        localImages.push(image);
+      }
+      if (localImages.length === 0) {
+        localImages.push('assets/images/hero/reception-banquet.jpg');
+      }
+      
+      let activeCover = image || localImages[0] || '';
+
+      const div = document.createElement('div');
+      div.className = 'nested-field-card subcategory-field-item';
+      div.setAttribute('data-sub-id', subId);
+      div.style.border = '1px solid var(--border)';
+      div.style.borderRadius = 'var(--radius-md)';
+      div.style.padding = '1rem';
+      div.style.background = 'var(--bg)';
+      div.style.display = 'flex';
+      div.style.flexDirection = 'column';
+      div.style.gap = '0.5rem';
+      div.style.position = 'relative';
+      div.style.marginBottom = '1.25rem';
+      
+      div.innerHTML = `
+        <button type="button" class="field-remove-btn" onclick="this.parentElement.remove()" style="position:absolute; top:0.5rem; right:0.5rem; background:none; border:none; color:var(--accent); font-weight:800; cursor:pointer;">✕</button>
+        <div style="font-size:10px; font-family:var(--font-mono); font-weight:700; color:var(--accent); margin-bottom:0.25rem;">SUBCATEGORY #${count} (ID: ${subId})</div>
+        <input type="hidden" class="sub-id-input" value="${subId}" />
+        <input type="hidden" class="sub-cover-img-url" value="${activeCover}" />
+        
+        <div>
+          <label style="font-size:10px; margin-bottom:0.15rem; display:block; font-weight:700;">Subcategory Title *</label>
+          <input type="text" class="sub-title-input" required placeholder="Wedding Events" value="${title.replace(/"/g, '&quot;')}" style="padding:0.4rem; font-size:12px; width:100%; border:1px solid var(--border); border-radius:4px; background:var(--bg2); color:var(--text);" />
+        </div>
+        <div>
+          <label style="font-size:10px; margin-bottom:0.15rem; display:block; font-weight:700;">Short Description *</label>
+          <textarea class="sub-desc-input" rows="2" placeholder="Premium wedding planning..." required style="padding:0.4rem; font-size:12px; width:100%; border:1px solid var(--border); border-radius:4px; background:var(--bg2); color:var(--text); resize:vertical;">${desc.replace(/"/g, '&quot;')}</textarea>
+        </div>
+        <div>
+          <label style="font-size:10px; margin-bottom:0.15rem; display:block; font-weight:700;">WhatsApp Template *</label>
+          <textarea class="sub-whatsapp-template-input" rows="4" placeholder="Hello Sathish Media,..." required style="padding:0.4rem; font-size:11px; font-family:var(--font-mono); width:100%; border:1px solid var(--border); border-radius:4px; background:var(--bg2); color:var(--text); resize:vertical;">${(whatsappTemplate || '').replace(/"/g, '&quot;')}</textarea>
+        </div>
+        <div>
+          <label style="font-size:10px; margin-bottom:0.3rem; display:block; font-weight:700;">Image Gallery (Manage Images)</label>
+          <div class="sub-gallery-container" style="display:flex; flex-direction:column; gap:0.5rem; border:1px dashed var(--border); border-radius:6px; padding:0.5rem; background:var(--bg2);">
+            <div class="sub-gallery-grid" style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+              <!-- Thumbnails -->
+            </div>
+            <div style="display:flex; gap:0.4rem; align-items:center; margin-top:0.25rem;">
+              <input type="text" class="new-sub-img-url-input" placeholder="Paste Image URL..." style="flex:1; padding:0.35rem 0.5rem; font-size:11px; border:1px solid var(--border); border-radius:4px; background:var(--bg); color:var(--text);" />
+              <label class="img-upload-label" style="padding:0.35rem 0.5rem; font-size:10px; margin:0; display:inline-flex; align-items:center; gap:2px; height:28px;">
+                📁 File
+                <input type="file" class="sub-img-upload-file" accept="image/*" style="display:none;" />
+              </label>
+              <button type="button" class="btn-add sub-img-add-btn" style="padding:0.35rem 0.6rem; font-size:10px; height:28px;">Add</button>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      const galleryGrid = div.querySelector('.sub-gallery-grid');
+      const coverInput = div.querySelector('.sub-cover-img-url');
+      
+      const renderGalleryThumbs = () => {
+        galleryGrid.innerHTML = '';
+        localImages.forEach((imgUrl, idx) => {
+          const isCover = imgUrl === activeCover;
+          
+          const thumbDiv = document.createElement('div');
+          thumbDiv.className = 'sub-gallery-item';
+          thumbDiv.style.position = 'relative';
+          thumbDiv.style.width = '55px';
+          thumbDiv.style.height = '55px';
+          thumbDiv.style.borderRadius = '4px';
+          thumbDiv.style.overflow = 'hidden';
+          thumbDiv.style.border = isCover ? '2px solid var(--accent)' : '1px solid var(--border)';
+          thumbDiv.style.background = '#000';
+          
+          thumbDiv.innerHTML = `
+            <img src="${imgUrl}" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.src='assets/images/videography-photography/videography-and-photography.jpg'" />
+            <input type="hidden" class="sub-gallery-img-url" value="${imgUrl}" />
+            
+            <!-- Cover Btn -->
+            <button type="button" class="set-cover-btn" title="${isCover ? 'Active Cover' : 'Set as Cover'}" style="position:absolute; bottom:1px; left:1px; width:16px; height:16px; border-radius:50%; background:${isCover ? 'var(--accent)' : 'rgba(0,0,0,0.6)'}; color:#fff; display:flex; align-items:center; justify-content:center; font-size:9px; border:none; cursor:pointer; padding:0; line-height:1;">
+              ★
+            </button>
+            
+            <!-- Delete Btn -->
+            <button type="button" class="del-img-btn" title="Delete Image" style="position:absolute; top:1px; right:1px; width:16px; height:16px; border-radius:50%; background:rgba(255, 78, 0, 0.85); color:#fff; display:flex; align-items:center; justify-content:center; font-size:9px; border:none; cursor:pointer; padding:0; line-height:1;">
+              ✕
+            </button>
+          `;
+          
+          thumbDiv.querySelector('.set-cover-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            activeCover = imgUrl;
+            coverInput.value = imgUrl;
+            renderGalleryThumbs();
+          });
+          
+          thumbDiv.querySelector('.del-img-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            localImages = localImages.filter((_, i) => i !== idx);
+            if (activeCover === imgUrl) {
+              activeCover = localImages[0] || '';
+              coverInput.value = activeCover;
+            }
+            renderGalleryThumbs();
+          });
+          
+          galleryGrid.appendChild(thumbDiv);
+        });
+      };
+      
+      const addUrlInput = div.querySelector('.new-sub-img-url-input');
+      const addBtn = div.querySelector('.sub-img-add-btn');
+      
+      addBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const val = addUrlInput.value.trim();
+        if (val) {
+          localImages.push(val);
+          if (!activeCover) {
+            activeCover = val;
+            coverInput.value = val;
+          }
+          addUrlInput.value = '';
+          renderGalleryThumbs();
+        }
+      });
+      
+      const fileInput = div.querySelector('.sub-img-upload-file');
+      fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (!file) return;
+        
+        if (file.size > 2 * 1024 * 1024) {
+          alert('File exceeds 2MB limit. Please compress.');
+          return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const dataUrl = e.target.result;
+          localImages.push(dataUrl);
+          if (!activeCover) {
+            activeCover = dataUrl;
+            coverInput.value = dataUrl;
+          }
+          renderGalleryThumbs();
+        };
+        reader.readAsDataURL(file);
+      });
+      
+      renderGalleryThumbs();
+      list.appendChild(div);
+    };
+
+    window.addGalleryField = function(val = '') {
+      const list = document.getElementById('gallery-fields-list');
+      if (!list) return;
+      const div = document.createElement('div');
+      div.className = 'gallery-field-item';
+      div.style.display = 'flex';
+      div.style.gap = '0.5rem';
+      div.style.alignItems = 'center';
+      
+      div.innerHTML = `
+        <div class="thumb-preview" style="width:34px; height:34px; border-radius:4px; overflow:hidden; border:1px solid var(--border); background:var(--bg); flex-shrink:0;">
+          <img src="${val || 'data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\'></svg>'}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='assets/images/common/unsplash-1579546929518.jpg'" />
+        </div>
+        <input type="text" class="gallery-url-input" value="${val}" placeholder="https://images.unsplash.com/... or assets/..." oninput="this.previousElementSibling.firstElementChild.src=this.value" required style="flex:1; padding:0.4rem 0.6rem; font-size:12px;" />
+        <button type="button" class="btn-action delete" style="width:30px; height:30px; border-radius:4px;" onclick="this.parentElement.remove()">🗑️</button>
+      `;
+      list.appendChild(div);
+    };
+
+    window.addFeatureField = function(icon = '✓', title = '', desc = '') {
+      const list = document.getElementById('features-fields-list');
+      if (!list) return;
+      const div = document.createElement('div');
+      div.className = 'nested-field-card';
+      div.innerHTML = `
+        <button type="button" class="nested-delete-btn" onclick="this.parentElement.remove()">✕ Delete</button>
+        <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+          <div style="width:70px;">
+            <label style="font-size:7px; margin-bottom:2px;">Icon</label>
+            <input type="text" class="feature-icon-input" value="${icon}" placeholder="💡" required style="padding:0.4rem 0.6rem; font-size:12px;" />
+          </div>
+          <div style="flex:1;">
+            <label style="font-size:7px; margin-bottom:2px;">Feature Title</label>
+            <input type="text" class="feature-title-input" value="${title}" placeholder="Professional Quality" required style="padding:0.4rem 0.6rem; font-size:12px;" />
+          </div>
+        </div>
+        <div>
+          <label style="font-size:7px; margin-bottom:2px;">Feature Description</label>
+          <input type="text" class="feature-desc-input" value="${desc}" placeholder="Explain key service highlights..." required style="padding:0.4rem 0.6rem; font-size:12px;" />
+        </div>
+      `;
+      list.appendChild(div);
+    };
+
+    window.addPackageField = function(name = '', price = '', badge = '', features = []) {
+      const list = document.getElementById('packages-fields-list');
+      if (!list) return;
+      const div = document.createElement('div');
+      div.className = 'nested-field-card';
+      div.innerHTML = `
+        <button type="button" class="nested-delete-btn" onclick="this.parentElement.remove()">✕ Delete</button>
+        <div style="display:grid; grid-template-columns: 1.2fr 1fr 1fr; gap:0.5rem; margin-top:0.5rem;">
+          <div>
+            <label style="font-size:7px; margin-bottom:2px;">Package Name</label>
+            <input type="text" class="pkg-name-input" value="${name}" placeholder="e.g. Standard" required style="padding:0.4rem 0.6rem; font-size:12px;" />
+          </div>
+          <div>
+            <label style="font-size:7px; margin-bottom:2px;">Price (₹)</label>
+            <input type="text" class="pkg-price-input" value="${price}" placeholder="e.g. ₹12,000" required style="padding:0.4rem 0.6rem; font-size:12px;" />
+          </div>
+          <div>
+            <label style="font-size:7px; margin-bottom:2px;">Badge (optional)</label>
+            <input type="text" class="pkg-badge-input" value="${badge}" placeholder="e.g. Most Popular" style="padding:0.4rem 0.6rem; font-size:12px;" />
+          </div>
+        </div>
+        <div>
+          <label style="font-size:7px; margin-bottom:2px;">Inclusions / Features (One per line)</label>
+          <textarea class="pkg-features-input" rows="3" placeholder="2-Hour Shoot&#10;20 Edited Photos&#10;High-Res Files" required style="padding:0.4rem 0.6rem; font-size:12px; resize:vertical;">${features.join('\n')}</textarea>
+        </div>
+      `;
+      list.appendChild(div);
+    };
+
+    window.addReviewField = function(name = '', initials = '', rating = 5, text = '') {
+      const list = document.getElementById('reviews-fields-list');
+      if (!list) return;
+      const div = document.createElement('div');
+      div.className = 'nested-field-card';
+      div.innerHTML = `
+        <button type="button" class="nested-delete-btn" onclick="this.parentElement.remove()">✕ Delete</button>
+        <div style="display:grid; grid-template-columns: 1.5fr 1fr 1fr; gap:0.5rem; margin-top:0.5rem;">
+          <div>
+            <label style="font-size:7px; margin-bottom:2px;">Author Name</label>
+            <input type="text" class="rev-name-input" value="${name}" placeholder="Abinaya M" required style="padding:0.4rem 0.6rem; font-size:12px;" />
+          </div>
+          <div>
+            <label style="font-size:7px; margin-bottom:2px;">Initials</label>
+            <input type="text" class="rev-initials-input" value="${initials}" placeholder="AM" required maxlength="3" style="padding:0.4rem 0.6rem; font-size:12px;" />
+          </div>
+          <div>
+            <label style="font-size:7px; margin-bottom:2px;">Rating (Stars)</label>
+            <select class="rev-rating-input" style="padding:0.4rem 0.6rem; font-size:12px; height:34px;">
+              <option value="5" ${rating == 5 ? 'selected' : ''}>5 Stars</option>
+              <option value="4" ${rating == 4 ? 'selected' : ''}>4 Stars</option>
+              <option value="3" ${rating == 3 ? 'selected' : ''}>3 Stars</option>
+              <option value="2" ${rating == 2 ? 'selected' : ''}>2 Stars</option>
+              <option value="1" ${rating == 1 ? 'selected' : ''}>1 Star</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label style="font-size:7px; margin-bottom:2px;">Review Content</label>
+          <textarea class="rev-text-input" rows="2" placeholder="Amazing creative solutions..." required style="padding:0.4rem 0.6rem; font-size:12px; resize:vertical;">${text}</textarea>
+        </div>
+      `;
+      list.appendChild(div);
+    };
+
+    // ─── AUTO-ID GENERATOR ──────────────────────────────────────────
+    function generateNextId(prefix, items) {
+      const nums = (items || []).map(item => {
+        const idStr = item.uniqueId || item.id || '';
+        const match = idStr.match(new RegExp(`^${prefix}-(\\d+)$`, 'i'));
+        return match ? parseInt(match[1], 10) : 0;
+      }).filter(n => !isNaN(n) && n > 0);
+      const next = nums.length ? Math.max(...nums) + 1 : 1;
+      return `${prefix}-${String(next).padStart(3, '0')}`;
+    }
+
+    // ─── OFFLINE IMAGE UPLOAD ───────────────────────────────────────
+    window.handleImgUpload = function (inputEl, imgFieldId, thumbId, warnId) {
+      const file = inputEl.files[0];
+      if (!file) return;
+      const warnEl = document.getElementById(warnId);
+
+      if (file.size > 2 * 1024 * 1024) {
+        if (warnEl) { warnEl.textContent = '⚠ File exceeds 2MB. Please compress or use a URL instead.'; warnEl.className = 'img-size-warning error'; }
+        return;
+      }
+      if (warnEl) { warnEl.textContent = 'Reading…'; warnEl.className = 'img-size-warning'; }
+
+      const reader = new FileReader();
+      reader.onload = function (ev) {
+        const dataUrl = ev.target.result;
+        const imgField = document.getElementById(imgFieldId);
+        if (imgField) imgField.value = dataUrl;
+        updateThumbFromUrl(dataUrl, thumbId);
+        if (warnEl) { warnEl.textContent = `✓ Loaded (${(file.size / 1024).toFixed(0)} KB) · Stored as Base64`; warnEl.className = 'img-size-warning'; }
+      };
+      reader.onerror = function () {
+        if (warnEl) { warnEl.textContent = '✗ Failed to read file. Try another image.'; warnEl.className = 'img-size-warning error'; }
+      };
+      reader.readAsDataURL(file);
+    };
+
+    window.updateThumbFromUrl = function (url, thumbId) {
+      const wrap = document.getElementById(thumbId);
+      if (!wrap) return;
+      if (url) {
+        wrap.innerHTML = `<img src="${url}" alt="preview" onerror="this.parentElement.innerHTML='🖼️'" />`;
+      } else {
+        wrap.innerHTML = '🖼️';
+      }
+    };
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const moduleName = document.getElementById('form-module').value;
+      const editId = document.getElementById('form-edit-id').value;
+      
+      const action = editId ? 'edit' : 'add';
+      if (!hasPermission(action, moduleName)) {
+        showToast(`You do not have permission to ${action} items in User Management or other modules.`, 'error');
+        return;
+      }
+      
+      if (moduleName === 'products') {
+        const products = getProducts;
+        const selectedCategory = document.getElementById('p-category').value;
+        const prefix = selectedCategory === 'CAT-MCA' ? 'MCA' : 'PRD';
+        const idVal = editId || generateNextId(prefix, products);
+        
+        const newProduct = {
+          id: idVal.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+          uniqueId: idVal,
+          name: document.getElementById('p-name').value.trim(),
+          category: selectedCategory,
+          subCategory: document.getElementById('p-subcat').value.trim().toUpperCase(),
+          price: parseInt(document.getElementById('p-price').value),
+          image: document.getElementById('p-img').value.trim(),
+          availability: document.getElementById('p-status').value,
+          description: document.getElementById('p-desc').value.trim(),
+          specs: selectedCategory === 'CAT-MCA' 
+            ? ['Premium construction and grade components', 'Integrated safety protection chips', 'Tested for optimum performance and speed', 'Manufacturer replacement warranty included']
+            : ['Archival premium grade papers', 'Waterproof coating', 'Custom presentation box included'],
+          rating: 5,
+          popular: false,
+          badge: ''
+        };
+
+        if (editId) {
+          const idx = products.findIndex(p => p.id === editId);
+          if (idx !== -1) {
+            products[idx] = { ...products[idx], ...newProduct };
+            logAction(`Updated product: ${newProduct.uniqueId} - ${newProduct.name}`);
+            showToast('Product specifications updated successfully.', 'success');
+          }
+        } else {
+          if (products.some(p => p.id === newProduct.id || p.uniqueId === newProduct.uniqueId)) {
+            showToast('A product with this ID already exists.', 'error');
+            return;
+          }
+          products.unshift(newProduct);
+          logAction(`Added product: ${newProduct.uniqueId} - ${newProduct.name}`);
+          showToast('Product added successfully to showcase.', 'success');
+        }
+        localStorage.setItem('sathish_products', JSON.stringify(products));
+        renderProducts();
+
+      } else if (moduleName === 'services') {
+        const services = getServices();
+        const idVal = editId || generateNextId('SRV', services);
+        
+        const gallery = Array.from(document.querySelectorAll('.gallery-url-input')).map(input => input.value.trim()).filter(Boolean);
+        
+        const features = Array.from(document.querySelectorAll('#features-fields-list .nested-field-card')).map(el => {
+          const iconIn = el.querySelector('.feature-icon-input');
+          const titleIn = el.querySelector('.feature-title-input');
+          const descIn = el.querySelector('.feature-desc-input');
+          if (iconIn && titleIn && descIn) {
+            return {
+              icon: iconIn.value.trim(),
+              title: titleIn.value.trim(),
+              desc: descIn.value.trim()
+            };
+          }
+          return null;
+        }).filter(Boolean);
+
+        const packages = Array.from(document.querySelectorAll('#packages-fields-list .nested-field-card')).map(el => {
+          const nameIn = el.querySelector('.pkg-name-input');
+          const priceIn = el.querySelector('.pkg-price-input');
+          const badgeIn = el.querySelector('.pkg-badge-input');
+          const featIn = el.querySelector('.pkg-features-input');
+          if (nameIn && priceIn && featIn) {
+            return {
+              name: nameIn.value.trim(),
+              price: priceIn.value.trim(),
+              badge: badgeIn ? badgeIn.value.trim() : '',
+              features: featIn.value.split('\n').map(x => x.trim()).filter(Boolean)
+            };
+          }
+          return null;
+        }).filter(Boolean);
+
+        const reviews = Array.from(document.querySelectorAll('#reviews-fields-list .nested-field-card')).map(el => {
+          const nameIn = el.querySelector('.rev-name-input');
+          const initialsIn = el.querySelector('.rev-initials-input');
+          const ratingIn = el.querySelector('.rev-rating-input');
+          const textIn = el.querySelector('.rev-text-input');
+          if (nameIn && initialsIn && ratingIn && textIn) {
+            return {
+              name: nameIn.value.trim(),
+              initials: initialsIn.value.trim().toUpperCase(),
+              rating: parseInt(ratingIn.value),
+              text: textIn.value.trim()
+            };
+          }
+          return null;
+        }).filter(Boolean);
+
+        const subcategories = Array.from(document.querySelectorAll('#subcategories-fields-list .subcategory-field-item')).map(el => {
+          const subIdIn = el.querySelector('.sub-id-input');
+          const subTitleIn = el.querySelector('.sub-title-input');
+          const subDescIn = el.querySelector('.sub-desc-input');
+          const subWhatsappTemplateIn = el.querySelector('.sub-whatsapp-template-input');
+          
+          const subImages = Array.from(el.querySelectorAll('.sub-gallery-img-url')).map(x => x.value).filter(Boolean);
+          const subCoverImg = el.querySelector('.sub-cover-img-url').value || (subImages[0] || 'assets/images/videography-photography/videography-and-photography.jpg');
+
+          if (subTitleIn && subDescIn) {
+            let sId = subIdIn.value;
+            if (sId.startsWith('SUB-TEMP-')) {
+              const parentNum = idVal.replace('SRV-00', '').replace('SRV-0', '');
+              sId = `SUB-${parentNum}${String(Math.floor(Math.random() * 900) + 100)}`; 
+            }
+            return {
+              id: sId,
+              title: subTitleIn.value.trim(),
+              image: subCoverImg,
+              images: subImages,
+              whatsappTemplate: subWhatsappTemplateIn ? subWhatsappTemplateIn.value.trim() : '',
+              description: subDescIn.value.trim()
+            };
+          }
+          return null;
+        }).filter(Boolean);
+
+        const sTitle = document.getElementById('s-title').value.trim();
+        const newService = {
+          id: idVal,
+          active: document.getElementById('s-active').value === 'true',
+          title: sTitle,
+          name: sTitle,
+          category: document.getElementById('s-category').value.trim(),
+          subcategory: document.getElementById('s-subcat').value.trim(),
+          tagline: document.getElementById('s-tagline').value.trim(),
+          image: document.getElementById('s-img').value.trim(),
+          heroImage: document.getElementById('s-hero-img').value.trim() || document.getElementById('s-img').value.trim(),
+          whatsapp: document.getElementById('s-whatsapp').value.trim(),
+          phone: document.getElementById('s-phone').value.trim(),
+          email: document.getElementById('s-email').value.trim(),
+          description: document.getElementById('s-desc').value.trim(),
+          gallery,
+          features,
+          packages,
+          reviews,
+          subcategories,
+          process: [
+            { step: 1, icon: '💬', title: 'Consultation', desc: 'Discuss brief concepts, project directives, timelines, and budgets.' },
+            { step: 2, icon: '🗺️', title: 'Planning', desc: 'Determine schedules, source production assets, and organize files.' },
+            { step: 3, icon: '📷', title: 'Design & Production', desc: 'Assemble visual setups, shoot scenes, write assets, and polish code.' },
+            { step: 4, icon: '📦', title: 'Delivery', desc: 'Perform final checks and deliver pristine exports.' }
+          ]
+        };
+
+        if (editId) {
+          const idx = services.findIndex(s => s.id === editId);
+          if (idx !== -1) {
+            newService.process = services[idx].process || newService.process;
+            services[idx] = newService;
+            logAction(`Updated service: ${newService.id} - ${newService.title}`);
+            showToast('Service specs updated successfully.', 'success');
+          }
+        } else {
+          if (services.some(s => s.id === newService.id)) {
+            showToast('Service code key already configured.', 'error');
+            return;
+          }
+          services.push(newService);
+          logAction(`Added service: ${newService.id} - ${newService.title}`);
+          showToast('New service catalog added.', 'success');
+        }
+        
+        if (typeof smhSaveServices === 'function') {
+          smhSaveServices(services);
+        } else {
+          localStorage.setItem('sathish_services_v2', JSON.stringify(services));
+        }
+        renderServices();
+
+      } else if (moduleName === 'courses') {
+        const courses = getCourses();
+        const idVal = editId || generateNextId('CRS', courses);
+        
+        const modulesVal = document.getElementById('c-modules').value.split('\n').map(m => m.trim()).filter(Boolean);
+
+        const newCourse = {
+          id: idVal.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+          uniqueId: idVal,
+          name: document.getElementById('c-name').value.trim(),
+          category: document.getElementById('c-category').value,
+          mode: document.getElementById('c-mode').value,
+          duration: document.getElementById('c-duration').value.trim(),
+          startDate: document.getElementById('c-startdate').value,
+          fee: parseInt(document.getElementById('c-fee').value),
+          seatsAvailable: parseInt(document.getElementById('c-seats').value),
+          status: document.getElementById('c-status').value,
+          image: document.getElementById('c-img').value.trim() || 'assets/images/courses/workshop.jpg',
+          banner: document.getElementById('c-img').value.trim() || 'assets/images/courses/workshop.jpg',
+          shortDescription: document.getElementById('c-short-desc').value.trim(),
+          overview: document.getElementById('c-desc').value.trim(),
+          description: document.getElementById('c-desc').value.trim(),
+          eligibility: document.getElementById('c-eligibility').value.trim(),
+          trainer: document.getElementById('c-trainer').value.trim(),
+          schedule: document.getElementById('c-schedule').value.trim(),
+          modules: modulesVal
+        };
+
+        if (editId) {
+          const idx = courses.findIndex(c => c.id === editId);
+          if (idx !== -1) {
+            courses[idx] = { ...courses[idx], ...newCourse };
+            logAction(`Updated course: ${newCourse.uniqueId} - ${newCourse.name}`);
+            showToast('Course specifications updated successfully.', 'success');
+          }
+        } else {
+          if (courses.some(c => c.id === newCourse.id || c.uniqueId === newCourse.uniqueId)) {
+            showToast('A course with this ID already exists.', 'error');
+            return;
+          }
+          courses.unshift(newCourse);
+          logAction(`Added course: ${newCourse.uniqueId} - ${newCourse.name}`);
+          showToast('Course added successfully to catalog.', 'success');
+        }
+        saveCourses(courses);
+        renderCourses();
+
+      } else if (moduleName === 'arts') {
+        const arts = getArts();
+        const idVal = editId || generateNextId('ART', arts);
+
+        const newArt = {
+          id: idVal.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+          uniqueId: idVal,
+          name: document.getElementById('a-name').value.trim(),
+          category: document.getElementById('a-category').value,
+          subCategory: document.getElementById('a-subcat').value.trim().toUpperCase(),
+          price: parseInt(document.getElementById('a-price').value),
+          image: document.getElementById('a-img').value.trim(),
+          description: document.getElementById('a-desc').value.trim(),
+          specs: ['Premium professional grade selection', 'Eco-friendly and sustainable', 'Curated by local artisans'],
+          rating: 5,
+          badge: ''
+        };
+
+        if (editId) {
+          const idx = arts.findIndex(a => a.id === editId);
+          if (idx !== -1) {
+            arts[idx] = { ...arts[idx], ...newArt };
+            logAction(`Updated stationery item: ${newArt.uniqueId} - ${newArt.name}`);
+            showToast('Item description modified successfully.', 'success');
+          }
+        } else {
+          if (arts.some(a => a.id === newArt.id || a.uniqueId === newArt.uniqueId)) {
+            showToast('An stationery/art item with this ID already exists.', 'error');
+            return;
+          }
+          arts.unshift(newArt);
+          logAction(`Added stationery item: ${newArt.uniqueId} - ${newArt.name}`);
+          showToast('Stationery item added successfully.', 'success');
+        }
+        localStorage.setItem('sathish_arts', JSON.stringify(arts));
+        renderArts();
+
+      } else if (moduleName === 'portfolio') {
+        const portfolio = getPortfolio();
+        const idVal = editId || generateNextId('PORT', portfolio);
+        
+        const gallery = Array.from(document.querySelectorAll('.port-gallery-url-input'))
+          .map(input => input.value.trim())
+          .filter(Boolean);
+
+        const newPortfolioItem = {
+          id: idVal,
+          title: document.getElementById('pt-title').value.trim(),
+          category: document.getElementById('pt-category').value,
+          shortDescription: document.getElementById('pt-short-desc').value.trim(),
+          description: document.getElementById('pt-desc').value.trim(),
+          client: document.getElementById('pt-client').value.trim(),
+          date: document.getElementById('pt-date').value,
+          image: document.getElementById('pt-img').value.trim(),
+          gallery,
+          featured: document.getElementById('pt-featured').checked,
+          visible: document.getElementById('pt-visible').value === 'true',
+          displayOrder: parseInt(document.getElementById('pt-order').value) || 1
+        };
+
+        if (editId) {
+          const idx = portfolio.findIndex(p => p.id === editId);
+          if (idx !== -1) {
+            portfolio[idx] = newPortfolioItem;
+            logAction(`Updated portfolio item: ${newPortfolioItem.id} - ${newPortfolioItem.title}`);
+            showToast('Portfolio item updated successfully.', 'success');
+          }
+        } else {
+          if (portfolio.some(p => p.id === newPortfolioItem.id)) {
+            showToast('A portfolio item with this ID already exists.', 'error');
+            return;
+          }
+          portfolio.push(newPortfolioItem);
+          logAction(`Added portfolio item: ${newPortfolioItem.id} - ${newPortfolioItem.title}`);
+          showToast('Portfolio item added successfully.', 'success');
+        }
+
+        savePortfolio(portfolio);
+        renderPortfolioAdmin();
+
+      } else if (moduleName === 'users') {
+        const users = getUsers();
+        const fullName = document.getElementById('u-fullname').value.trim();
+        const username = document.getElementById('u-username').value.trim().toLowerCase();
+        const email = document.getElementById('u-email').value.trim();
+        const mobile = document.getElementById('u-mobile').value.trim();
+        const role = document.getElementById('u-role').value;
+        const password = document.getElementById('u-password').value;
+        const confirmPassword = document.getElementById('u-confirm-password').value;
+        const status = document.getElementById('u-status').value;
+
+        // Validations
+        if (password) {
+          if (password.length < 8) {
+            showToast('Password must be at least 8 characters long.', 'error');
+            return;
+          }
+          if (password !== confirmPassword) {
+            showToast('Passwords do not match.', 'error');
+            return;
+          }
+        }
+
+        if (editId) {
+          const idx = users.findIndex(u => u.username === editId);
+          if (idx !== -1) {
+            const oldUser = users[idx];
+            const session = getSession();
+            
+            if (session && session.username === editId) {
+              if (status === 'Inactive') {
+                showToast('You cannot deactivate your own account.', 'error');
+                return;
+              }
+              if (role !== 'Super Admin') {
+                showToast('You cannot change your own Super Admin role.', 'error');
+                return;
+              }
+            }
+
+            users[idx] = {
+              ...oldUser,
+              fullName,
+              email,
+              mobile,
+              role,
+              status
+            };
+
+            let pwdUpdated = false;
+            if (password) pwdUpdated = true;
+
+            const saveChanges = async () => {
+              if (pwdUpdated) {
+                users[idx].passwordHash = await hashPassword(password);
+              }
+              localStorage.setItem('sathish_users', JSON.stringify(users));
+              logAction(`Updated user: ${username} (Role: ${role}, Status: ${status}${pwdUpdated ? ', password updated' : ''})`);
+              showToast(`User ${username} updated successfully.`, 'success');
+              
+              if (session && session.username === editId) {
+                session.fullName = fullName;
+                session.role = role;
+                session.email = email;
+                localStorage.setItem('sathish_admin_session', JSON.stringify(session));
+                updateHeaderUserInfo();
+              }
+              renderUsers();
+            };
+            
+            saveChanges();
+          }
+        } else {
+          if (users.some(u => u.username === username)) {
+            showToast('Username already exists.', 'error');
+            return;
+          }
+          if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+            showToast('Email address already exists.', 'error');
+            return;
+          }
+          if (!password) {
+            showToast('Password is required for new users.', 'error');
+            return;
+          }
+
+          const saveNewUser = async () => {
+            const passwordHash = await hashPassword(password);
+            const newUser = {
+              fullName,
+              username,
+              email,
+              mobile,
+              role,
+              passwordHash,
+              status
+            };
+            users.push(newUser);
+            localStorage.setItem('sathish_users', JSON.stringify(users));
+            logAction(`Created user: ${username} (${role})`);
+            showToast(`User ${username} created successfully.`, 'success');
+            renderUsers();
+          };
+          
+          saveNewUser();
+        }
+      }
+      updateDashboardStats();
+      closeModal();
+    }
+
+    function deleteItem(moduleName, itemId) {
+      if (!hasPermission('delete', moduleName)) {
+        showToast('You do not have permission to delete items in this module.', 'error');
+        return;
+      }
+
+      if (!confirm('Are you absolutely sure you want to delete this item? This action is permanent.')) return;
+      
+      if (moduleName === 'products') {
+        const item = getProducts.find(p => p.id === itemId);
+        const name = item ? item.name : itemId;
+        const filtered = getProducts.filter(p => p.id !== itemId);
+        localStorage.setItem('sathish_products', JSON.stringify(filtered));
+        logAction(`Deleted product: ${itemId} - ${name}`);
+        renderProducts();
+        showToast('Product catalog item purged successfully.', 'success');
+      } else if (moduleName === 'services') {
+        const item = getServices().find(s => s.id === itemId);
+        const name = item ? (item.title || item.name) : itemId;
+        if (typeof smhDeleteService === 'function') {
+          smhDeleteService(itemId);
+        } else {
+          const filtered = getServices().filter(s => s.id !== itemId);
+          localStorage.setItem('sathish_services_v2', JSON.stringify(filtered));
+        }
+        logAction(`Deleted service: ${itemId} - ${name}`);
+        renderServices();
+        showToast('Service pack purged from archives.', 'success');
+      } else if (moduleName === 'courses') {
+        const item = getCourses().find(c => c.id === itemId);
+        const name = item ? item.name : itemId;
+        const filtered = getCourses().filter(c => c.id !== itemId);
+        saveCourses(filtered);
+        logAction(`Deleted course: ${itemId} - ${name}`);
+        renderCourses();
+        showToast('Course purged successfully.', 'success');
+      } else if (moduleName === 'arts') {
+        const item = getArts().find(a => a.id === itemId);
+        const name = item ? item.name : itemId;
+        const filtered = getArts().filter(a => a.id !== itemId);
+        localStorage.setItem('sathish_arts', JSON.stringify(filtered));
+        logAction(`Deleted stationery item: ${itemId} - ${name}`);
+        renderArts();
+        showToast('Arts item purged.', 'success');
+      } else if (moduleName === 'portfolio') {
+        const item = getPortfolio().find(p => p.id === itemId);
+        const name = item ? item.title : itemId;
+        const filtered = getPortfolio().filter(p => p.id !== itemId);
+        savePortfolio(filtered);
+        logAction(`Deleted portfolio item: ${itemId} - ${name}`);
+        renderPortfolioAdmin();
+        showToast('Portfolio item deleted successfully.', 'success');
+      } else if (moduleName === 'users') {
+        const session = getSession();
+        if (session && session.username === itemId) {
+          showToast('You cannot delete your own account.', 'error');
+          return;
+        }
+        const filtered = getUsers().filter(u => u.username !== itemId);
+        localStorage.setItem('sathish_users', JSON.stringify(filtered));
+        logAction(`Deleted user: ${itemId}`);
+        renderUsers();
+        showToast('User deleted successfully.', 'success');
+      }
+      updateDashboardStats();
+    }
+
+    // ─── SETTINGS PANEL LOGIC ──────────────────────────────────────
+    function loadSettingsForm() {
+      const settings = JSON.parse(localStorage.getItem('sathish_settings') || '{}');
+      document.getElementById('settings-email').value = settings.email || 'sathishmedia4u@gmail.com';
+      document.getElementById('settings-whatsapp').value = settings.whatsapp || '+91 8762097098';
+      document.getElementById('settings-theme').value = settings.theme || 'dark';
+      
+      document.getElementById('settings-phone').value = settings.phone || '+91 87620 97098';
+      document.getElementById('settings-address').value = settings.address || 'Salem, Tamil Nadu, India';
+      document.getElementById('settings-hours').value = settings.hours || '9:00 AM - 9:00 PM';
+      document.getElementById('settings-facebook').value = settings.facebook || 'https://facebook.com/sathishmedia';
+      document.getElementById('settings-instagram').value = settings.instagram || 'https://instagram.com/sathishmedia';
+      document.getElementById('settings-youtube').value = settings.youtube || 'https://youtube.com/sathishmedia';
+      document.getElementById('settings-twitter').value = settings.twitter || 'https://twitter.com/sathishmedia';
+      document.getElementById('settings-keywords').value = settings.keywords || 'photography, videography, Salem, courses, web design';
+      document.getElementById('settings-description').value = settings.description || 'Sathish Media - Creative digital agency, corporate event organizer, photography, and academy in Salem.';
+
+      // Disable configurations form if user is Staff
+      const session = getSession();
+      const isStaff = session && session.role === 'Staff';
+      const form = document.getElementById('settings-form');
+      if (form) {
+        const inputs = form.querySelectorAll('input, select, textarea, button');
+        inputs.forEach(input => {
+          input.disabled = isStaff;
+        });
+      }
+    }
+
+    function saveSettings(e) {
+      e.preventDefault();
+      if (!hasPermission('edit', 'settings')) {
+        showToast('You do not have permission to update website configurations.', 'error');
+        return;
+      }
+      
+      const settings = {
+        name: 'Sathish Media',
+        email: document.getElementById('settings-email').value.trim(),
+        whatsapp: document.getElementById('settings-whatsapp').value.trim(),
+        phone: document.getElementById('settings-phone').value.trim(),
+        address: document.getElementById('settings-address').value.trim(),
+        hours: document.getElementById('settings-hours').value.trim(),
+        facebook: document.getElementById('settings-facebook').value.trim(),
+        instagram: document.getElementById('settings-instagram').value.trim(),
+        youtube: document.getElementById('settings-youtube').value.trim(),
+        twitter: document.getElementById('settings-twitter').value.trim(),
+        keywords: document.getElementById('settings-keywords').value.trim(),
+        description: document.getElementById('settings-description').value.trim(),
+        theme: document.getElementById('settings-theme').value,
+        website: 'Sathish Media'
+      };
+
+      localStorage.setItem('sathish_settings', JSON.stringify(settings));
+      initTheme();
+      logAction('Updated global website configuration');
+      showToast('Settings saved and synchronized successfully.', 'success');
+    }
+
+    // ─── USER MANAGEMENT MODULE LOGIC ──────────────────────────────
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('sathish_users') || '[]');
+    }
+
+    function renderUsers(filtered = null) {
+      const session = getSession();
+      if (!session || session.role !== 'Super Admin') {
+        const grid = document.getElementById('users-list-grid');
+        if (grid) grid.innerHTML = '';
+        return;
+      }
+      const list = filtered || getUsers();
+      const grid = document.getElementById('users-list-grid');
+      
+      if (!grid) return;
+      
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column: 1/-1;">
+            <div class="empty-icon">👥</div>
+            <div class="empty-title">No users found</div>
+            <p>Click "Add User" to create a new user profile.</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = list.map(u => {
+        const isSelf = getSession() && getSession().username === u.username;
+        const statusBadgeClass = u.status === 'Active' ? 'in-stock' : 'out-of-stock';
+        const roleBadgeColor = u.role === 'Super Admin' ? 'var(--accent)' : (u.role === 'Admin' ? 'var(--gold)' : 'var(--text-dim)');
+        const initials = u.fullName.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        
+        return `
+          <div class="data-card">
+            <span class="status-badge ${statusBadgeClass}">${u.status}</span>
+            <div class="card-img" style="background: linear-gradient(135deg, rgba(255,78,0,0.1), rgba(245,200,66,0.1)); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; color: ${roleBadgeColor}; border-color: rgba(255,255,255,0.05); width: 80px; height: 80px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+              ${initials || 'U'}
+            </div>
+            <div class="card-info">
+              <span class="card-id">${u.role.toUpperCase()} ${isSelf ? '• YOU' : ''}</span>
+              <h4 class="card-title" title="${u.fullName}">${u.fullName}</h4>
+              <span class="card-meta">@${u.username} • ${u.mobile}</span>
+              <p class="card-desc" style="-webkit-line-clamp: 1;">${u.email}</p>
+              <div class="card-footer" style="margin-top: 0.5rem; padding-top: 0.5rem;">
+                <div></div>
+                <div class="card-actions">
+                  <button class="btn-action edit" onclick="openEditModal('users', '${u.username}')" title="Edit">✏️</button>
+                  ${isSelf ? '' : `<button class="btn-action delete" onclick="deleteItem('users', '${u.username}')" title="Delete">🗑️</button>`}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterUsers() {
+      const q = document.getElementById('search-users').value.trim().toLowerCase();
+      const filtered = getUsers().filter(u => 
+        u.fullName.toLowerCase().includes(q) || 
+        u.username.toLowerCase().includes(q) || 
+        u.email.toLowerCase().includes(q) ||
+        u.role.toLowerCase().includes(q)
+      );
+      renderUsers(filtered);
+    }
+
+    // ─── AUDIT LOGS MODULE LOGIC ───────────────────────────────────
+    function getLogs() {
+      return JSON.parse(localStorage.getItem('sathish_logs') || '[]');
+    }
+
+    function renderLogs(filtered = null) {
+      const session = getSession();
+      if (!session || session.role === 'Staff') {
+        const tbody = document.getElementById('logs-table-body');
+        if (tbody) tbody.innerHTML = '';
+        return;
+      }
+      const list = filtered || getLogs();
+      const tbody = document.getElementById('logs-table-body');
+      const clearBtn = document.getElementById('btn-clear-logs');
+      if (clearBtn) {
+        clearBtn.style.display = (session && session.role === 'Super Admin') ? 'block' : 'none';
+      }
+      if (!tbody) return;
+
+      if (list.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="3" style="text-align: center; padding: 2rem; color: var(--text-dim);">
+              No activity logs recorded.
+            </td>
+          </tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map(log => `
+        <tr style="border-bottom: 1px solid var(--border); transition: background var(--transition);" onmouseover="this.style.background='rgba(255,255,255,0.02)'" onmouseout="this.style.background='transparent'">
+          <td style="padding: 0.75rem 1rem; font-family: var(--font-mono); color: var(--text-dim); font-size: 11px;">${log.timestamp}</td>
+          <td style="padding: 0.75rem 1rem; font-weight: 700; color: var(--text); font-family: var(--font-mono); font-size: 12px;">@${log.username}</td>
+          <td style="padding: 0.75rem 1rem; color: var(--text-dim);">${log.action}</td>
+        </tr>
+      `).join('');
+    }
+
+    function filterLogs() {
+      const q = document.getElementById('search-logs').value.trim().toLowerCase();
+      const filtered = getLogs().filter(log => 
+        log.username.toLowerCase().includes(q) || 
+        log.action.toLowerCase().includes(q) ||
+        log.timestamp.toLowerCase().includes(q)
+      );
+      renderLogs(filtered);
+    }
+
+    function clearLogs() {
+      const session = getSession();
+      if (!session || session.role !== 'Super Admin') {
+        showToast('You do not have permission to clear logs.', 'error');
+        return;
+      }
+      if (!confirm('Are you sure you want to permanently clear all activity logs?')) return;
+      localStorage.setItem('sathish_logs', JSON.stringify([]));
+      logAction('Activity logs cleared');
+      renderLogs();
+      showToast('Activity logs cleared.', 'success');
+    }
+
+    // ─── CURRENT USER PROFILE & PASSWORD SETTINGS ──────────────────
+    function loadProfileSettingsForm() {
+      const session = getSession();
+      if (!session) return;
+      
+      const users = getUsers();
+      const user = users.find(u => u.username === session.username);
+      if (!user) return;
+
+      document.getElementById('profile-fullname').value = user.fullName;
+      document.getElementById('profile-username').value = user.username;
+      document.getElementById('profile-email').value = user.email;
+      document.getElementById('profile-mobile').value = user.mobile;
+      
+      document.getElementById('profile-current-password').value = '';
+      document.getElementById('profile-new-password').value = '';
+      document.getElementById('profile-confirm-password').value = '';
+    }
+
+    async function saveProfileSettings(e) {
+      e.preventDefault();
+      const session = getSession();
+      if (!session) return;
+
+      const users = getUsers();
+      const idx = users.findIndex(u => u.username === session.username);
+      if (idx === -1) return;
+
+      const user = users[idx];
+      const fullName = document.getElementById('profile-fullname').value.trim();
+      const email = document.getElementById('profile-email').value.trim();
+      const mobile = document.getElementById('profile-mobile').value.trim();
+      
+      const currentPass = document.getElementById('profile-current-password').value;
+      const newPass = document.getElementById('profile-new-password').value;
+      const confirmPass = document.getElementById('profile-confirm-password').value;
+
+      if (users.some((u, i) => u.email.toLowerCase() === email.toLowerCase() && i !== idx)) {
+        showToast('Email address already in use by another account.', 'error');
+        return;
+      }
+
+      let passwordChanged = false;
+      if (newPass || confirmPass || currentPass) {
+        if (!currentPass) {
+          showToast('Please enter your current password to make changes.', 'error');
+          return;
+        }
+        const currentHash = await hashPassword(currentPass);
+        if (user.passwordHash !== currentHash) {
+          showToast('Current password verification failed.', 'error');
+          return;
+        }
+        if (newPass.length < 8) {
+          showToast('New password must be at least 8 characters long.', 'error');
+          return;
+        }
+        if (newPass !== confirmPass) {
+          showToast('New password and confirmation do not match.', 'error');
+          return;
+        }
+        user.passwordHash = await hashPassword(newPass);
+        passwordChanged = true;
+      }
+
+      user.fullName = fullName;
+      user.email = email;
+      user.mobile = mobile;
+
+      users[idx] = user;
+      localStorage.setItem('sathish_users', JSON.stringify(users));
+
+      session.fullName = fullName;
+      session.email = email;
+      localStorage.setItem('sathish_admin_session', JSON.stringify(session));
+
+      updateHeaderUserInfo();
+      loadProfileSettingsForm();
+      
+      logAction(passwordChanged ? 'Updated profile details and changed password' : 'Updated profile details');
+      showToast('Profile updated successfully.', 'success');
+    }
+
+
+    // ─── DATABASE SYNC FOR ADMIN CONTENT ─────────────────────────────
+    const CONTENT_STORAGE_MAP = {
+      sathish_products: 'products',
+      sathish_services_v2: 'services',
+      sathish_portfolio: 'portfolio',
+      sathish_arts: 'arts',
+      sathish_courses: 'courses'
+    };
+    let loadingDatabaseContent = false;
+    let contentSyncQueue = Promise.resolve();
+
+    async function loadRemoteData() {
+      loadingDatabaseContent = true;
+      try {
+        for (const [storageKey, endpoint] of Object.entries(CONTENT_STORAGE_MAP)) {
+          const response = await fetch(`/api/${endpoint}`, {
+            credentials: 'same-origin',
+            headers: { 'Accept': 'application/json' }
+          });
+          if (!response.ok) throw new Error(`Could not load ${endpoint} from database.`);
+          const result = await response.json();
+          const items = result[endpoint];
+          if (!Array.isArray(items)) throw new Error(`Invalid ${endpoint} response.`);
+          nativeLocalStorageSetItem.call(localStorage, storageKey, JSON.stringify(items));
+        }
+      } finally {
+        loadingDatabaseContent = false;
+      }
+    }
+
+    async function syncContentChange(storageKey, oldValue, newValue) {
+      const table = CONTENT_STORAGE_MAP[storageKey];
+      if (!table || loadingDatabaseContent) return;
+
+      let oldItems = [];
+      let newItems = [];
+      try {
+        oldItems = oldValue ? JSON.parse(oldValue) : [];
+        newItems = newValue ? JSON.parse(newValue) : [];
+        if (!Array.isArray(oldItems) || !Array.isArray(newItems)) return;
+      } catch (error) {
+        console.error('Could not parse content for database sync:', error);
+        return;
+      }
+
+      const oldById = new Map(oldItems.map(item => [String(item.id), item]));
+      const newById = new Map(newItems.map(item => [String(item.id), item]));
+
+      for (const oldItem of oldItems) {
+        if (!newById.has(String(oldItem.id)) && oldItem.dbId) {
+          const response = await fetch(`/api/${table}/${oldItem.dbId}`, {
+            method: 'DELETE',
+            credentials: 'same-origin',
+            headers: { 'Accept': 'application/json' }
+          });
+          if (!response.ok && response.status !== 404) {
+            throw new Error(`Failed to delete ${table} item from database.`);
+          }
+        }
+      }
+
+      let updated = false;
+      for (const item of newItems) {
+        const oldItem = oldById.get(String(item.id));
+        const payload = { ...item };
+        delete payload.dbId;
+
+        if (!oldItem) {
+          const response = await fetch(`/api/${table}`, {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+          if (!response.ok) {
+            const error = await response.json().catch(() => ({}));
+            throw new Error(error.error || `Failed to save ${table} item.`);
+          }
+          const result = await response.json();
+          item.dbId = result.id;
+          updated = true;
+        } else if (oldItem.dbId && JSON.stringify(oldItem) !== JSON.stringify(item)) {
+          const response = await fetch(`/api/${table}/${oldItem.dbId}`, {
+            method: 'PUT',
+            credentials: 'same-origin',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+          if (!response.ok) {
+            const error = await response.json().catch(() => ({}));
+            throw new Error(error.error || `Failed to update ${table} item.`);
+          }
+          item.dbId = oldItem.dbId;
+        }
+      }
+
+      if (updated) {
+        loadingDatabaseContent = true;
+        try {
+          nativeLocalStorageSetItem.call(localStorage, storageKey, JSON.stringify(newItems));
+        } finally {
+          loadingDatabaseContent = false;
+        }
+      }
+    }
+
+    // Intercept existing admin modules' localStorage writes and persist them to SQLite.
+    const nativeLocalStorageSetItem = Storage.prototype.setItem;
+    Storage.prototype.setItem = function(key, value) {
+      const oldValue = this.getItem(key);
+      nativeLocalStorageSetItem.call(this, key, value);
+      if (this === localStorage && CONTENT_STORAGE_MAP[key] && !loadingDatabaseContent) {
+        contentSyncQueue = contentSyncQueue
+          .then(() => syncContentChange(key, oldValue, String(value)))
+          .catch(error => {
+            console.error('Database sync error:', error);
+            if (typeof showToast === 'function') {
+              showToast(`Database sync failed: ${error.message}`, 'error');
+            }
+          });
+      }
+    };
+
+
+    // ─── PAGE INITIALIZATION ───────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      checkAuth();
+    });
+  </script>
+</body>
+</html>

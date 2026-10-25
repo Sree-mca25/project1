@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Social Media Marketing (SMM) | Sathish Media Salem</title>
+  <meta name="description" content="Grow your online presence with targeted social media campaigns, content calendars, poster designs, and business marketing by Sathish Media Salem." />
+  <meta name="author" content="Sathish Media" />
+  <link rel="canonical" href="https://sathishmedia.com/social-media-marketing.html" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Social Media Marketing (SMM) | Sathish Media Salem" />
+  <meta property="og:description" content="Grow your online presence with targeted social media campaigns, content calendars, poster designs, and business marketing by Sathish Media Salem." />
+  <meta property="og:image" content="assets/images/about/unsplash-1521791136064.jpg" />
+  <meta property="og:url" content="https://sathishmedia.com/social-media-marketing.html" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Social Media Marketing (SMM) | Sathish Media Salem" />
+  <meta name="twitter:description" content="Grow your online presence with targeted social media campaigns, content calendars, poster designs, and business marketing by Sathish Media Salem." />
+  <meta name="twitter:image" content="assets/images/about/unsplash-1521791136064.jpg" />
+
+  <!-- Structured Schema Data for SEO & AI Search Agents -->
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Social Media Marketing Services",
+      "description": "Content planning, page management, campaign design, and targeted audience expansion setups.",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Sathish Media",
+        "telephone": "+918762097098",
+        "email": "sathishmedia4u@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "358, Sathish Media Complex, TVK Road, Ammapet",
+          "addressLocality": "Salem",
+          "addressRegion": "Tamil Nadu",
+          "postalCode": "636003",
+          "addressCountry": "IN"
+        }
+      },
+      "areaServed": "Salem, Tamil Nadu"
+    }
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Open Graph -->
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <style>
+    /* ── SOCIAL MEDIA MARKETING VARIABLES ─────────────────── */
+    :root {
+      --smm-accent:      #2563EB;   /* Tech Blue */
+      --smm-accent2:     #06B6D4;   /* Cool Cyan */
+      --smm-gold:        #F59E0B;
+      --glass-bg:        rgba(255, 255, 255, 0.88);
+      --glass-border:    rgba(255, 255, 255, 0.45);
+      --card-glow:       rgba(37, 99, 235, 0.14);
+      --wa-green:       linear-gradient(135deg, #111111, #2A2A2A);
+      --wa-green-hover: linear-gradient(135deg, #222222, #3A3A3A);
+    }
+
+    .smm-page-content {
+      padding-top: var(--header-h);
+      background: var(--bg);
+      min-height: 100vh;
+    }
+
+    /* ─── 1. HERO BANNER ─────────────────────────────────── */
+    .smm-banner {
+      position: relative;
+      min-height: 42vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem 4.5rem;
+      overflow: hidden;
+      background-image: url('assets/images/hero/media-production-events.jpg');
+      background-size: cover;
+      background-position: center 35%;
+    }
+
+    .smm-banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(37, 99, 235, 0.55) 0%,
+        rgba(6, 182, 212, 0.35) 50%,
+        rgba(255, 255, 255, 0.7) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1;
+    }
+
+    .smm-banner-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      text-align: center;
+      animation: smmFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes smmFadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .smm-breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 99px;
+      margin-bottom: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .smm-breadcrumb a { color: var(--text2); transition: color var(--transition); }
+    .smm-breadcrumb a:hover { color: var(--smm-accent); }
+    .smm-breadcrumb-sep { color: var(--text3); }
+    .smm-breadcrumb-current { color: var(--smm-accent); font-weight: 700; }
+
+    .smm-banner-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--smm-accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .smm-banner-title {
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+      margin-bottom: 1.1rem;
+    }
+    .smm-banner-title span {
+      background: linear-gradient(135deg, var(--smm-accent), var(--smm-accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .smm-banner-desc {
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      color: var(--text2);
+      max-width: 740px;
+      margin: 0 auto 2rem;
+      line-height: 1.65;
+      font-weight: 500;
+    }
+
+    .smm-banner-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .smm-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+    .smm-stat-num {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--smm-accent);
+      font-family: var(--font-mono);
+      line-height: 1;
+    }
+    .smm-stat-label {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    /* ─── 2. SECTION HEADER ──────────────────────────────── */
+    .smm-section-intro {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 4rem 2rem 1rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .smm-section-intro-left .section-badge {
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .smm-section-intro-left h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+    }
+    .smm-section-intro-left h2 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--smm-accent), var(--smm-accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .smm-count-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1.1rem;
+      background: linear-gradient(135deg, rgba(37,99,235,0.08), rgba(6,182,212,0.06));
+      border: 1px solid rgba(37,99,235,0.2);
+      border-radius: 99px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--smm-accent);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    /* ─── 3. CATALOG GRID ────────────────────────────────── */
+    .smm-grid-section {
+      padding: 2rem 2rem 6rem;
+    }
+    .smm-grid-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .smm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 2.5rem;
+    }
+
+    /* ─── 4. VIDEO CARD ──────────────────────────────────── */
+    .smm-catalog-card {
+      background: var(--surface, #fff);
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.3s ease;
+    }
+    .smm-catalog-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(37, 99, 235, 0.14);
+      border-color: rgba(37, 99, 235, 0.3);
+    }
+
+    /* Image */
+    .smm-img-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: #0f0f1a;
+    }
+    .smm-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .smm-catalog-card:hover .smm-img-wrapper img {
+      transform: scale(1.09);
+    }
+
+    /* Gradient overlay */
+    .smm-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 40%,
+        rgba(10,10,30,0.78) 100%
+      );
+      z-index: 1;
+    }
+
+    /* Icon + category badge */
+    .smm-icon-badge {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.5rem;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.42rem 1rem;
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .smm-icon-badge .icon { font-size: 1.05rem; }
+
+    /* Card number badge */
+    .smm-num-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 2;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--smm-accent), var(--smm-accent2));
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+    }
+
+    /* Content */
+    .smm-card-content {
+      padding: 2rem 2rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      gap: 0.75rem;
+    }
+    .smm-card-title {
+      font-size: 1.35rem;
+      font-weight: 850;
+      color: var(--text);
+      line-height: 1.25;
+      letter-spacing: -0.018em;
+      transition: color var(--transition);
+    }
+    .smm-catalog-card:hover .smm-card-title {
+      color: var(--smm-accent);
+    }
+    .smm-card-desc {
+      font-size: 0.9rem;
+      color: var(--text2);
+      line-height: 1.65;
+      flex-grow: 1;
+    }
+
+    /* CTA Area */
+    .smm-card-actions {
+      margin-top: auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn-smm-wa {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.8rem 1.2rem;
+      background: var(--wa-green);
+      color: #fff;
+      font-weight: 700;
+      font-size: 12.5px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08);
+      letter-spacing: 0.02em;
+    }
+    .btn-smm-wa svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+    .btn-smm-wa:hover {
+      background: var(--wa-green-hover);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(255, 77, 148, 0.35); border-color: #FF4D94;
+    }
+    .btn-smm-wa:active { transform: translateY(0); }
+
+    .btn-smm-learn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8rem 1.1rem;
+      border: 1.5px solid rgba(37,99,235,0.3);
+      border-radius: 10px;
+      color: var(--smm-accent);
+      font-size: 12px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    .btn-smm-learn:hover {
+      background: rgba(37,99,235,0.06);
+      border-color: var(--smm-accent);
+      transform: translateY(-2px);
+    }
+
+    /* ─── 5. WHY SATHISH MEDIA STRIP ────────────────────── */
+    .smm-why-strip {
+      background: linear-gradient(135deg,
+        rgba(37, 99, 235, 0.05) 0%,
+        rgba(6, 182, 212, 0.04) 100%);
+      border-top: 1px solid rgba(37,99,235,0.08);
+      border-bottom: 1px solid rgba(37,99,235,0.08);
+      padding: 3.5rem 2rem;
+    }
+    .smm-why-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .smm-why-title {
+      text-align: center;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+    }
+    .smm-why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .smm-why-card {
+      background: var(--surface, #fff);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .smm-why-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px var(--card-glow);
+    }
+    .smm-why-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .smm-why-card h4 {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .smm-why-card p {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+
+    /* ─── 6. RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      .smm-grid {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+      }
+      .smm-card-content { padding: 1.5rem 1.5rem 1.25rem; }
+      .smm-banner-stats { gap: 1.5rem; }
+      .smm-section-intro { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .smm-card-actions { flex-direction: column; }
+      .btn-smm-wa, .btn-smm-learn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header site-header-details">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🎬</div>
+        <div class="logo-text">
+          <span class="logo-eyebrow">Production House</span>
+          <span class="logo-name">Sathish Media</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a href="index.html#hero" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="index.html#services" class="nav-link">Services</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="index.html#portfolio" class="nav-link">Portfolio</a>
+        <a href="index.html#reviews" class="nav-link">Reviews</a>
+        <a href="courses.html" class="nav-link">Courses</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="index.html#contact" class="nav-link">Contact Us</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="wa-header-btn">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.4 0 9.795-4.39 9.798-9.789.002-2.614-1.012-5.071-2.859-6.92-1.847-1.849-4.305-2.867-6.926-2.868-5.405 0-9.803 4.394-9.806 9.794-.001 2.083.541 4.116 1.571 5.861L2.122 22l5.474-1.435z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+        <button class="hamburger" id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" role="navigation">
+    <a href="index.html#hero" class="mobile-nav-link">Home</a>
+    <a href="about.html" class="mobile-nav-link">About Us</a>
+    <a href="index.html#services" class="mobile-nav-link">Services</a>
+    <a href="products.html" class="mobile-nav-link">Products</a>
+    <a href="index.html#portfolio" class="mobile-nav-link">Portfolio</a>
+    <a href="index.html#reviews" class="mobile-nav-link">Reviews</a>
+    <a href="courses.html" class="mobile-nav-link">Courses</a>
+    <a href="faq.html" class="mobile-nav-link">FAQ</a>
+    <a href="index.html#contact" class="mobile-nav-link">Contact Us</a>
+    <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="mobile-nav-link accent" style="margin-top:1rem;">WhatsApp Us 📱</a>
+  </div>
+
+  <main class="smm-page-content">
+
+    <!-- ─── HERO BANNER ─── -->
+    <section class="smm-banner" aria-label="Video Production Hero">
+      <div class="smm-banner-overlay"></div>
+      <div class="smm-banner-inner">
+        <div class="smm-breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="smm-breadcrumb-sep">/</span>
+          <a href="index.html#services">Services</a>
+          <span class="smm-breadcrumb-sep">/</span>
+          <span class="smm-breadcrumb-current">Video Production</span>
+        </div>
+        <div class="smm-banner-eyebrow">Creative Production House</div>
+        <h1 class="branding-banner-title">
+          <span>Video Production</span> &amp;<br>Social Media
+        </h1>
+        <p class="smm-banner-desc">
+          Professional cinematic filmmaking, commercial advertisements, luxury wedding highlights, trending social reels, YouTube content studios, and high-fidelity drone videography.
+        </p>
+        <div class="smm-banner-stats">
+          <div class="smm-stat">
+            <span class="smm-stat-num">12</span>
+            <span class="smm-stat-label">Core Specialities</span>
+          </div>
+          <div class="smm-stat">
+            <span class="smm-stat-num">500+</span>
+            <span class="smm-stat-label">Videos Produced</span>
+          </div>
+          <div class="smm-stat">
+            <span class="smm-stat-num">4K UHD</span>
+            <span class="smm-stat-label">Production Quality</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CATALOG GRID ─── -->
+    <section class="smm-grid-section" aria-label="Video Production Catalog">
+      <div class="smm-grid-inner">
+
+        <!-- Section intro -->
+        <div class="smm-section-intro">
+          <div class="smm-section-intro-left">
+            <span class="section-badge">Premium Film Studios</span>
+            <h2>Our Dynamic <em>Media</em> Services</h2>
+          </div>
+          <div class="smm-count-pill">
+            <span>✦</span>
+            <span id="smm-count-display">12 Categories Available</span>
+          </div>
+        </div>
+
+        <!-- Card Grid — populated by JS -->
+        <div class="smm-grid" id="smm-grid-container" role="list">
+          <!-- Dynamic cards rendered by script below -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── WHY SATHISH MEDIA ─── -->
+    <section class="smm-why-strip" aria-label="Why Sathish Media Video Production">
+      <div class="smm-why-inner">
+        <h2 class="smm-why-title">Why Choose Sathish Media for Video Production?</h2>
+        <div class="smm-why-grid">
+          <div class="smm-why-card" data-reveal>
+            <div class="smm-why-icon">🎥</div>
+            <h4>Cinema-Grade Gear</h4>
+            <p>We use professional full-frame cinema cameras, lighting, sound setups, and drone devices for all shoots.</p>
+          </div>
+          <div class="smm-why-card" data-reveal>
+            <div class="smm-why-icon">⚡</div>
+            <h4>Agile Editing</h4>
+            <p>Fast post-production timelines. Color grading, sound syncing, and initial cuts within 5 business days.</p>
+          </div>
+          <div class="smm-why-card" data-reveal>
+            <div class="smm-why-icon">🔄</div>
+            <h4>Collaborative Direction</h4>
+            <p>Our screenwriters and directors work side-by-side with you to write scripts and refine visuals perfectly.</p>
+          </div>
+          <div class="smm-why-card" data-reveal>
+            <div class="smm-why-icon">💬</div>
+            <h4>Direct WhatsApp Booking</h4>
+            <p>Bypass tedious intermediate routes. Coordinate directly with our Salem production team on WhatsApp.</p>
+          </div>
+          <div class="smm-why-card" data-reveal>
+            <div class="smm-why-icon">🏆</div>
+            <h4>Complete Storytelling</h4>
+            <p>From storyboarding and casting to final publishing, thumbnail design, and visual effects.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CONTACT SECTION ─── -->
+    <section class="srv-contact" id="smm-contact" aria-label="Contact Production Studio">
+      <div class="srv-section-header" style="text-align:center;">
+        <span class="srv-section-badge">Coordinate Your Video Shoot</span>
+        <h2 class="srv-section-title">Get in Touch</h2>
+      </div>
+      <div class="srv-contact-inner">
+        <div class="srv-contact-info-col">
+          <p class="section-desc" style="max-width:100%; margin-bottom:1.5rem;">
+            Ready to produce cinematic wedding films, commercial promos, social reels, YouTube content, or drone captures? Connect with our Salem studio managers.
+          </p>
+          <div class="srv-contact-grid">
+            <div class="srv-contact-card">
+              <div class="srv-contact-icon">📞</div>
+              <div class="srv-contact-details">
+                <h4>Phone / WhatsApp</h4>
+                <p>+91 87620 97098</p>
+              </div>
+            </div>
+            <div class="srv-contact-card">
+              <div class="srv-contact-icon">✉️</div>
+              <div class="srv-contact-details">
+                <h4>Email</h4>
+                <p>sathishmedia4u@gmail.com</p>
+              </div>
+            </div>
+            <div class="srv-contact-card">
+              <div class="srv-contact-icon">📍</div>
+              <div class="srv-contact-details">
+                <h4>Studio Address</h4>
+                <p>358, Sathish Media Complex,<br>TVK Road,<br>Ammapet,<br>Salem - 636003</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="srv-contact-map-col" style="position: relative; display: flex; flex-direction: column; gap: 1rem;">
+          <iframe
+            src="https://maps.google.com/maps?q=358,%20Sathish%20Media%20Complex,%20TVK%20Road,%20Ammapet,%20Salem%20-%20636003&t=&z=16&ie=UTF8&iwloc=&output=embed"
+            width="100%" height="100%" style="border:0; min-height:300px; display:block;" allowfullscreen="" loading="lazy"
+            title="Sathish Media Video Production Studio Location Salem">
+          </iframe>
+                  <a href="https://www.google.com/maps/search/?api=1&query=Sathish+Media+Works,+358,+Sathish+Media+Complex,+TVK+Road,+Ammapet,+Salem+-+636003" 
+             target="_blank" rel="noopener" class="btn-outline" 
+             style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 0.75rem; font-size: 13px; font-weight: 700; text-transform: none; border-color: var(--border); margin-top: 0.5rem;">
+            🗺️ Open in Google Maps
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer agency-footer">
+    <div class="footer-gradient-bar"></div>
+    <div class="footer-main-area">
+      <div class="footer-cols">
+        <!-- Brand Column -->
+        <div class="footer-brand-col">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">🎬</div>
+            <div class="logo-text">
+              <span class="logo-eyebrow">Production House</span>
+              <span class="logo-name">Sathish Media</span>
+            </div>
+          </a>
+          <p class="footer-brand-text">Transforming ideas into cinematic visual experiences. Creative media, branding solutions, art &amp; stationery supplies — all under one premium production house.</p>
+          <div class="footer-social-row">
+            <a href="https://www.instagram.com/sathishmedia?igsh=ZGo2Y2h0Zjh5azJx" target="_blank" rel="noopener" class="footer-social-btn instagram" title="Instagram" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/sathishmedia" target="_blank" rel="noopener" class="footer-social-btn facebook" title="Facebook" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://youtube.com/@sathishmedia?si=qZbj140beodCdEj8" target="_blank" rel="noopener" class="footer-social-btn youtube" title="YouTube" aria-label="YouTube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 00-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 002.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 002.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="footer-social-btn whatsapp" title="WhatsApp" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.704 1.459h.005c6.56 0 11.9-5.336 11.903-11.894a11.785 11.785 0 00-3.486-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+        <!-- Services Column -->
+        <div>
+          <h4 class="footer-col-title">Our Services</h4>
+          <ul class="footer-links-list">
+            <li><a href="videography-photography.html">Videography &amp; Photography</a></li>
+            <li><a href="events.html">Event Planning &amp; Coverage</a></li>
+            <li><a href="branding.html">Branding Systems</a></li>
+            <li><a href="designing.html">Designing</a></li>
+            <li><a href="social-media-marketing.html">Social Media Marketing</a></li>
+            <li><a href="advertising.html">Advertising</a></li>
+          </ul>
+        </div>
+        <!-- Contact Column -->
+        <div>
+          <h4 class="footer-col-title">Contact Video Studio</h4>
+          <p class="footer-consult-text">Ready to launch a new video campaign pack? Speak directly to our video producers on WhatsApp for pricing coordinates.</p>
+          <a href="https://wa.me/918762097098?text=Hello%20Sathish%20Media%2C%0A%0AI%20am%20interested%20in%20your%20Video%20Production%20Services.%0A%0APlease%20share%20details%20and%20pricing.%0A%0AThank%20you." target="_blank" rel="noopener" class="footer-wa-cta">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.4 0 9.795-4.39 9.798-9.789.002-2.614-1.012-5.071-2.859-6.92-1.847-1.849-4.305-2.867-6.926-2.868-5.405 0-9.803 4.394-9.806 9.794-.001 2.083.541 4.116 1.571 5.861L2.122 22l5.474-1.435z"/></svg>
+            WhatsApp Our Production Team
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom-bar">
+      <div class="footer-copyright">© 2026 <strong>Sathish Media</strong>. All Rights Reserved.</div>
+      <div class="footer-tagline">Premium Creative Media Production · Salem, Tamil Nadu</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/services.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // ── Icon map for video categories ───────────────────
+      function getVideoIcon(title) {
+        const t = title.toLowerCase();
+        if (t.includes('cinematic') && t.includes('video')) return '🎥';
+        if (t.includes('advertisement') || t.includes('promo')) return '🎬';
+        if (t.includes('wedding')) return '💍';
+        if (t.includes('youtube')) return '📹';
+        if (t.includes('reel') || t.includes('short')) return '📱';
+        if (t.includes('corporate') || t.includes('business')) return '🏢';
+        if (t.includes('music')) return '🎵';
+        if (t.includes('documentary')) return '🎙️';
+        if (t.includes('event')) return '🎪';
+        if (t.includes('drone') || t.includes('aerial')) return '🚁';
+        if (t.includes('product')) return '📦';
+        if (t.includes('motion graphic') || t.includes('animation') || t.includes('vfx')) return '⚡';
+        return '📹';
+      }
+
+      // ── Build WhatsApp link ───────────────────────────────
+      function getWhatsAppLink(sub, parent) {
+        let num = '918762097098';
+        try {
+          const settings = JSON.parse(localStorage.getItem('sathish_settings') || '{}');
+          if (settings.whatsapp) num = settings.whatsapp.replace(/[^0-9]/g, '');
+        } catch (e) {}
+        const template = sub.whatsappTemplate ||
+          `Hello Sathish Media,\n\nI am interested in ${sub.title} Services.\n\nPlease share details and pricing.\n\nThank you.`;
+        return `https://wa.me/${num}?text=${encodeURIComponent(template)}`;
+      }
+
+      // ── Render cards ──────────────────────────────────────
+      const grid = document.getElementById('smm-grid-container');
+      const smmService = smhGetServiceById('SRV-005');
+      const countDisplay = document.getElementById('smm-count-display');
+
+      if (grid && smmService) {
+        const subcategories = smmService.subcategories || [];
+
+        if (subcategories.length > 0) {
+          if (countDisplay) countDisplay.textContent = `${subcategories.length} Categories Available`;
+
+          grid.innerHTML = subcategories.map((sub, idx) => {
+            const icon    = getVideoIcon(sub.title);
+            const waLink  = getWhatsAppLink(sub, smmService);
+            const waLearn = waLink;
+            const num     = String(idx + 1).padStart(2, '0');
+
+            // Dynamic card matching Event and Branding premium styling
+            return `
+              <article class="smm-catalog-card" data-reveal id="smm-card-${sub.id}" role="listitem">
+                <div class="smm-img-wrapper">
+                  <img
+                    src="${sub.image}"
+                    alt="${sub.title}"
+                    loading="lazy"
+                    onerror="this.src='assets/images/hero/media-production-events.jpg'"
+                  />
+                  <div class="smm-img-overlay"></div>
+                  <div class="smm-num-badge">${num}</div>
+                </div>
+                <div class="smm-card-content">
+                  <h3 class="smm-card-title">${sub.title}</h3>
+                  <p class="smm-card-desc">${sub.description}</p>
+                  <div class="smm-card-actions">
+                    <a
+                      href="${waLink}"
+                      target="_blank"
+                      rel="noopener"
+                      class="btn-smm-wa"
+                      id="enquire-btn-${sub.id}"
+                      aria-label="Enquire about ${sub.title} on WhatsApp"
+                    >
+                      <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.4 0 9.795-4.39 9.798-9.789.002-2.614-1.012-5.071-2.859-6.92-1.847-1.849-4.305-2.867-6.926-2.868-5.405 0-9.803 4.394-9.806 9.794-.001 2.083.541 4.116 1.571 5.861L2.122 22l5.474-1.435z"/></svg>
+                      <span>Enquire Now</span>
+                    </a>
+                    
+                  </div>
+                </div>
+              </article>
+            `;
+          }).join('');
+
+        } else {
+          grid.innerHTML = `
+            <div class="empty-state" style="grid-column:1/-1; text-align:center; padding:5rem 2rem;">
+              <div style="font-size:3.5rem; margin-bottom:1rem;">🎬</div>
+              <h3 style="font-size:1.3rem; font-weight:800;">No Video Services Seeded</h3>
+              <p style="font-size:0.95rem; color:var(--text2); margin-top:0.5rem; max-width:480px; margin-left:auto; margin-right:auto;">
+                Please verify that local storage seeds are correctly refreshed.
+              </p>
+            </div>
+          `;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

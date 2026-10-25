@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>College Events Event Planner | Sathish Media Salem</title>
+  <meta name="description" content="Professional planning, visual coverage, photography, videography, stage decorations, and sound configurations for College Events in Salem by Sathish Media." />
+  <meta name="author" content="Sathish Media" />
+  <link rel="canonical" href="https://sathishmedia.com/college-events.html" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="College Events Event Planner | Sathish Media Salem" />
+  <meta property="og:description" content="Professional planning, visual coverage, photography, videography, stage decorations, and sound configurations for College Events in Salem by Sathish Media." />
+  <meta property="og:image" content="assets/images/hero/reception-banquet.jpg" />
+  <meta property="og:url" content="https://sathishmedia.com/college-events.html" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="College Events Event Planner | Sathish Media Salem" />
+  <meta name="twitter:description" content="Professional planning, visual coverage, photography, videography, stage decorations, and sound configurations for College Events in Salem by Sathish Media." />
+  <meta name="twitter:image" content="assets/images/hero/reception-banquet.jpg" />
+
+  <!-- Structured Schema Data for SEO & AI Search Agents -->
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "College Events Management Services",
+      "description": "Comprehensive planning and coverage for College Events in Salem.",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Sathish Media",
+        "telephone": "+918762097098",
+        "email": "sathishmedia4u@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "358, Sathish Media Complex, TVK Road, Ammapet",
+          "addressLocality": "Salem",
+          "addressRegion": "Tamil Nadu",
+          "postalCode": "636003",
+          "addressCountry": "IN"
+        }
+      },
+      "areaServed": "Salem, Tamil Nadu"
+    }
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    :root {
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.4);
+      --card-hover-border: rgba(255, 107, 0, 0.25);
+    }
+    .details-page-content {
+      padding-top: var(--header-h);
+      background: var(--bg);
+    }
+    .event-hero {
+      position: relative;
+      min-height: 55vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5rem 2rem;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .event-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.7));
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1;
+    }
+    .event-hero-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .event-breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 99px;
+      margin-bottom: 2rem;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .event-breadcrumb a { color: var(--text2); transition: color var(--transition); }
+    .event-breadcrumb a:hover { color: var(--accent); }
+    .event-breadcrumb-sep { color: var(--text3); }
+    .event-breadcrumb-current { color: var(--accent); font-weight: 700; }
+    .event-hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      margin-bottom: 0.75rem;
+    }
+    .event-hero-title {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.15;
+      max-width: 900px;
+      margin: 0 auto 1.25rem;
+    }
+    .event-hero-desc {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: var(--text2);
+      max-width: 800px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+    .event-hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .event-gallery-section { padding: 6rem 2rem; background: var(--bg); }
+    .event-gallery-inner { max-width: 1280px; margin: 0 auto; }
+    .gallery-masonry {
+      columns: 3 320px;
+      column-gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .gallery-item {
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 1.5rem;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      position: relative;
+      background: #000;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-hover-border);
+      box-shadow: var(--shadow-lg);
+    }
+    .gallery-item:hover img { transform: scale(1.03); }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+      color: #fff;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-title { font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-family: var(--font-mono); }
+    .event-details-grid { padding: 6rem 2rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .event-details-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: 5rem; align-items: start; }
+    .services-offered-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+    .service-offered-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .service-offered-icon { font-size: 1.5rem; color: var(--accent); }
+    .service-offered-title { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .service-offered-desc { font-size: 0.82rem; color: var(--text2); line-height: 1.5; }
+    .highlights-box {
+      background: var(--surface);
+      border: 1.5px solid var(--card-hover-border);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .highlights-title { font-size: 1.25rem; font-weight: 800; color: var(--text); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .highlights-item { display: flex; gap: 0.75rem; margin-bottom: 1.25rem; align-items: start; }
+    .highlights-item-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; margin-top: 0.5rem; flex-shrink: 0; }
+    .highlights-item-text { font-size: 0.88rem; color: var(--text2); line-height: 1.5; }
+    .event-loop-nav { padding: 4rem 2rem; background: var(--bg); text-align: center; }
+    .event-loop-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+    .loop-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text2);
+      transition: all var(--transition);
+    }
+    .loop-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--bg2); }
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .lightbox-modal.active { opacity: 1; pointer-events: auto; }
+    .lightbox-content { max-width: 90%; max-height: 85vh; border-radius: var(--radius-md); box-shadow: 0 10px 40px rgba(0,0,0,0.5); transform: scale(0.95); transition: transform 0.4s ease; }
+    .lightbox-modal.active .lightbox-content { transform: scale(1); }
+    .lightbox-close { position: absolute; top: 2rem; right: 2rem; font-size: 2rem; color: #fff; cursor: pointer; background: none; border: none; transition: opacity 0.3s; }
+    .lightbox-close:hover { opacity: 0.7; }
+    @media (max-width: 992px) {
+      .event-details-inner { grid-template-columns: 1fr; gap: 4rem; }
+      .services-offered-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header site-header-details">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🎬</div>
+        <div class="logo-text">
+          <span class="logo-eyebrow">Production House</span>
+          <span class="logo-name">Sathish Media</span>
+        </div>
+      </a>
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a href="index.html#hero" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="index.html#services" class="nav-link">Services</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="index.html#portfolio" class="nav-link">Portfolio</a>
+        <a href="index.html#reviews" class="nav-link">Reviews</a>
+        <a href="courses.html" class="nav-link">Courses</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="index.html#contact" class="nav-link">Contact Us</a>
+      </nav>
+      <div class="header-actions">
+        <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="wa-header-btn">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.4 0 9.795-4.39 9.798-9.789.002-2.614-1.012-5.071-2.859-6.92-1.847-1.849-4.305-2.867-6.926-2.868-5.405 0-9.803 4.394-9.806 9.794-.001 2.083.541 4.116 1.571 5.861L2.122 22l5.474-1.435z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+        <button class="hamburger" id="hamburger-btn" aria-label="Open navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html#hero" class="mobile-nav-link">Home</a>
+    <a href="about.html" class="mobile-nav-link">About Us</a>
+    <a href="index.html#services" class="mobile-nav-link">Services</a>
+    <a href="products.html" class="mobile-nav-link">Products</a>
+    <a href="index.html#portfolio" class="mobile-nav-link">Portfolio</a>
+    <a href="index.html#reviews" class="mobile-nav-link">Reviews</a>
+    <a href="courses.html" class="mobile-nav-link">Courses</a>
+    <a href="faq.html" class="mobile-nav-link">FAQ</a>
+    <a href="index.html#contact" class="mobile-nav-link">Contact Us</a>
+    <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="mobile-nav-link accent" style="margin-top: 1rem;">WhatsApp Us 📱</a>
+  </div>
+
+  <main class="details-page-content">
+    <!-- HERO SECTION -->
+    <section class="event-hero" style="background-image: url('assets/images/hero/college-events.jpg');">
+      <div class="event-hero-overlay"></div>
+      <div class="event-hero-inner">
+        <div class="event-breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="event-breadcrumb-sep">/</span>
+          <a href="index.html#services">Services</a>
+          <span class="event-breadcrumb-sep">/</span>
+          <a href="events.html">Events</a>
+          <span class="event-breadcrumb-sep">/</span>
+          <span class="event-breadcrumb-current">College Events</span>
+        </div>
+        <div class="event-hero-eyebrow">Events Management & Production</div>
+        <h1 class="event-hero-title">College Events Management & Production</h1>
+        <p class="event-hero-desc">Professional management of college culturals, inter-college symposiums, music concerts, graduation ceremonies, freshers day, farewells, and high-energy student celebrations.</p>
+        <div class="event-hero-actions">
+          <a href="index.html#portfolio" class="btn-primary">View Portfolio</a>
+          <a href="#event-contact" class="btn-outline" style="border-color:var(--text2); color:var(--text);">Contact Us</a>
+          <a href="https://wa.me/918762097098?text=Hello%20Sathish%20Media,%20I%20am%20inquiring%20about%20your%20College%20Events%20services." target="_blank" rel="noopener" class="wa-header-btn" style="padding:0.75rem 1.8rem; border-radius:99px; font-size:12px; font-weight:700;">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24z"/></svg>
+            <span>WhatsApp Inquiry</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MASONRY GALLERY SECTION -->
+    <section class="event-gallery-section">
+      <div class="event-gallery-inner">
+        <div class="srv-section-header" style="text-align: center;">
+          <span class="srv-section-badge">Visual Showcase</span>
+          <h2 class="srv-section-title">High-Energy College Gallery</h2>
+          <p class="section-desc" style="margin: 0.5rem auto 0; max-width: 600px;">Explore professional coverage of high-energy college festivals, technical symposium panels, concert lighting setups, and student celebrations.</p>
+        </div>
+        <div class="gallery-masonry">
+          <div class="gallery-item" onclick="openLightbox('assets/images/branding/entertainment-branding.jpg')">
+            <img src="assets/images/branding/entertainment-branding.jpg" alt="Concert Stage" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-title">Live Concert Stage</span>
+            </div>
+          </div>
+          <div class="gallery-item" onclick="openLightbox('assets/images/events/it-summit.jpg')">
+            <img src="assets/images/events/it-summit.jpg" alt="Symposium Speakers" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-title">Academic Symposium</span>
+            </div>
+          </div>
+          <div class="gallery-item" onclick="openLightbox('assets/images/hero/stage-lighting.jpg')">
+            <img src="assets/images/hero/stage-lighting.jpg" alt="Cultural Dance Lights" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-title">Culturals Spotlight</span>
+            </div>
+          </div>
+          <div class="gallery-item" onclick="openLightbox('assets/images/events/student-ceremonies.jpg')">
+            <img src="assets/images/events/student-ceremonies.jpg" alt="Student Ceremonies" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-title">Graduation Ceremony</span>
+            </div>
+          </div>
+          <div class="gallery-item" onclick="openLightbox('assets/images/hero/event-2.jpg')">
+            <img src="assets/images/hero/event-2.jpg" alt="Symposium Presentations" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-title">Symposium Exhibits</span>
+            </div>
+          </div>
+          <div class="gallery-item" onclick="openLightbox('assets/images/hero/event.jpg')">
+            <img src="assets/images/hero/event.jpg" alt="Confetti Celebrations" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-title">Grand Finale Fireworks</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INCLUSIONS SECTION -->
+    <section class="event-details-grid">
+      <div class="event-details-inner">
+        <div>
+          <span class="srv-section-badge">Full Capabilities</span>
+          <h2 class="srv-section-title" style="margin-bottom: 1rem;">Services Included</h2>
+          <p class="section-desc" style="max-width: 100%;">We coordinate all aspects of college events, including concert stage engineering, live projections, multi-cam student reels, and sound rigs under one professional banner.</p>
+          <div class="services-offered-list">
+            <div class="service-offered-card">
+              <div class="service-offered-icon">🎪</div>
+              <h4 class="service-offered-title">Culturals Planning & coordination</h4>
+              <p class="service-offered-desc">Complete symposium layouts, schedule scripting, and celebrity/DJ guest coordination management.</p>
+            </div>
+            <div class="service-offered-card">
+              <div class="service-offered-icon">✨</div>
+              <h4 class="service-offered-title">Grand Concert Stages</h4>
+              <p class="service-offered-desc">Premium heavy-duty modular aluminum trussing, customized stages, and printed structural banners.</p>
+            </div>
+            <div class="service-offered-card">
+              <div class="service-offered-icon">📺</div>
+              <h4 class="service-offered-title">LED Walls & Live Projections</h4>
+              <p class="service-offered-desc">High-brightness outdoor LED walls, multi-input visual mixers, and delay screens around college campuses.</p>
+            </div>
+            <div class="service-offered-card">
+              <div class="service-offered-icon">🎤</div>
+              <h4 class="service-offered-title">Concert-Grade Sound Systems</h4>
+              <p class="service-offered-desc">PA line array speaker units, professional digital mixing consoles, heavy subwoofers, and active feedback monitors.</p>
+            </div>
+            <div class="service-offered-card">
+              <div class="service-offered-icon">📷</div>
+              <h4 class="service-offered-title">Multi-Cam Video Coverage</h4>
+              <p class="service-offered-desc">High-speed cinematography crews, dynamic student social reels, and high-quality post-edited event films.</p>
+            </div>
+            <div class="service-offered-card">
+              <div class="service-offered-icon">🚁</div>
+              <h4 class="service-offered-title">Drone Sweeps & Live Streams</h4>
+              <p class="service-offered-desc">High-altitude dynamic drone footage and seamless live streaming coordinates to digital screens or social platforms.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="highlights-box">
+          <h3 class="highlights-title">⭐ College Stage Highlights</h3>
+          <div class="highlights-item">
+            <span class="highlights-item-dot"></span>
+            <p class="highlights-item-text"><strong>Heavy-Duty Stage Rigs:</strong> Heavy structural stages constructed to fully support high-energy group performances and musical concerts.</p>
+          </div>
+          <div class="highlights-item">
+            <span class="highlights-item-dot"></span>
+            <p class="highlights-item-text"><strong>Dynamic Trussing Lasers:</strong> Fully controllable moving-head lasers, programmable spotlights, and strobe lights.</p>
+          </div>
+          <div class="highlights-item">
+            <span class="highlights-item-dot"></span>
+            <p class="highlights-item-text"><strong>High-Definition Live Streams:</strong> Stream graduation ceremonies and symposia in full 1080P HD directly to college YouTube channels.</p>
+          </div>
+          <div class="highlights-item">
+            <span class="highlights-item-dot"></span>
+            <p class="highlights-item-text"><strong>Fast Post-Production:</strong> We deliver edited highlights and photo databases within tight institutional scheduling constraints.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER LOOPS -->
+    <section class="event-loop-nav">
+      <div class="event-loop-inner">
+        <a href="wedding-events.html" class="loop-btn">❮ Previous Category</a>
+        <a href="events.html" class="loop-btn" style="border-color:var(--accent); color:var(--accent);">🎪 Back To Events</a>
+        <a href="corporate-events.html" class="loop-btn">Next Category ❯</a>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="srv-contact" id="event-contact">
+      <div class="srv-section-header">
+        <span class="srv-section-badge">Let's Connect</span>
+        <h2 class="srv-section-title">Direct Studio Portal</h2>
+      </div>
+      <div class="srv-contact-inner">
+        <div class="srv-contact-info-col">
+          <p class="section-desc" style="max-width: 100%; margin-bottom: 0.5rem;">Planning a college cultural or symposium? Contact our Salem coordinators directly. Let's draft your visual checklist today.</p>
+          <div class="srv-contact-grid">
+            <div class="srv-contact-card">
+              <div class="srv-contact-icon">📞</div>
+              <div class="srv-contact-details">
+                <h4>Phone / Contact</h4>
+                <p>+91 87620 97098</p>
+              </div>
+            </div>
+            <div class="srv-contact-card">
+              <div class="srv-contact-icon">📍</div>
+              <div class="srv-contact-details">
+                <h4>Office Location</h4>
+                <p>358, Sathish Media Complex,<br>TVK Road,<br>Ammapet,<br>Salem - 636003</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="srv-contact-map-col" style="position: relative; display: flex; flex-direction: column; gap: 1rem;">
+          <iframe 
+            src="https://maps.google.com/maps?q=358,%20Sathish%20Media%20Complex,%20TVK%20Road,%20Ammapet,%20Salem%20-%20636003&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+            width="100%" height="100%" style="border:0; min-height: 280px; display: block;" allowfullscreen="" loading="lazy">
+          </iframe>
+                  <a href="https://www.google.com/maps/search/?api=1&query=Sathish+Media+Works,+358,+Sathish+Media+Complex,+TVK+Road,+Ammapet,+Salem+-+636003" 
+             target="_blank" rel="noopener" class="btn-outline" 
+             style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 0.75rem; font-size: 13px; font-weight: 700; text-transform: none; border-color: var(--border); margin-top: 0.5rem;">
+            🗺️ Open in Google Maps
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer agency-footer">
+    <div class="footer-gradient-bar"></div>
+    <div class="footer-main-area">
+      <div class="footer-cols">
+        <div class="footer-brand-col">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">🎬</div>
+            <div class="logo-text">
+              <span class="logo-eyebrow">Production House</span>
+              <span class="logo-name">Sathish Media</span>
+            </div>
+          </a>
+          <p class="footer-about-text">Transforming ideas into cinematic visual experiences. Creative media, branding solutions, art &amp; stationery supplies — all under one premium production house.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Our Capabilities</h4>
+          <ul class="footer-links-list">
+            <li><a href="videography-photography.html">Videography &amp; Photography</a></li>
+            <li><a href="events.html">Event Planning &amp; Coverage</a></li>
+            <li><a href="branding.html">Branding Systems</a></li>
+            <li><a href="designing.html">Designing</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Direct Studio Portal</h4>
+          <p class="footer-consult-text">Have a major advertising campaign or event in coordination? Ping our Salem coordinators now.</p>
+          <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="footer-wa-cta">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24z"/></svg>
+            WhatsApp Us Now
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom-bar">
+      <div class="footer-copyright">© 2026 <strong>Sathish Media</strong>. All Rights Reserved.</div>
+      <div class="footer-tagline">Premium Creative Media Production · Salem, Tamil Nadu</div>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="lightbox-modal" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img src="" class="lightbox-content" id="lightbox-img" onclick="event.stopPropagation()" />
+  </div>
+
+  <script src="assets/js/products.js?v=2.1"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    window.openLightbox = function(src) {
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lightbox-img');
+      if (lb && lbImg) {
+        lbImg.src = src;
+        lb.classList.add('active');
+      }
+    };
+    window.closeLightbox = function() {
+      const lb = document.getElementById('lightbox');
+      if (lb) {
+        lb.classList.remove('active');
+      }
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Videography & Photography | Sathish Media Salem</title>
+  <meta name="description" content="Professional wedding photography, pre-wedding films, corporate video shoots, drone videography, and product photography services in Salem by Sathish Media." />
+  <meta name="author" content="Sathish Media" />
+  <link rel="canonical" href="https://sathishmedia.com/videography-photography.html" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Videography & Photography | Sathish Media Salem" />
+  <meta property="og:description" content="Professional wedding photography, pre-wedding films, corporate video shoots, drone videography, and product photography services in Salem by Sathish Media." />
+  <meta property="og:image" content="assets/images/videography-photography/videography-and-photography.jpg" />
+  <meta property="og:url" content="https://sathishmedia.com/videography-photography.html" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Videography & Photography | Sathish Media Salem" />
+  <meta name="twitter:description" content="Professional wedding photography, pre-wedding films, corporate video shoots, drone videography, and product photography services in Salem by Sathish Media." />
+  <meta name="twitter:image" content="assets/images/videography-photography/videography-and-photography.jpg" />
+
+  <!-- Structured Schema Data for SEO & AI Search Agents -->
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Videography & Photography Services",
+      "description": "Cinematic 4K weddings, candid shoots, drone photography, real estate, travel, and commercial branding photography.",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Sathish Media",
+        "telephone": "+918762097098",
+        "email": "sathishmedia4u@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "358, Sathish Media Complex, TVK Road, Ammapet",
+          "addressLocality": "Salem",
+          "addressRegion": "Tamil Nadu",
+          "postalCode": "636003",
+          "addressCountry": "IN"
+        }
+      },
+      "areaServed": "Salem, Tamil Nadu"
+    }
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Open Graph -->
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📷</text></svg>" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <style>
+    /* ── VIDEOGRAPHY & PHOTOGRAPHY PAGE THEME ─────────────── */
+    :root {
+      --photo-black:    #0A0A0A;
+      --photo-charcoal: #1A1A1A;
+      --photo-gold:     #C9A84C;
+      --photo-gold2:    #E8C878;
+      --photo-amber:    #F59E0B;
+      --photo-warm:     #FFF8EE;
+      --photo-overlay:  rgba(10, 10, 10, 0.70);
+      --glass-bg:       rgba(255, 255, 255, 0.93);
+      --glass-border:   rgba(255, 255, 255, 0.5);
+      --wa-green:       linear-gradient(135deg, #111111, #2A2A2A);
+      --wa-green-hover: linear-gradient(135deg, #222222, #3A3A3A);
+    }
+
+    .photo-page-content {
+      padding-top: var(--header-h);
+      background: var(--bg);
+      min-height: 100vh;
+    }
+
+    /* ─── 1. CINEMATIC HERO ──────────────────────────────── */
+    .photo-hero {
+      position: relative;
+      min-height: 52vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem 5rem;
+      overflow: hidden;
+    }
+
+    /* Parallax-feel stacked images */
+    .photo-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/images/videography-photography/videography-and-photography.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      transform: scale(1.04);
+      transition: transform 8s ease;
+    }
+
+    .photo-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(10, 10, 10, 0.72) 0%,
+        rgba(10, 10, 10, 0.45) 50%,
+        rgba(201, 168, 76, 0.18) 100%
+      );
+      z-index: 1;
+    }
+
+    /* Film-strip left accent bar */
+    .photo-hero-filmbar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: linear-gradient(180deg, var(--photo-gold), var(--photo-amber), var(--photo-gold));
+      z-index: 2;
+    }
+
+    .photo-hero-inner {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      text-align: center;
+      animation: photoFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes photoFadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Breadcrumb */
+    .photo-breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.3rem;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      border-radius: 99px;
+      margin-bottom: 1.75rem;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .photo-breadcrumb a { color: rgba(255,255,255,0.65); transition: color var(--transition); }
+    .photo-breadcrumb a:hover { color: var(--photo-gold2); }
+    .photo-breadcrumb-sep { color: rgba(255,255,255,0.35); }
+    .photo-breadcrumb-current { color: var(--photo-gold2); font-weight: 700; }
+
+    /* Eyebrow */
+    .photo-hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--photo-gold2);
+      margin-bottom: 0.75rem;
+    }
+
+    /* Main title */
+    .photo-hero-title {
+      font-size: clamp(2.6rem, 6vw, 4.5rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      margin-bottom: 1.1rem;
+    }
+    .photo-hero-title .gold-word {
+      background: linear-gradient(135deg, var(--photo-gold), var(--photo-gold2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Description */
+    .photo-hero-desc {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: rgba(255,255,255,0.75);
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    /* Stats row */
+    .photo-hero-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(201, 168, 76, 0.2);
+      border-radius: 16px;
+      max-width: 680px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .photo-stat {
+      flex: 1;
+      min-width: 130px;
+      padding: 1.25rem 1rem;
+      text-align: center;
+      border-right: 1px solid rgba(201, 168, 76, 0.15);
+    }
+    .photo-stat:last-child { border-right: none; }
+    .photo-stat-num {
+      display: block;
+      font-size: 1.85rem;
+      font-weight: 900;
+      color: var(--photo-gold2);
+      font-family: var(--font-mono);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .photo-stat-label {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    /* ─── 2. SECTION HEADER ──────────────────────────────── */
+    .photo-section-intro {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 4rem 2rem 1.5rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .photo-section-intro h2 {
+      font-size: clamp(1.65rem, 3.5vw, 2.5rem);
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .photo-section-intro h2 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--photo-gold), var(--photo-amber));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .photo-count-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1.2rem;
+      background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(245,158,11,0.06));
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 99px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--photo-gold);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    /* ─── 3. CATALOG GRID ────────────────────────────────── */
+    .photo-grid-section {
+      padding: 1.5rem 2rem 6rem;
+    }
+    .photo-grid-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 2rem;
+    }
+
+    /* ─── 4. CATALOG CARD ────────────────────────────────── */
+    .photo-catalog-card {
+      background: var(--surface, #fff);
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.3s ease;
+    }
+    .photo-catalog-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 24px 64px rgba(201, 168, 76, 0.14);
+      border-color: rgba(201, 168, 76, 0.30);
+    }
+
+    /* Image */
+    .photo-img-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--photo-charcoal);
+    }
+    .photo-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      filter: brightness(0.97);
+    }
+    .photo-catalog-card:hover .photo-img-wrapper img {
+      transform: scale(1.1);
+      filter: brightness(1.02);
+    }
+
+    /* Dark gradient over image */
+    .photo-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 30%,
+        rgba(10,10,10,0.85) 100%
+      );
+      z-index: 1;
+    }
+
+    /* Gold category badge bottom-left */
+    .photo-cat-badge {
+      position: absolute;
+      bottom: 1.1rem;
+      left: 1.25rem;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.38rem 0.9rem;
+      background: linear-gradient(135deg, var(--photo-gold), var(--photo-amber));
+      border-radius: 99px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 3px 12px rgba(201,168,76,0.35);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .photo-cat-badge .icon { font-size: 0.9rem; }
+
+    /* Number badge top-right */
+    .photo-num-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 2;
+      min-width: 32px;
+      height: 32px;
+      padding: 0 6px;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.60);
+      backdrop-filter: blur(6px);
+      color: var(--photo-gold2);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(201,168,76,0.2);
+    }
+
+    /* Content */
+    .photo-card-content {
+      padding: 1.75rem 1.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      gap: 0.75rem;
+    }
+    .photo-card-title {
+      font-size: 1.2rem;
+      font-weight: 850;
+      color: var(--text);
+      line-height: 1.3;
+      letter-spacing: -0.018em;
+      transition: color var(--transition);
+    }
+    .photo-catalog-card:hover .photo-card-title {
+      color: var(--photo-gold);
+    }
+    .photo-card-desc {
+      font-size: 0.88rem;
+      color: var(--text2);
+      line-height: 1.7;
+      flex-grow: 1;
+    }
+
+    /* Divider */
+    .photo-card-divider {
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+      margin-top: 0.5rem;
+    }
+
+    /* Action area */
+    .photo-card-actions {
+      padding-top: 1.2rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    /* WhatsApp Enquire button */
+    .btn-photo-wa {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.82rem 1.2rem;
+      background: var(--wa-green);
+      color: #fff;
+      font-weight: 700;
+      font-size: 12.5px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08);
+      letter-spacing: 0.02em;
+    }
+    .btn-photo-wa svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+    .btn-photo-wa:hover {
+      background: var(--wa-green-hover);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(255, 77, 148, 0.35); border-color: #FF4D94;
+    }
+    .btn-photo-wa:active { transform: translateY(0); }
+
+    /* Gold accent "Details" button */
+    .btn-photo-detail {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.82rem 1rem;
+      border: 1.5px solid rgba(201,168,76,0.3);
+      border-radius: 10px;
+      color: var(--photo-gold);
+      font-size: 12px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    .btn-photo-detail:hover {
+      background: rgba(201,168,76,0.07);
+      border-color: var(--photo-gold);
+      transform: translateY(-2px);
+    }
+
+    /* ─── 5. WHY SATHISH MEDIA STRIP ─────────────────────── */
+    .photo-why-strip {
+      background: linear-gradient(180deg,
+        rgba(201,168,76,0.04) 0%,
+        rgba(245,158,11,0.02) 100%);
+      border-top: 1px solid rgba(201,168,76,0.1);
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+      padding: 4rem 2rem;
+    }
+    .photo-why-inner { max-width: 1280px; margin: 0 auto; }
+    .photo-why-title {
+      text-align: center;
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.025em;
+      margin-bottom: 2.5rem;
+    }
+    .photo-why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 1.5rem;
+    }
+    .photo-why-card {
+      background: var(--surface, #fff);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem 1.25rem;
+      text-align: center;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .photo-why-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 35px rgba(201,168,76,0.10);
+    }
+    .photo-why-icon { font-size: 2.2rem; margin-bottom: 0.85rem; }
+    .photo-why-card h4 {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .photo-why-card p {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    /* ─── 6. RESPONSIVE ───────────────────────────────────── */
+    @media (max-width: 900px) {
+      .photo-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    }
+    @media (max-width: 680px) {
+      .photo-grid { grid-template-columns: 1fr; }
+      .photo-hero-stats { border-radius: 12px; }
+      .photo-stat { min-width: 100px; padding: 1rem 0.75rem; }
+      .photo-card-content { padding: 1.5rem 1.4rem 1.25rem; }
+      .photo-section-intro { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+    @media (max-width: 420px) {
+      .photo-card-actions { flex-direction: column; }
+      .btn-photo-wa, .btn-photo-detail { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ HEADER ═══════════════════════════════════════════ -->
+  <header class="site-header site-header-details">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🎬</div>
+        <div class="logo-text">
+          <span class="logo-eyebrow">Production House</span>
+          <span class="logo-name">Sathish Media</span>
+        </div>
+      </a>
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a href="index.html#hero" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="index.html#services" class="nav-link">Services</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="index.html#portfolio" class="nav-link">Portfolio</a>
+        <a href="index.html#reviews" class="nav-link">Reviews</a>
+        <a href="courses.html" class="nav-link">Courses</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="index.html#contact" class="nav-link">Contact Us</a>
+      </nav>
+      <div class="header-actions">
+        <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="wa-header-btn">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.4 0 9.795-4.39 9.798-9.789.002-2.614-1.012-5.071-2.859-6.92-1.847-1.849-4.305-2.867-6.926-2.868-5.405 0-9.803 4.394-9.806 9.794-.001 2.083.541 4.116 1.571 5.861L2.122 22l5.474-1.435z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+        <button class="hamburger" id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" role="navigation">
+    <a href="index.html#hero" class="mobile-nav-link">Home</a>
+    <a href="about.html" class="mobile-nav-link">About Us</a>
+    <a href="index.html#services" class="mobile-nav-link">Services</a>
+    <a href="products.html" class="mobile-nav-link">Products</a>
+    <a href="index.html#portfolio" class="mobile-nav-link">Portfolio</a>
+    <a href="index.html#reviews" class="mobile-nav-link">Reviews</a>
+    <a href="courses.html" class="mobile-nav-link">Courses</a>
+    <a href="faq.html" class="mobile-nav-link">FAQ</a>
+    <a href="index.html#contact" class="mobile-nav-link">Contact Us</a>
+    <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="mobile-nav-link accent" style="margin-top:1rem;">WhatsApp Us 📱</a>
+  </div>
+
+  <main class="photo-page-content">
+
+    <!-- ─── CINEMATIC HERO ─── -->
+    <section class="photo-hero" aria-label="Videography & Photography Hero">
+      <div class="photo-hero-bg" id="photo-hero-bg"></div>
+      <div class="photo-hero-overlay"></div>
+      <div class="photo-hero-filmbar"></div>
+      <div class="photo-hero-inner">
+        <div class="photo-breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="photo-breadcrumb-sep">/</span>
+          <a href="index.html#services">Services</a>
+          <span class="photo-breadcrumb-sep">/</span>
+          <span class="photo-breadcrumb-current">Videography &amp; Photography</span>
+        </div>
+        <div class="photo-hero-eyebrow">📷 Production Studio · Salem</div>
+        <h1 class="photo-hero-title">
+          <span class="gold-word">Videography</span><br>&amp; Photography
+        </h1>
+        <p class="photo-hero-desc">
+          From intimate weddings and corporate branding sessions to fashion films, drone aerials, and food photography — we capture every story with cinematic precision and artistic vision.
+        </p>
+        <div class="photo-hero-stats">
+          <div class="photo-stat">
+            <span class="photo-stat-num">16</span>
+            <span class="photo-stat-label">Specialisations</span>
+          </div>
+          <div class="photo-stat">
+            <span class="photo-stat-num">2500+</span>
+            <span class="photo-stat-label">Projects Done</span>
+          </div>
+          <div class="photo-stat">
+            <span class="photo-stat-num">4K</span>
+            <span class="photo-stat-label">Cinematic Shoots</span>
+          </div>
+          <div class="photo-stat">
+            <span class="photo-stat-num">25+</span>
+            <span class="photo-stat-label">Years Trusted</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CATALOG GRID ─── -->
+    <section class="photo-grid-section" aria-label="Photography & Videography Catalog">
+      <div class="photo-grid-inner">
+
+        <div class="photo-section-intro">
+          <div>
+            <span class="section-badge">Premium Production House</span>
+            <h2>Our <em>Photography</em> &amp; Videography Services</h2>
+          </div>
+          <div class="photo-count-pill">
+            <span>✦</span>
+            <span id="photo-count-display">16 Specialisations Available</span>
+          </div>
+        </div>
+
+        <!-- Grid populated by JS -->
+        <div class="photo-grid" id="photo-grid-container" role="list">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── WHY SATHISH MEDIA ─── -->
+    <section class="photo-why-strip" aria-label="Why Sathish Media Photography">
+      <div class="photo-why-inner">
+        <h2 class="photo-why-title">Why Choose Sathish Media for Photography &amp; Videography?</h2>
+        <div class="photo-why-grid">
+          <div class="photo-why-card" data-reveal>
+            <div class="photo-why-icon">🎬</div>
+            <h4>Cinematic 4K Production</h4>
+            <p>All video shoots are delivered in high-resolution 4K with professional colour grading and editing.</p>
+          </div>
+          <div class="photo-why-card" data-reveal>
+            <div class="photo-why-icon">🚁</div>
+            <h4>Certified Drone Pilots</h4>
+            <p>Licensed aerial drone photography and videography providing breathtaking cinematic perspectives.</p>
+          </div>
+          <div class="photo-why-card" data-reveal>
+            <div class="photo-why-icon">📸</div>
+            <h4>Premium Camera Gear</h4>
+            <p>Full-frame professional cameras, cinema rigs, and top-grade lenses for every shoot.</p>
+          </div>
+          <div class="photo-why-card" data-reveal>
+            <div class="photo-why-icon">⚡</div>
+            <h4>Fast Turnaround</h4>
+            <p>Quick delivery of edited photos and videos, ensuring you receive your memories without delay.</p>
+          </div>
+          <div class="photo-why-card" data-reveal>
+            <div class="photo-why-icon">💬</div>
+            <h4>WhatsApp Booking</h4>
+            <p>Instant booking, quotes, and project updates via WhatsApp for fast and convenient coordination.</p>
+          </div>
+          <div class="photo-why-card" data-reveal>
+            <div class="photo-why-icon">🏆</div>
+            <h4>25+ Years of Trust</h4>
+            <p>Decades of experience serving thousands of happy clients in Salem and across Tamil Nadu.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CONTACT SECTION ─── -->
+    <section class="srv-contact" id="photo-contact" aria-label="Book Photography Session">
+      <div class="srv-section-header" style="text-align:center;">
+        <span class="srv-section-badge">Book a Session</span>
+        <h2 class="srv-section-title">Enquire &amp; Book Today</h2>
+      </div>
+      <div class="srv-contact-inner">
+        <div class="srv-contact-info-col">
+          <p class="section-desc" style="max-width:100%; margin-bottom:1.5rem;">
+            Planning a wedding shoot, corporate video, product photography session, or drone coverage? Share your requirements on WhatsApp and our team will get back to you instantly with a custom quote.
+          </p>
+          <div class="srv-contact-grid">
+            <div class="srv-contact-card">
+              <div class="srv-contact-icon">📞</div>
+              <div class="srv-contact-details">
+                <h4>Phone / WhatsApp</h4>
+                <p>+91 87620 97098</p>
+              </div>
+            </div>
+            <div class="srv-contact-card">
+              <div class="srv-contact-icon">✉️</div>
+              <div class="srv-contact-details">
+                <h4>Email</h4>
+                <p>sathishmedia4u@gmail.com</p>
+              </div>
+            </div>
+            <div class="srv-contact-card">
+              <div class="srv-contact-icon">📍</div>
+              <div class="srv-contact-details">
+                <h4>Studio Address</h4>
+                <p>358, Sathish Media Complex,<br>TVK Road,<br>Ammapet,<br>Salem - 636003</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="srv-contact-map-col" style="position: relative; display: flex; flex-direction: column; gap: 1rem;">
+          <iframe
+            src="https://maps.google.com/maps?q=358,%20Sathish%20Media%20Complex,%20TVK%20Road,%20Ammapet,%20Salem%20-%20636003&t=&z=16&ie=UTF8&iwloc=&output=embed"
+            width="100%" height="100%" style="border:0; min-height:300px; display:block;" allowfullscreen="" loading="lazy"
+            title="Sathish Media Studio Location Salem">
+          </iframe>
+                  <a href="https://www.google.com/maps/search/?api=1&query=Sathish+Media+Works,+358,+Sathish+Media+Complex,+TVK+Road,+Ammapet,+Salem+-+636003" 
+             target="_blank" rel="noopener" class="btn-outline" 
+             style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 0.75rem; font-size: 13px; font-weight: 700; text-transform: none; border-color: var(--border); margin-top: 0.5rem;">
+            🗺️ Open in Google Maps
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══ FOOTER ═══════════════════════════════════════════ -->
+  <footer class="site-footer agency-footer">
+    <div class="footer-gradient-bar"></div>
+    <div class="footer-main-area">
+      <div class="footer-cols">
+
+        <div class="footer-brand-col">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">🎬</div>
+            <div class="logo-text">
+              <span class="logo-eyebrow">Production House</span>
+              <span class="logo-name">Sathish Media</span>
+            </div>
+          </a>
+          <p class="footer-brand-text">Transforming ideas into cinematic visual experiences. Creative media, branding solutions, art &amp; stationery supplies — all under one premium production house.</p>
+          <div class="footer-social-row">
+            <a href="https://www.instagram.com/sathishmedia?igsh=ZGo2Y2h0Zjh5azJx" target="_blank" rel="noopener" class="footer-social-btn instagram" title="Instagram" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/sathishmedia" target="_blank" rel="noopener" class="footer-social-btn facebook" title="Facebook" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://youtube.com/@sathishmedia?si=qZbj140beodCdEj8" target="_blank" rel="noopener" class="footer-social-btn youtube" title="YouTube" aria-label="YouTube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 00-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 002.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 002.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="footer-social-btn whatsapp" title="WhatsApp" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.704 1.459h.005c6.56 0 11.9-5.336 11.903-11.894a11.785 11.785 0 00-3.486-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Our Services</h4>
+          <ul class="footer-links-list">
+            <li><a href="videography-photography.html">Videography &amp; Photography</a></li>
+            <li><a href="events.html">Event Planning &amp; Coverage</a></li>
+            <li><a href="branding.html">Branding Systems</a></li>
+            <li><a href="designing.html">Designing</a></li>
+            <li><a href="social-media-marketing.html">Social Media Marketing</a></li>
+            <li><a href="advertising.html">Advertising</a></li>
+            <li><a href="web-app-development.html">Web &amp; App Development</a></li>
+            <li><a href="printing.html">Printing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Book a Shoot</h4>
+          <p class="footer-consult-text">Ready to book a wedding, corporate, or product shoot? Connect directly with our Salem photography team on WhatsApp.</p>
+          <a href="https://wa.me/918762097098?text=Hello%20Sathish%20Media%2C%0A%0AI%20am%20interested%20in%20your%20Photography%20%26%20Videography%20Services.%0A%0APlease%20share%20package%20details%20and%20pricing.%0A%0AThank%20you." target="_blank" rel="noopener" class="footer-wa-cta">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.4 0 9.795-4.39 9.798-9.789.002-2.614-1.012-5.071-2.859-6.92-1.847-1.849-4.305-2.867-6.926-2.868-5.405 0-9.803 4.394-9.806 9.794-.001 2.083.541 4.116 1.571 5.861L2.122 22l5.474-1.435z"/></svg>
+            WhatsApp Our Photography Team
+          </a>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom-bar">
+      <div class="footer-copyright">© 2026 <strong>Sathish Media</strong>. All Rights Reserved.</div>
+      <div class="footer-tagline">Premium Photography &amp; Videography Production House · Salem, Tamil Nadu</div>
+    </div>
+  </footer>
+
+  <!-- ══ SCRIPTS ═══════════════════════════════════════════ -->
+  <script src="assets/js/services.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // ── Icon map for photo/video categories ──────────────
+      function getPhotoIcon(title) {
+        const t = title.toLowerCase();
+        if (t.includes('wedding')) return '💍';
+        if (t.includes('pre-wedding')) return '💑';
+        if (t.includes('post-wedding')) return '🥂';
+        if (t.includes('candid')) return '😊';
+        if (t.includes('event')) return '🎪';
+        if (t.includes('birthday')) return '🎂';
+        if (t.includes('corporate')) return '💼';
+        if (t.includes('product')) return '📦';
+        if (t.includes('fashion')) return '👗';
+        if (t.includes('portrait')) return '🧑‍🎨';
+        if (t.includes('baby') || t.includes('kids') || t.includes('family')) return '👨‍👩‍👧';
+        if (t.includes('maternity') || t.includes('newborn')) return '👶';
+        if (t.includes('food')) return '🍽️';
+        if (t.includes('real estate') || t.includes('property')) return '🏠';
+        if (t.includes('travel')) return '✈️';
+        if (t.includes('drone')) return '🚁';
+        return '📷';
+      }
+
+      // Short label for card badge (2 key words)
+      function getBadgeLabel(title) {
+        const map = {
+          'Wedding Photography': 'Wedding',
+          'Pre-Wedding Photography': 'Pre-Wedding',
+          'Post-Wedding Photography': 'Post-Wedding',
+          'Candid Photography': 'Candid',
+          'Event Photography': 'Events',
+          'Birthday Photography': 'Birthday',
+          'Corporate Photography': 'Corporate',
+          'Product Photography': 'Product Shoot',
+          'Fashion Photography': 'Fashion',
+          'Portrait Photography': 'Portrait',
+          'Baby, Kids': 'Family',
+          'Maternity': 'Maternity',
+          'Food Photography': 'Food',
+          'Real Estate': 'Real Estate',
+          'Travel Photography': 'Travel',
+          'Drone Photography': 'Drone Aerial'
+        };
+        for (const key of Object.keys(map)) {
+          if (title.includes(key)) return map[key];
+        }
+        return title.split(' ').slice(0, 2).join(' ');
+      }
+
+      // ── WhatsApp link builder ─────────────────────────────
+      function getWhatsAppLink(sub) {
+        let num = '918762097098';
+        try {
+          const settings = JSON.parse(localStorage.getItem('sathish_settings') || '{}');
+          if (settings.whatsapp) num = settings.whatsapp.replace(/[^0-9]/g, '');
+        } catch (e) {}
+        const template = sub.whatsappTemplate ||
+          `Hello Sathish Media,\n\nI am interested in ${sub.title} Services.\n\nPlease share:\n• Package Details\n• Pricing Information\n• Sample Portfolio\n• Available Dates\n• Delivery Timeline\n\nThank You.`;
+        return `https://wa.me/${num}?text=${encodeURIComponent(template)}`;
+      }
+
+      // ── Render cards ──────────────────────────────────────
+      const grid = document.getElementById('photo-grid-container');
+      const countDisplay = document.getElementById('photo-count-display');
+      const photoService = smhGetServiceById('SRV-001');
+
+      if (grid && photoService) {
+        const subcategories = photoService.subcategories || [];
+
+        if (subcategories.length > 0) {
+          if (countDisplay) countDisplay.textContent = `${subcategories.length} Specialisations Available`;
+
+          grid.innerHTML = subcategories.map((sub, idx) => {
+            const icon      = getPhotoIcon(sub.title);
+            const badge     = getBadgeLabel(sub.title);
+            const waLink    = getWhatsAppLink(sub);
+            const num       = String(idx + 1).padStart(2, '0');
+
+            return `
+              <article class="photo-catalog-card" data-reveal id="photo-card-${sub.id}" role="listitem">
+                <div class="photo-img-wrapper">
+                  <img
+                    src="${sub.image}"
+                    alt="${sub.title} — Sathish Media Photography Services"
+                    loading="${idx < 4 ? 'eager' : 'lazy'}"
+                    onerror="this.src='assets/images/videography-photography/videography-and-photography.jpg'"
+                  />
+                  <div class="photo-img-overlay"></div>
+                  <div class="photo-num-badge">${num}</div>
+                </div>
+                <div class="photo-card-content">
+                  <h3 class="photo-card-title">${sub.title}</h3>
+                  <p class="photo-card-desc">${sub.description}</p>
+                  <div class="photo-card-divider"></div>
+                  <div class="photo-card-actions">
+                    <a
+                      href="${waLink}"
+                      target="_blank"
+                      rel="noopener"
+                      class="btn-photo-wa"
+                      id="enquire-btn-${sub.id}"
+                      aria-label="Enquire about ${sub.title} on WhatsApp"
+                    >
+                      <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.4 0 9.795-4.39 9.798-9.789.002-2.614-1.012-5.071-2.859-6.92-1.847-1.849-4.305-2.867-6.926-2.868-5.405 0-9.803 4.394-9.806 9.794-.001 2.083.541 4.116 1.571 5.861L2.122 22l5.474-1.435z"/></svg>
+                      <span>Enquire Now</span>
+                    </a>
+                    
+                  </div>
+                </div>
+              </article>
+            `;
+          }).join('');
+
+        } else {
+          grid.innerHTML = `
+            <div class="empty-state" style="grid-column:1/-1; text-align:center; padding:5rem 2rem;">
+              <div style="font-size:3.5rem; margin-bottom:1rem;">📷</div>
+              <h3 style="font-size:1.3rem; font-weight:800;">No Services Seeded</h3>
+              <p style="font-size:0.95rem; color:var(--text2); margin-top:0.5rem; max-width:480px; margin-left:auto; margin-right:auto;">
+                Please refresh your local storage seed in the admin panel.
+              </p>
+            </div>
+          `;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

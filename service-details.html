@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Service Details — Sathish Media</title>
+  <meta name="description" content="Explore professional media production, branding, and printing solutions at Sathish Media." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" />
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Premium Page Specific Styling -->
+  <style>
+    /* ─── DETAIL PAGE SPECIFIC STYLES ────────────────────────── */
+    :root {
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.4);
+      --card-hover-border: rgba(255, 138, 0, 0.25);
+    }
+
+    /* Adjust page container padding for fixed header */
+    .details-page-content {
+      padding-top: var(--header-h);
+      background: var(--bg);
+    }
+
+    /* ─── 1. HERO SECTION ───────────────────────────────────── */
+    .srv-hero {
+      position: relative;
+      min-height: 55vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    
+    .srv-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.65));
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1;
+    }
+
+    .srv-hero-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      text-align: center;
+      animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .srv-breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 99px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+      margin-bottom: 2rem;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .srv-breadcrumb a {
+      color: var(--text2);
+      transition: color var(--transition);
+    }
+    .srv-breadcrumb a:hover {
+      color: var(--accent);
+    }
+    .srv-breadcrumb-sep {
+      color: var(--text3);
+    }
+    .srv-breadcrumb-current {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .srv-hero-cat {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      margin-bottom: 0.75rem;
+    }
+
+    .srv-hero-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      max-width: 900px;
+      margin: 0 auto 0.75rem;
+    }
+
+    .srv-hero-tagline {
+      font-size: clamp(0.95rem, 2vw, 1.2rem);
+      color: var(--text2);
+      font-weight: 500;
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.5;
+    }
+
+    .srv-hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ─── 2. OVERVIEW SECTION ───────────────────────────────── */
+    .srv-overview {
+      padding: 6rem 2rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .srv-overview-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .srv-overview-img-wrap {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      aspect-ratio: 4/3;
+      background: var(--bg2);
+    }
+    .srv-overview-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--transition);
+    }
+    .srv-overview-img-wrap:hover img {
+      transform: scale(1.02);
+    }
+    
+    .srv-overview-content span.sub {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .srv-overview-title {
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      line-height: 1.25;
+      color: var(--text);
+    }
+    .srv-overview-desc {
+      color: var(--text2);
+      font-size: 14.5px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    
+    .srv-benefits-list {
+      margin-bottom: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .srv-benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 13.5px;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .srv-benefit-icon {
+      color: var(--green);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .srv-overview-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* ─── 3. SERVICE FEATURES ───────────────────────────────── */
+    .srv-features {
+      padding: 6rem 2rem;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .srv-section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .srv-section-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .srv-section-title {
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .srv-features-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .srv-feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem 2rem;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .srv-feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: var(--card-hover-border);
+    }
+    .srv-feature-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+      transition: transform var(--transition);
+    }
+    .srv-feature-card:hover .srv-feature-icon {
+      transform: scale(1.15) rotate(2deg);
+    }
+    .srv-feature-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .srv-feature-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    /* ─── 4. SERVICE GALLERY ────────────────────────────────── */
+    .srv-gallery {
+      padding: 6rem 2rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    /* Masonry grid design */
+    .srv-gallery-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      columns: 3 320px;
+      column-gap: 1.5rem;
+    }
+    .srv-gallery-item {
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 1.5rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      position: relative;
+      background: var(--bg2);
+    }
+    .srv-gallery-item img {
+      width: 100%;
+      display: block;
+      height: auto;
+      transition: transform var(--transition), filter var(--transition);
+    }
+    .srv-gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 138, 0, 0.15);
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity var(--transition);
+    }
+    .srv-gallery-overlay span {
+      background: #ffffff;
+      color: var(--text);
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transform: scale(0.9);
+      transition: transform var(--transition);
+    }
+    .srv-gallery-item:hover img {
+      transform: scale(1.04);
+    }
+    .srv-gallery-item:hover .srv-gallery-overlay {
+      opacity: 1;
+    }
+    .srv-gallery-item:hover .srv-gallery-overlay span {
+      transform: scale(1);
+    }
+
+    /* LIGHTBOX SYSTEM */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 10;
+      transition: transform var(--transition);
+    }
+    .lightbox-close:hover { transform: rotate(90deg); }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      width: 50px; height: 50px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition), transform var(--transition);
+      z-index: 10;
+      user-select: none;
+    }
+    .lightbox-nav:hover { background: var(--accent); }
+    .lightbox-nav.prev { left: 1.5rem; }
+    .lightbox-nav.next { right: 1.5rem; }
+    .lightbox-content {
+      max-width: 85vw;
+      max-height: 80vh;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+    }
+    .lightbox.open .lightbox-content {
+      transform: scale(1);
+    }
+    .lightbox-content img {
+      display: block;
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+    .lightbox-caption {
+      color: #ccc;
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 13px;
+      font-family: var(--font-mono);
+    }
+
+    /* ─── 5. SERVICE HIGHLIGHTS ─────────────────────────────── */
+    .srv-highlights {
+      padding: 6rem 2rem;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .srv-highlights-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .srv-highlight-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .srv-highlight-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,138,0,0.04) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition);
+      pointer-events: none;
+    }
+    .srv-highlight-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+      border-color: rgba(255, 138, 0, 0.3);
+    }
+    .srv-highlight-card:hover::before {
+      opacity: 1;
+    }
+    .srv-highlight-icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(255,138,0,0.12), rgba(255,138,0,0.05));
+      border: 1px solid rgba(255,138,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      transition: transform var(--transition), box-shadow var(--transition);
+      flex-shrink: 0;
+    }
+    .srv-highlight-card:hover .srv-highlight-icon-wrap {
+      transform: scale(1.1) rotate(3deg);
+      box-shadow: 0 8px 20px rgba(255,138,0,0.15);
+    }
+    .srv-highlight-check {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(135deg, #25d366, #1aab4e);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #fff;
+      font-weight: 900;
+      box-shadow: 0 3px 10px rgba(37,211,102,0.25);
+    }
+    .srv-highlight-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.3;
+      margin: 0;
+    }
+    .srv-highlight-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ─── 6. WORK PROCESS ───────────────────────────────────── */
+    .srv-process {
+      padding: 6rem 2rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .srv-process-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      position: relative;
+    }
+    /* Animated timeline line */
+    .srv-process-line {
+      position: absolute;
+      left: 50%; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--border);
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+    .srv-process-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+      position: relative;
+      z-index: 2;
+    }
+    .srv-process-step {
+      display: grid;
+      grid-template-columns: 1fr 80px 1fr;
+      align-items: center;
+    }
+    .srv-process-node-wrap {
+      display: flex;
+      justify-content: center;
+    }
+    .srv-process-node {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      box-shadow: 0 4px 15px rgba(255, 138, 0, 0.15);
+      z-index: 5;
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+    }
+    .srv-process-step:hover .srv-process-node {
+      background: var(--accent);
+      color: #fff;
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(255, 138, 0, 0.3);
+    }
+    .srv-process-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .srv-process-step:hover .srv-process-card {
+      border-color: var(--card-hover-border);
+      transform: translateY(-2px);
+    }
+    .srv-process-step-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .srv-process-step-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+    .srv-process-step.left .srv-process-card {
+      grid-column: 1;
+      text-align: right;
+    }
+    .srv-process-step.right .srv-process-card {
+      grid-column: 3;
+    }
+    .srv-process-step.left .srv-process-empty {
+      grid-column: 3;
+    }
+    .srv-process-step.right .srv-process-empty {
+      grid-column: 1;
+    }
+    .srv-process-step.left .srv-process-step-title {
+      justify-content: flex-end;
+    }
+
+    /* ─── 7. RELATED SERVICES ───────────────────────────────── */
+    .srv-related {
+      padding: 6rem 2rem;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .srv-related-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.75rem;
+    }
+    .srv-related-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .srv-related-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--card-hover-border);
+    }
+    .srv-related-img-wrap {
+      aspect-ratio: 16/10;
+      background: var(--bg2);
+      overflow: hidden;
+    }
+    .srv-related-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition);
+    }
+    .srv-related-card:hover .srv-related-img-wrap img {
+      transform: scale(1.03);
+    }
+    .srv-related-info {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex-grow: 1;
+    }
+    .srv-related-sub {
+      font-family: var(--font-mono);
+      font-size: 9px; font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .srv-related-title {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .srv-related-desc {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ─── 8. CUSTOMER REVIEWS (SLIDER) ──────────────────────── */
+    /* Handled by standard css, let's add custom styles to guarantee a pristine auto-sliding layout */
+    .srv-reviews {
+      padding: 6rem 2rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .srv-reviews-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* ─── 9. WHATSAPP INQUIRY BANNER ────────────────────────── */
+    .srv-cta {
+      padding: 7rem 2rem;
+      background: linear-gradient(135deg, #FFF9F5 0%, #FFFFFF 100%);
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      overflow: hidden;
+    }
+    .srv-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(255, 138, 0, 0.04), transparent 50%);
+      pointer-events: none;
+    }
+    .srv-cta-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      margin: 0 auto;
+      animation: fadeUp 0.8s ease;
+    }
+    .srv-cta-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .srv-cta-desc {
+      font-size: 14.5px;
+      color: var(--text2);
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+    .srv-cta-actions {
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .srv-cta-whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.95rem 2.25rem;
+      border-radius: 99px;
+      background: linear-gradient(135deg, #111111, #2A2A2A);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13.5px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      transition: all var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .srv-cta-whatsapp-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 30px rgba(255, 77, 148, 0.35);
+      border-color: #FF4D94;
+      opacity: 1;
+    }
+    .srv-cta-quote-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.95rem 2.25rem;
+      border-radius: 99px;
+      background: var(--text);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13.5px;
+      transition: all var(--transition);
+    }
+    .srv-cta-quote-btn:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255, 138, 0, 0.2);
+    }
+
+    /* ─── 10. CONTACT SECTION ───────────────────────────────── */
+    .srv-contact {
+      padding: 6rem 2rem;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .srv-contact-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+    }
+    .srv-contact-info-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .srv-contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .srv-contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .srv-contact-icon {
+      font-size: 1.5rem;
+      color: var(--accent);
+      flex-shrink: 0;
+      background: var(--bg2);
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border);
+    }
+    .srv-contact-details h4 {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .srv-contact-details p {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+    .srv-contact-socials {
+      display: flex;
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+    .srv-social-btn {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.95rem;
+      transition: all var(--transition);
+    }
+    .srv-social-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--bg2);
+      transform: scale(1.05);
+    }
+    .srv-contact-map-col {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      min-height: 380px;
+      background: var(--bg);
+    }
+
+    /* ─── RESPONSIVE RULES ──────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .srv-overview-inner {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+      }
+      .srv-highlights-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .srv-contact-inner {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .srv-process-line {
+        left: 20px;
+      }
+      .srv-process-step {
+        grid-template-columns: 36px 1fr;
+        gap: 1.5rem;
+      }
+      .srv-process-node-wrap {
+        grid-column: 1;
+        justify-content: flex-start;
+      }
+      .srv-process-node {
+        width: 36px; height: 36px;
+        font-size: 11px;
+      }
+      .srv-process-step.left .srv-process-card,
+      .srv-process-step.right .srv-process-card {
+        grid-column: 2;
+        text-align: left;
+      }
+      .srv-process-step.left .srv-process-step-title {
+        justify-content: flex-start;
+      }
+      .srv-process-empty {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .srv-hero {
+        padding: 3rem 1rem;
+      }
+      .srv-overview, .srv-features, .srv-gallery, .srv-highlights, .srv-process, .srv-related, .srv-reviews, .srv-cta, .srv-contact {
+        padding: 4rem 1rem;
+      }
+      .srv-hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .srv-hero-actions .btn-primary,
+      .srv-hero-actions .btn-outline,
+      .srv-hero-actions .btn-whatsapp {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════
+       HEADER (Imported styling and structures)
+       ══════════════════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🎬</div>
+        <div class="logo-text">
+          <span class="logo-eyebrow">Production House</span>
+          <span class="logo-name">Sathish Media</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a href="index.html#hero" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="index.html#services" class="nav-link">Services</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="index.html#portfolio" class="nav-link">Portfolio</a>
+        <a href="index.html#reviews" class="nav-link">Reviews</a>
+        <a href="courses.html" class="nav-link">Courses</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="index.html#contact" class="nav-link">Contact Us</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="wa-header-btn">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.4 0 9.795-4.39 9.798-9.789.002-2.614-1.012-5.071-2.859-6.92-1.847-1.849-4.305-2.867-6.926-2.868-5.405 0-9.803 4.394-9.806 9.794-.001 2.083.541 4.116 1.571 5.861L2.122 22l5.474-1.435z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+        <button class="hamburger" id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Navigation -->
+  <div class="mobile-menu" id="mobile-menu" role="navigation">
+    <a href="index.html#hero" class="mobile-nav-link">Home</a>
+    <a href="about.html" class="mobile-nav-link">About Us</a>
+    <a href="index.html#services" class="mobile-nav-link">Services</a>
+    <a href="products.html" class="mobile-nav-link">Products</a>
+    <a href="index.html#portfolio" class="mobile-nav-link">Portfolio</a>
+    <a href="index.html#reviews" class="mobile-nav-link">Reviews</a>
+    <a href="courses.html" class="mobile-nav-link">Courses</a>
+    <a href="faq.html" class="mobile-nav-link">FAQ</a>
+    <a href="index.html#contact" class="mobile-nav-link">Contact Us</a>
+    <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="mobile-nav-link accent" style="margin-top: 1rem;">WhatsApp Us 📱</a>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       MAIN CONTENT CONTAINER
+       ══════════════════════════════════════════════════ -->
+  <main class="details-page-content">
+
+    <!-- ─── 1. HERO SECTION ─── -->
+    <section class="srv-hero" id="srv-hero-bg">
+      <div class="srv-hero-overlay"></div>
+      <div class="srv-hero-inner">
+        <!-- Breadcrumb Navigation -->
+        <nav class="srv-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="srv-breadcrumb-sep">></span>
+          <a href="index.html#services">Services</a>
+          <span class="srv-breadcrumb-sep">></span>
+          <a href="#" id="breadcrumb-category">Category</a>
+          <span class="srv-breadcrumb-sep">></span>
+          <span class="srv-breadcrumb-current" id="breadcrumb-title">Service Details</span>
+        </nav>
+        
+        <div class="srv-hero-cat" id="hero-category">Service Category</div>
+        <h1 class="srv-hero-title" id="hero-title">Service Details</h1>
+        <p class="srv-hero-tagline" id="hero-tagline">Loading your premium service experience...</p>
+        
+        <div class="srv-hero-actions">
+          <a href="#srv-contact" class="btn-primary">Get Quote</a>
+          <a href="#" id="hero-wa-btn" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 0.35rem; vertical-align: middle;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.4 0 9.795-4.39 9.798-9.789.002-2.614-1.012-5.071-2.859-6.92-1.847-1.849-4.305-2.867-6.926-2.868-5.405 0-9.803 4.394-9.806 9.794-.001 2.083.541 4.116 1.571 5.861L2.122 22l5.474-1.435z"/></svg>
+            <span>WhatsApp Inquiry</span>
+          </a>
+          <a href="#srv-gallery" class="btn-outline">View Portfolio</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 2. SERVICE OVERVIEW ─── -->
+    <section class="srv-overview">
+      <div class="srv-overview-inner">
+        <!-- Left: Image -->
+        <div class="srv-overview-img-wrap">
+          <img id="overview-img" src="" alt="Sathish Media Service Image" onerror="this.src='assets/images/videography-photography/videography-and-photography.jpg'" />
+        </div>
+        <!-- Right: Content -->
+        <div class="srv-overview-content">
+          <span class="sub">Overview</span>
+          <h2 class="srv-overview-title" id="overview-title">Premium Service Capabilities</h2>
+          <p class="srv-overview-desc" id="overview-desc">Description loading...</p>
+          
+          <div class="srv-benefits-list" id="overview-benefits">
+            <!-- Dynamically populated benefits list -->
+          </div>
+          
+          <div class="srv-overview-actions">
+            <a href="#srv-contact" class="btn-primary">Request Custom Session</a>
+            <a href="#" id="overview-wa-btn" target="_blank" rel="noopener" class="btn-outline" style="display:inline-flex; align-items:center; gap:0.4rem;">
+              <span>Ask on WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 3. SERVICE FEATURES ─── -->
+    <section class="srv-features">
+      <div class="srv-section-header">
+        <span class="srv-section-badge">Key Highlights</span>
+        <h2 class="srv-section-title">Core Service Features</h2>
+      </div>
+      <div class="srv-features-grid" id="features-grid">
+        <!-- Dynamically populated features -->
+      </div>
+    </section>
+
+    <!-- ─── 4. SERVICE GALLERY ─── -->
+    <section class="srv-gallery" id="srv-gallery">
+      <div class="srv-section-header">
+        <span class="srv-section-badge">Our Craft</span>
+        <h2 class="srv-section-title">Service Showcase &amp; Gallery</h2>
+      </div>
+      <div class="srv-gallery-grid" id="gallery-grid">
+        <!-- Dynamically populated masonry items -->
+      </div>
+    </section>
+
+    <!-- ─── 5. SERVICE HIGHLIGHTS ─── -->
+    <section class="srv-highlights" id="srv-highlights">
+      <div class="srv-section-header">
+        <span class="srv-section-badge">Why Choose Us</span>
+        <h2 class="srv-section-title">Why Choose This Service</h2>
+      </div>
+      <div class="srv-highlights-grid">
+
+        <div class="srv-highlight-card">
+          <span class="srv-highlight-check">✓</span>
+          <div class="srv-highlight-icon-wrap">🏆</div>
+          <h3 class="srv-highlight-title">Professional Quality</h3>
+          <p class="srv-highlight-desc">Every deliverable is crafted to the highest industry standards, ensuring premium outputs for your brand.</p>
+        </div>
+
+        <div class="srv-highlight-card">
+          <span class="srv-highlight-check">✓</span>
+          <div class="srv-highlight-icon-wrap">👥</div>
+          <h3 class="srv-highlight-title">Experienced Team</h3>
+          <p class="srv-highlight-desc">Our dedicated team brings years of hands-on expertise across media, branding, and creative production.</p>
+        </div>
+
+        <div class="srv-highlight-card">
+          <span class="srv-highlight-check">✓</span>
+          <div class="srv-highlight-icon-wrap">💡</div>
+          <h3 class="srv-highlight-title">Creative Solutions</h3>
+          <p class="srv-highlight-desc">We develop innovative and tailored strategies that align with your unique business vision and goals.</p>
+        </div>
+
+        <div class="srv-highlight-card">
+          <span class="srv-highlight-check">✓</span>
+          <div class="srv-highlight-icon-wrap">⚡</div>
+          <h3 class="srv-highlight-title">Fast Delivery</h3>
+          <p class="srv-highlight-desc">We respect your deadlines — every project is planned and delivered on schedule without compromising quality.</p>
+        </div>
+
+        <div class="srv-highlight-card">
+          <span class="srv-highlight-check">✓</span>
+          <div class="srv-highlight-icon-wrap">📷</div>
+          <h3 class="srv-highlight-title">Premium Equipment</h3>
+          <p class="srv-highlight-desc">We use industry-grade professional equipment and tools to capture and produce stunning visual results.</p>
+        </div>
+
+        <div class="srv-highlight-card">
+          <span class="srv-highlight-check">✓</span>
+          <div class="srv-highlight-icon-wrap">🎯</div>
+          <h3 class="srv-highlight-title">Custom Requirements</h3>
+          <p class="srv-highlight-desc">Every project is treated as unique — we adapt fully to your brief, style, and specific business requirements.</p>
+        </div>
+
+        <div class="srv-highlight-card">
+          <span class="srv-highlight-check">✓</span>
+          <div class="srv-highlight-icon-wrap">🛡️</div>
+          <h3 class="srv-highlight-title">Dedicated Support</h3>
+          <p class="srv-highlight-desc">From brief to delivery and beyond, our team is available to assist you at every stage of the project.</p>
+        </div>
+
+        <div class="srv-highlight-card">
+          <span class="srv-highlight-check">✓</span>
+          <div class="srv-highlight-icon-wrap">⭐</div>
+          <h3 class="srv-highlight-title">Trusted Service</h3>
+          <p class="srv-highlight-desc">Trusted by businesses and clients across Salem — our track record speaks through every successful project.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── 6. WORK PROCESS ─── -->
+    <section class="srv-process">
+      <div class="srv-section-header">
+        <span class="srv-section-badge">How It Works</span>
+        <h2 class="srv-section-title">Our Production Process</h2>
+      </div>
+      <div class="srv-process-inner">
+        <div class="srv-process-line"></div>
+        <div class="srv-process-grid" id="process-grid">
+          <!-- Dynamically populated timeline steps -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 7. RELATED SERVICES ─── -->
+    <section class="srv-related">
+      <div class="srv-section-header">
+        <span class="srv-section-badge">More Services</span>
+        <h2 class="srv-section-title">Related In This Category</h2>
+      </div>
+      <div class="srv-related-grid" id="related-grid">
+        <!-- Dynamically populated cards -->
+      </div>
+    </section>
+
+    <!-- ─── 8. CUSTOMER REVIEWS (CAROUSEL) ─── -->
+    <section class="srv-reviews reviews-section" id="srv-reviews">
+      <div class="srv-section-header" style="text-align: center;">
+        <span class="srv-section-badge">Testimonials</span>
+        <h2 class="srv-section-title">What Our Clients Say</h2>
+        <p class="section-desc" style="margin: 0 auto;">Trusted by businesses and customers across Salem.</p>
+      </div>
+      <div class="srv-reviews-inner">
+        <div class="rv-carousel-outer">
+          <div class="rv-track" id="reviews-track">
+            <!-- Dynamically populated review cards -->
+          </div>
+          <button class="rv-arrow prev" id="rev-prev-btn" aria-label="Previous Review">←</button>
+          <button class="rv-arrow next" id="rev-next-btn" aria-label="Next Review">→</button>
+        </div>
+        <div class="rv-dots" id="reviews-dots">
+          <!-- Dots dynamically created -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 9. WHATSAPP INQUIRY SECTION ─── -->
+    <section class="srv-cta">
+      <div class="srv-cta-inner">
+        <h2 class="srv-cta-title">Interested In This Service?</h2>
+        <p class="srv-cta-desc">Let us help you bring your creative concepts to life. Click below to launch a live inquiry on WhatsApp or get a quick detailed quote.</p>
+        <div class="srv-cta-actions">
+          <a href="#" id="cta-whatsapp-btn" target="_blank" rel="noopener" class="srv-cta-whatsapp-btn">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.4 0 9.795-4.39 9.798-9.789.002-2.614-1.012-5.071-2.859-6.92-1.847-1.849-4.305-2.867-6.926-2.868-5.405 0-9.803 4.394-9.806 9.794-.001 2.083.541 4.116 1.571 5.861L2.122 22l5.474-1.435z"/></svg>
+            <span>WhatsApp Now</span>
+          </a>
+          <a href="#srv-contact" class="srv-cta-quote-btn">Request Custom Quote</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 10. CONTACT SECTION ─── -->
+    <section class="srv-contact" id="srv-contact">
+      <div class="srv-section-header">
+        <span class="srv-section-badge">Let's Connect</span>
+        <h2 class="srv-section-title">Get in Touch</h2>
+      </div>
+      <div class="srv-contact-inner">
+        <!-- Left details col -->
+        <div class="srv-contact-info-col">
+          <p class="section-desc" style="max-width: 100%; margin-bottom: 0.5rem;">Reach out to us directly or stop by our creative studio. We are ready to help launch your projects.</p>
+          
+          <div class="srv-contact-grid">
+            
+            <div class="srv-contact-card">
+              <div class="srv-contact-icon">📞</div>
+              <div class="srv-contact-details">
+                <h4>Phone / Contact</h4>
+                <p id="contact-phone">+91 87620 97098</p>
+              </div>
+            </div>
+
+            <div class="srv-contact-card">
+              <div class="srv-contact-icon">📱</div>
+              <div class="srv-contact-details">
+                <h4>WhatsApp Inquiry</h4>
+                <p id="contact-whatsapp">+91 87620 97098</p>
+              </div>
+            </div>
+
+            <div class="srv-contact-card">
+              <div class="srv-contact-icon">✉️</div>
+              <div class="srv-contact-details">
+                <h4>Email Address</h4>
+                <p id="contact-email">sathishmedia4u@gmail.com</p>
+              </div>
+            </div>
+
+            <div class="srv-contact-card">
+              <div class="srv-contact-icon">📍</div>
+              <div class="srv-contact-details">
+                <h4>Office Location</h4>
+                <p>358, Sathish Media Complex,<br>TVK Road,<br>Ammapet,<br>Salem - 636003</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="srv-contact-socials">
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="srv-social-btn" aria-label="Instagram">📸</a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="srv-social-btn" aria-label="Facebook">📘</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" class="srv-social-btn" aria-label="LinkedIn">💼</a>
+          </div>
+        </div>
+
+        <!-- Right map col -->
+        <div class="srv-contact-map-col" style="position: relative; display: flex; flex-direction: column; gap: 1rem;">
+          <iframe 
+            src="https://maps.google.com/maps?q=358,%20Sathish%20Media%20Complex,%20TVK%20Road,%20Ammapet,%20Salem%20-%20636003&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+            width="100%" 
+            height="100%" 
+            style="border:0; min-height: 380px; display: block;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+                  <a href="https://www.google.com/maps/search/?api=1&query=Sathish+Media+Works,+358,+Sathish+Media+Complex,+TVK+Road,+Ammapet,+Salem+-+636003" 
+             target="_blank" rel="noopener" class="btn-outline" 
+             style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 0.75rem; font-size: 13px; font-weight: 700; text-transform: none; border-color: var(--border); margin-top: 0.5rem;">
+            🗺️ Open in Google Maps
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════════
+       11. FOOTER
+       ══════════════════════════════════════════════════ -->
+  <footer class="site-footer agency-footer">
+    <div class="footer-gradient-bar"></div>
+    <div class="footer-main-area">
+      <div class="footer-cols">
+        <!-- Brand Column -->
+        <div class="footer-brand-col">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">🎬</div>
+            <div class="logo-text">
+              <span class="logo-eyebrow">Production House</span>
+              <span class="logo-name">Sathish Media</span>
+            </div>
+          </a>
+          <p class="footer-brand-text">Transforming ideas into cinematic visual experiences. Creative media, branding solutions, art &amp; stationery supplies — all under one premium production house.</p>
+          <div class="footer-social-row">
+            <a href="https://www.instagram.com/sathishmedia?igsh=ZGo2Y2h0Zjh5azJx" target="_blank" rel="noopener" class="footer-social-btn instagram" title="Instagram" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/sathishmedia" target="_blank" rel="noopener" class="footer-social-btn facebook" title="Facebook" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://youtube.com/@sathishmedia?si=qZbj140beodCdEj8" target="_blank" rel="noopener" class="footer-social-btn youtube" title="YouTube" aria-label="YouTube">
+              <svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 00-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 002.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 002.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="footer-social-btn whatsapp" title="WhatsApp" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.704 1.459h.005c6.56 0 11.9-5.336 11.903-11.894a11.785 11.785 0 00-3.486-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+        <!-- Services Column -->
+        <div>
+          <div class="footer-col-head">Services</div>
+          <a href="videography-photography.html" class="footer-col-link">Videography & Photography</a>
+          <a href="events.html" class="footer-col-link">Event</a>
+          <a href="branding.html" class="footer-col-link">Branding</a>
+          <a href="designing.html" class="footer-col-link">Designing</a>
+          <a href="social-media-marketing.html" class="footer-col-link">Social Media Marketing</a>
+          <a href="advertising.html" class="footer-col-link">Advertising</a>
+          <a href="web-app-development.html" class="footer-col-link">Web & App Development</a>
+          <a href="printing.html" class="footer-col-link">Printing</a>
+        </div>
+        <!-- Products Column -->
+        <div>
+          <div class="footer-col-head">Products</div>
+          <a href="products.html?cat=Gifts" class="footer-col-link">Personalized Gifts</a>
+          <a href="products.html?cat=Gifts" class="footer-col-link">Premium Frames</a>
+          <a href="products.html?cat=Art%20Materials" class="footer-col-link">Fine Art Supplies</a>
+          <a href="products.html?cat=Stationery" class="footer-col-link">Office Stationery</a>
+          <a href="about.html" class="footer-col-link">About Us</a>
+          <a href="admin.html" class="footer-col-link">Admin Panel</a>
+        </div>
+        <!-- Contact Column -->
+        <div>
+          <div class="footer-col-head">Get In Touch</div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon">📞</div>
+            <div class="footer-contact-text"><a href="tel:+918762097098">+91 87620 97098</a></div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon">✉️</div>
+            <div class="footer-contact-text"><a href="mailto:sathishmedia4u@gmail.com">sathishmedia4u@gmail.com</a></div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon">📍</div>
+            <div class="footer-contact-text">358, Sathish Media Complex,<br>TVK Road,<br>Ammapet,<br>Salem - 636003</div>
+          </div>
+          <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="footer-wa-cta">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.4 0 9.795-4.39 9.798-9.789.002-2.614-1.012-5.071-2.859-6.92-1.847-1.849-4.305-2.867-6.926-2.868-5.405 0-9.803 4.394-9.806 9.794-.001 2.083.541 4.116 1.571 5.861L2.122 22l5.474-1.435z"/></svg>
+            WhatsApp Us Now
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom-bar">
+      <div class="footer-copyright">© 2026 <strong>Sathish Media</strong>. All Rights Reserved.</div>
+      <div class="footer-tagline">Premium Creative Media Production · Salem, Tamil Nadu</div>
+    </div>
+  </footer>
+
+  <!-- Lightbox DOM element -->
+  <div class="lightbox" id="gallery-lightbox">
+    <span class="lightbox-close" id="lightbox-close-btn">&times;</span>
+    <span class="lightbox-nav prev" id="lightbox-prev-btn">&#10094;</span>
+    <span class="lightbox-nav next" id="lightbox-next-btn">&#10095;</span>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="Lightbox Zoomed Graphic" />
+      <div class="lightbox-caption" id="lightbox-caption">Showcase Preview</div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/services.js"></script>
+  <script src="assets/js/main.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // ─── PARSE SERVICE ID ──────────────────────────────────────────
+      const params = new URLSearchParams(window.location.search);
+      let srvId = params.get('id');
+      if (!srvId) {
+        // Fallback to first subcategory if no query param provided
+        srvId = 'SUB-101';
+      }
+
+      // Helper function to resolve subcategory or parent service by slug or ID
+      function resolveItem(input) {
+        if (input.startsWith('SUB-')) {
+          return smhGetSubcategoryById(input);
+        } else if (input.startsWith('SRV-')) {
+          return smhGetServiceById(input);
+        }
+        
+        // Try resolving by slug as a fallback
+        const slugifiedInput = input.toLowerCase().trim();
+        const allServices = smhGetServices();
+        
+        // Check subcategories first
+        for (const parent of allServices) {
+          if (parent.subcategories) {
+            const matchedSub = parent.subcategories.find(sub => {
+              const subSlug = sub.title.toLowerCase()
+                .replace(/&/g, '')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)+/g, '');
+              return subSlug === slugifiedInput;
+            });
+            if (matchedSub) {
+              return smhGetSubcategoryById(matchedSub.id); // Hydrated subcategory
+            }
+          }
+        }
+        
+        // Check parents next
+        const matchedParent = allServices.find(s => {
+          const parentSlug = s.title.toLowerCase()
+            .replace(/&/g, '')
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)+/g, '');
+          return parentSlug === slugifiedInput;
+        });
+        return matchedParent || null;
+      }
+
+      // Load active service or subcategory
+      const s = resolveItem(srvId);
+
+      if (!s) {
+        showErrorState();
+        return;
+      }
+
+      // Populate document meta tags dynamically for SEO & AI Search Optimization (AIO)
+      document.title = `${s.title} | Sathish Media Salem`;
+      document.getElementById('page-title').textContent = `${s.title} | Sathish Media`;
+
+      const pageUrl = window.location.href;
+      const pageDesc = s.tagline || (s.description ? s.description.substring(0, 155) + '...' : `Professional ${s.title} services in Salem by Sathish Media.`);
+      const pageImg = s.image || 'assets/images/videography-photography/videography-and-photography.jpg';
+
+      const updateMeta = (name, val, isProperty = false) => {
+        let el = isProperty ? document.querySelector(`meta[property="${name}"]`) : document.querySelector(`meta[name="${name}"]`);
+        if (!el) {
+          el = document.createElement('meta');
+          if (isProperty) el.setAttribute('property', name);
+          else el.setAttribute('name', name);
+          document.head.appendChild(el);
+        }
+        el.setAttribute('content', val);
+      };
+
+      updateMeta('description', pageDesc);
+      updateMeta('og:type', 'website', true);
+      updateMeta('og:url', pageUrl, true);
+      updateMeta('og:title', `${s.title} | Sathish Media Salem`, true);
+      updateMeta('og:description', pageDesc, true);
+      updateMeta('og:image', pageImg, true);
+      updateMeta('twitter:card', 'summary_large_image');
+      updateMeta('twitter:title', `${s.title} | Sathish Media Salem`);
+      updateMeta('twitter:description', pageDesc);
+      updateMeta('twitter:image', pageImg);
+
+      // Canonical link
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (!canonicalLink) {
+        canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalLink);
+      }
+      canonicalLink.setAttribute('href', pageUrl);
+
+      // Structured JSON-LD Service Schema
+      let schemaScript = document.getElementById('dynamic-service-schema');
+      if (!schemaScript) {
+        schemaScript = document.createElement('script');
+        schemaScript.id = 'dynamic-service-schema';
+        schemaScript.type = 'application/ld+json';
+        document.head.appendChild(schemaScript);
+      }
+      const serviceSchemaObj = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": s.title,
+        "description": s.description || pageDesc,
+        "image": pageImg,
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "Sathish Media",
+          "telephone": "+918762097098",
+          "email": "sathishmedia4u@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "358, Sathish Media Complex, TVK Road, Ammapet",
+            "addressLocality": "Salem",
+            "addressRegion": "Tamil Nadu",
+            "postalCode": "636003",
+            "addressCountry": "IN"
+          }
+        },
+        "areaServed": "Salem, Tamil Nadu"
+      };
+      schemaScript.textContent = JSON.stringify(serviceSchemaObj, null, 2);
+
+      // ─── POPULATE HERO ─────────────────────────────────────────────
+      const heroBg = document.getElementById('srv-hero-bg');
+      if (heroBg && (s.heroImage || s.image)) {
+        heroBg.style.backgroundImage = `url('${s.heroImage || s.image}')`;
+      }
+      
+      document.getElementById('breadcrumb-category').textContent = s.category;
+      if (s.parentId) {
+        document.getElementById('breadcrumb-category').href = `service-category.html?id=${s.parentId}`;
+      } else {
+        document.getElementById('breadcrumb-category').href = `index.html#services`;
+      }
+      document.getElementById('breadcrumb-title').textContent = s.title;
+
+      document.getElementById('hero-category').textContent = s.category + (s.subcategory ? ` • ${s.subcategory}` : '');
+      document.getElementById('hero-title').textContent = s.title;
+      document.getElementById('hero-tagline').textContent = s.tagline || (s.description || '').substring(0, 120) + '...';
+
+      // Pre-fill WhatsApp Links
+      const waNumber = s.whatsapp || '918762097098';
+      const waMsg = encodeURIComponent(
+        `Hello Sathish Media,\nI am interested in the service:\n[${s.title}]\n\nPlease provide more details.`
+      );
+      const waUrl = `https://wa.me/${waNumber}?text=${waMsg}`;
+      
+      document.getElementById('hero-wa-btn').href = waUrl;
+      document.getElementById('overview-wa-btn').href = waUrl;
+      document.getElementById('cta-whatsapp-btn').href = waUrl;
+
+      // Contact details sync
+      if (s.phone) {
+        document.getElementById('contact-phone').textContent = s.phone;
+        document.getElementById('contact-whatsapp').textContent = s.phone;
+      }
+      if (s.email) {
+        document.getElementById('contact-email').textContent = s.email;
+      }
+
+      // ─── POPULATE OVERVIEW ─────────────────────────────────────────
+      document.getElementById('overview-img').src = s.image;
+      document.getElementById('overview-img').alt = s.title;
+      document.getElementById('overview-title').textContent = s.title;
+      document.getElementById('overview-desc').textContent = s.description;
+
+      // Generate visual benefits list
+      const benefitsGrid = document.getElementById('overview-benefits');
+      const defaultBenefits = [
+        'Tailored corporate creative strategy aligned to business goals',
+        'Industry-grade high-fidelity visual production and outputs',
+        'Transparent delivery checkpoints and collaborative review pipeline',
+        'Dedicated client support with prompt post-delivery configurations'
+      ];
+      const activeBenefits = (s.features && s.features.length) 
+        ? s.features.slice(0, 4).map(f => f.desc) 
+        : defaultBenefits;
+
+      benefitsGrid.innerHTML = activeBenefits.map(b => `
+        <div class="srv-benefit-item">
+          <span class="srv-benefit-icon">✓</span>
+          <span>${b}</span>
+        </div>
+      `).join('');
+
+      // ─── POPULATE FEATURES ─────────────────────────────────────────
+      const featuresGrid = document.getElementById('features-grid');
+      if (s.features && s.features.length) {
+        featuresGrid.innerHTML = s.features.map(f => `
+          <div class="srv-feature-card">
+            <span class="srv-feature-icon">${f.icon || '✓'}</span>
+            <h3 class="srv-feature-title">${f.title}</h3>
+            <p class="srv-feature-desc">${f.desc}</p>
+          </div>
+        `).join('');
+      } else {
+        // Fallback placeholder features
+        featuresGrid.innerHTML = `
+          <div class="srv-feature-card"><span class="srv-feature-icon">✓</span><h3 class="srv-feature-title">Professional Quality</h3><p class="srv-feature-desc">Engineered for client business outcomes with premium styling standards.</p></div>
+          <div class="srv-feature-card"><span class="srv-feature-icon">✓</span><h3 class="srv-feature-title">Rapid Deliveries</h3><p class="srv-feature-desc">Delivered safely and on time according to contract frameworks.</p></div>
+          <div class="srv-feature-card"><span class="srv-feature-icon">✓</span><h3 class="srv-feature-title">Dedicated Support</h3><p class="srv-feature-desc">Ongoing configuration and customization guides available at request.</p></div>
+        `;
+      }
+
+      // ─── POPULATE GALLERY & LIGHTBOX ────────────────────────────────
+      const galleryGrid = document.getElementById('gallery-grid');
+      const galleryImages = s.gallery || [s.image];
+      
+      galleryGrid.innerHTML = galleryImages.map((imgUrl, index) => `
+        <div class="srv-gallery-item" data-index="${index}">
+          <img src="${imgUrl}" alt="${s.title} Showcase ${index + 1}" loading="lazy" />
+          <div class="srv-gallery-overlay">
+            <span>🔍</span>
+          </div>
+        </div>
+      `).join('');
+
+      // Lightbox execution logic
+      const lightbox = document.getElementById('gallery-lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      let currentImgIdx = 0;
+
+      function openLightbox(idx) {
+        currentImgIdx = idx;
+        lightboxImg.src = galleryImages[currentImgIdx];
+        lightboxCaption.textContent = `${s.title} — Showcase Preview ${currentImgIdx + 1} of ${galleryImages.length}`;
+        lightbox.classList.add('open');
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('open');
+      }
+
+      function nextLightboxImage() {
+        currentImgIdx = (currentImgIdx + 1) % galleryImages.length;
+        lightboxImg.src = galleryImages[currentImgIdx];
+        lightboxCaption.textContent = `${s.title} — Showcase Preview ${currentImgIdx + 1} of ${galleryImages.length}`;
+      }
+
+      function prevLightboxImage() {
+        currentImgIdx = (currentImgIdx - 1 + galleryImages.length) % galleryImages.length;
+        lightboxImg.src = galleryImages[currentImgIdx];
+        lightboxCaption.textContent = `${s.title} — Showcase Preview ${currentImgIdx + 1} of ${galleryImages.length}`;
+      }
+
+      // Event listeners for gallery items
+      document.querySelectorAll('.srv-gallery-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const idx = parseInt(item.getAttribute('data-index'));
+          openLightbox(idx);
+        });
+      });
+
+      document.getElementById('lightbox-close-btn').addEventListener('click', closeLightbox);
+      document.getElementById('lightbox-next-btn').addEventListener('click', nextLightboxImage);
+      document.getElementById('lightbox-prev-btn').addEventListener('click', prevLightboxImage);
+
+      // Keyboard support for Lightbox
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextLightboxImage();
+        if (e.key === 'ArrowLeft') prevLightboxImage();
+      });
+
+      // Click outside to close lightbox
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      // Service Highlights section is fully static HTML — no JS population needed.
+
+      // ─── POPULATE WORK PROCESS TIMELINE ─────────────────────────────
+      const processGrid = document.getElementById('process-grid');
+      const defaultSteps = [
+        { step: 1, icon: '💬', title: 'Consultation', desc: 'Discuss brief concepts, project directives, timelines, and budgets.' },
+        { step: 2, icon: '🗺️', title: 'Planning', desc: 'Determine schedules, source production assets, and organize files.' },
+        { step: 3, icon: '🎨', title: 'Design & Production', desc: 'Assemble visual setups, shoot scenes, write assets, and polish code.' },
+        { step: 4, icon: '📦', title: 'Delivery', desc: 'Perform final checks and deliver pristine exports via cloud servers.' }
+      ];
+      const activeSteps = s.process || defaultSteps;
+
+      processGrid.innerHTML = activeSteps.map((p, idx) => {
+        const sideClass = idx % 2 === 0 ? 'left' : 'right';
+        return `
+          <div class="srv-process-step ${sideClass}">
+            <div class="srv-process-card">
+              <h3 class="srv-process-step-title">
+                <span style="font-size:1.1rem; margin-right:0.25rem;">${p.icon || '⚡'}</span>
+                <span>${p.title}</span>
+              </h3>
+              <p class="srv-process-step-desc">${p.desc}</p>
+            </div>
+            <div class="srv-process-node-wrap">
+              <div class="srv-process-node">${p.step || (idx + 1)}</div>
+            </div>
+            <div class="srv-process-empty"></div>
+          </div>
+        `;
+      }).join('');
+
+      // ─── POPULATE RELATED SERVICES ──────────────────────────────────
+      const relatedGrid = document.getElementById('related-grid');
+      const relatedServices = smhGetByCategory(s.category, s.id);
+
+      if (relatedServices.length) {
+        relatedGrid.innerHTML = relatedServices.slice(0, 3).map(r => `
+          <div class="srv-related-card" onclick="location.href='service-details.html?id=${r.id}'">
+            <div class="srv-related-img-wrap">
+              <img src="${r.image}" alt="${r.title}" loading="lazy" onerror="this.src='assets/images/videography-photography/videography-and-photography.jpg'" />
+            </div>
+            <div class="srv-related-info">
+              <span class="srv-related-sub">${r.category}</span>
+              <h3 class="srv-related-title">${r.title}</h3>
+              <p class="srv-related-desc">${r.description}</p>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        // Fallback: load general other services
+        const fallbackList = smhGetServices().filter(x => x.id !== s.id).slice(0, 3);
+        relatedGrid.innerHTML = fallbackList.map(r => `
+          <div class="srv-related-card" onclick="location.href='service-details.html?id=${r.id}'">
+            <div class="srv-related-img-wrap">
+              <img src="${r.image}" alt="${r.title}" loading="lazy" onerror="this.src='assets/images/videography-photography/videography-and-photography.jpg'" />
+            </div>
+            <div class="srv-related-info">
+              <span class="srv-related-sub">${r.category}</span>
+              <h3 class="srv-related-title">${r.title}</h3>
+              <p class="srv-related-desc">${r.description}</p>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // ─── POPULATE REVIEWS SLIDER ────────────────────────────────────
+      const reviewsTrack = document.getElementById('reviews-track');
+      const reviewsDots = document.getElementById('reviews-dots');
+      const srvReviews = s.reviews || [];
+
+      if (srvReviews.length) {
+        // Build cards
+        reviewsTrack.innerHTML = srvReviews.map((r, idx) => `
+          <div class="rv-card ${idx === 0 ? 'active' : ''}" data-index="${idx}">
+            <div class="rv-quote-mark">“</div>
+            <div class="rv-rating">${'★'.repeat(r.rating || 5)}</div>
+            <p class="rv-text">${r.text}</p>
+            <div class="rv-author">
+              <div class="rv-avatar">${r.initials || r.name.substring(0, 2).toUpperCase()}</div>
+              <div>
+                <div class="rv-name">${r.name}</div>
+                <div class="rv-location">Verified Client • Salem</div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        // Build dots
+        reviewsDots.innerHTML = srvReviews.map((_, idx) => `
+          <button class="rv-dot ${idx === 0 ? 'active' : ''}" data-index="${idx}" aria-label="Review page ${idx+1}"></button>
+        `).join('');
+
+        // Slider Javascript loop
+        let currentRevIdx = 0;
+        let revInterval;
+        const revCards = document.querySelectorAll('#reviews-track .rv-card');
+        const revDots = document.querySelectorAll('#reviews-dots .rv-dot');
+
+        function showReview(idx) {
+          revCards.forEach(c => c.classList.remove('active'));
+          revDots.forEach(d => d.classList.remove('active'));
+          currentRevIdx = (idx + revCards.length) % revCards.length;
+          revCards[currentRevIdx].classList.add('active');
+          revDots[currentRevIdx].classList.add('active');
+        }
+
+        function nextReview() {
+          showReview(currentRevIdx + 1);
+        }
+
+        function prevReview() {
+          showReview(currentRevIdx - 1);
+        }
+
+        function startReviewTimer() {
+          stopReviewTimer();
+          revInterval = setInterval(nextReview, 4000);
+        }
+
+        function stopReviewTimer() {
+          if (revInterval) clearInterval(revInterval);
+        }
+
+        // Event listeners
+        document.getElementById('rev-next-btn').addEventListener('click', () => {
+          nextReview();
+          startReviewTimer();
+        });
+        document.getElementById('rev-prev-btn').addEventListener('click', () => {
+          prevReview();
+          startReviewTimer();
+        });
+
+        revDots.forEach(dot => {
+          dot.addEventListener('click', () => {
+            const idx = parseInt(dot.getAttribute('data-index'));
+            showReview(idx);
+            startReviewTimer();
+          });
+        });
+
+        startReviewTimer();
+      } else {
+        document.getElementById('srv-reviews').style.display = 'none';
+      }
+    });
+
+    // ─── ERROR STATE FALLBACK ───────────────────────────────────────
+    function showErrorState() {
+      const mainContent = document.querySelector('.details-page-content');
+      mainContent.innerHTML = `
+        <div style="max-width:600px; margin:8rem auto; text-align:center; padding:3rem; background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-xl); box-shadow:var(--shadow-lg);">
+          <div style="font-size:4rem; margin-bottom:1rem;">⚠️</div>
+          <h2 style="font-size:24px; font-weight:900; margin-bottom:1rem;">Service Not Found</h2>
+          <p style="font-size:14px; color:var(--text2); margin-bottom:2rem; line-height:1.6;">The service details you are looking for does not exist in the LocalStorage database, or has been deleted by an administrator.</p>
+          <a href="index.html" class="btn-primary">Return to Homepage</a>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>

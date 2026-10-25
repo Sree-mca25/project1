@@ -1,0 +1,30 @@
+# robots.txt for Sathish Media Salem
+
+User-agent: *
+Allow: /
+Disallow: /admin.html
+
+# Allow all AI Search Agents
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Reference the sitemap
+Sitemap: https://sathishmedia.com/sitemap.xml

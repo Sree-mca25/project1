@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Portfolio Details — Sathish Media</title>
+  <meta name="description" id="page-desc" content="View creative campaign details, production portfolio, and enquiry info." />
+  <meta property="og:title" id="og-title" content="Portfolio — Sathish Media" />
+  <meta property="og:description" id="og-desc" content="Creative production campaigns and designs." />
+  <meta property="og:image" id="og-image" content="" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* Premium banner styles */
+    .portfolio-hero {
+      position: relative;
+      height: 55vh;
+      min-height: 380px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      background: #0a0a0a;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .portfolio-hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.65;
+      transform: scale(1.02);
+      transition: transform 12s ease;
+    }
+    .portfolio-hero:hover .portfolio-hero-bg {
+      transform: scale(1.05);
+    }
+    .portfolio-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.4) 60%, transparent 100%);
+      z-index: 1;
+    }
+    .portfolio-hero-content {
+      position: relative;
+      z-index: 2;
+      padding-bottom: 4rem;
+      width: 100%;
+    }
+    
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      gap: 4rem;
+      padding: 5rem 2rem;
+      align-items: start;
+    }
+
+    .project-body h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .project-body p {
+      font-size: 1.05rem;
+      color: var(--text2);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+
+    .project-sidebar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: calc(var(--header-h) + 2rem);
+    }
+
+    .sidebar-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+    }
+
+    .meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .meta-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--text3);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .meta-value {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .btn-wa-details {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      width: 100%;
+      padding: 0.95rem 1.85rem;
+      background: linear-gradient(135deg, #111111, #2A2A2A);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13.5px;
+      border-radius: var(--radius);
+      transition: all var(--transition);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 2rem;
+    }
+
+    .btn-wa-details:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(255, 77, 148, 0.35);
+      border-color: #FF4D94;
+    }
+
+    .gallery-section {
+      background: var(--bg2);
+      padding: 6rem 2rem;
+      border-top: 1.5px solid var(--border);
+      border-bottom: 1.5px solid var(--border);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gallery-item {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      aspect-ratio: 16/10;
+      cursor: zoom-in;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 1024px) {
+      .project-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .project-sidebar {
+        position: relative;
+        top: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🎬</div>
+      <div class="logo-text">
+        <span class="logo-eyebrow">Production House</span>
+        <span class="logo-name">Sathish Media</span>
+      </div>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html#hero" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About Us</a>
+      <a href="index.html#services" class="nav-link">Services</a>
+      <a href="products.html" class="nav-link">Products</a>
+      <a href="index.html#portfolio" class="nav-link">Portfolio</a>
+      <a href="index.html#reviews" class="nav-link">Reviews</a>
+      <a href="courses.html" class="nav-link">Courses</a>
+      <a href="faq.html" class="nav-link">FAQ</a>
+      <a href="index.html#contact" class="nav-link">Contact Us</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="wa-header-btn">
+        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.4 0 9.795-4.39 9.798-9.789.002-2.614-1.012-5.071-2.859-6.92-1.847-1.849-4.305-2.867-6.926-2.868-5.405 0-9.803 4.394-9.806 9.794-.001 2.083.541 4.116 1.571 5.861L2.122 22l5.474-1.435z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+      <button class="hamburger" id="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html#hero" class="mobile-nav-link">Home</a>
+  <a href="about.html" class="mobile-nav-link">About Us</a>
+  <a href="index.html#services" class="mobile-nav-link">Services</a>
+  <a href="products.html" class="mobile-nav-link">Products</a>
+  <a href="index.html#portfolio" class="mobile-nav-link">Portfolio</a>
+  <a href="index.html#reviews" class="mobile-nav-link">Reviews</a>
+  <a href="courses.html" class="mobile-nav-link">Courses</a>
+  <a href="faq.html" class="mobile-nav-link">FAQ</a>
+  <a href="index.html#contact" class="mobile-nav-link">Contact Us</a>
+  <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="mobile-nav-link accent">WhatsApp Order 📱</a>
+</div>
+
+<!-- PORTFOLIO DETAIL CONTENT -->
+<main id="portfolio-detail-main">
+  <!-- Rendered dynamically by Javascript -->
+</main>
+
+<!-- RELATED PROJECTS -->
+<section style="padding: 4rem 2rem 5rem; background: var(--bg);" id="related-section" style="display: none;">
+  <div class="section-inner">
+    <div class="section-header-row" style="margin-bottom: 3rem;">
+      <div>
+        <span class="section-badge">Recent Campaigns</span>
+        <h2 class="section-title">Related <span class="accent">Projects</span></h2>
+      </div>
+      <a href="index.html#portfolio" class="btn-outline" style="white-space: nowrap;">View All Works</a>
+    </div>
+    <div class="portfolio-grid" id="related-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;">
+      <!-- Dynamically Rendered -->
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer agency-footer">
+  <div class="footer-gradient-bar"></div>
+  <div class="footer-main-area">
+    <div class="footer-cols">
+      <!-- Brand Column -->
+      <div class="footer-brand-col">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">🎬</div>
+          <div class="logo-text">
+            <span class="logo-eyebrow">Production House</span>
+            <span class="logo-name">Sathish Media</span>
+          </div>
+        </a>
+        <p class="footer-brand-text">Transforming ideas into cinematic visual experiences. Creative media, branding solutions, art &amp; stationery supplies — all under one premium production house.</p>
+        <div class="footer-social-row">
+          <a href="https://www.instagram.com/sathishmedia?igsh=ZGo2Y2h0Zjh5azJx" target="_blank" rel="noopener" class="footer-social-btn instagram" title="Instagram" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/sathishmedia" target="_blank" rel="noopener" class="footer-social-btn facebook" title="Facebook" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://youtube.com/@sathishmedia?si=qZbj140beodCdEj8" target="_blank" rel="noopener" class="footer-social-btn youtube" title="YouTube" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 00-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 002.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 002.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="footer-social-btn whatsapp" title="WhatsApp" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.704 1.459h.005c6.56 0 11.9-5.336 11.903-11.894a11.785 11.785 0 00-3.486-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+      <!-- Services Column -->
+      <div>
+        <div class="footer-col-head">Services</div>
+        <a href="videography-photography.html" class="footer-col-link">Videography &amp; Photography</a>
+        <a href="events.html" class="footer-col-link">Event</a>
+        <a href="branding.html" class="footer-col-link">Branding</a>
+        <a href="designing.html" class="footer-col-link">Designing</a>
+        <a href="social-media-marketing.html" class="footer-col-link">Social Media Marketing</a>
+        <a href="advertising.html" class="footer-col-link">Advertising</a>
+        <a href="web-app-development.html" class="footer-col-link">Web &amp; App Development</a>
+        <a href="printing.html" class="footer-col-link">Printing</a>
+      </div>
+      <!-- Products Column -->
+      <div>
+        <div class="footer-col-head">Products</div>
+        <a href="products.html?cat=Gifts" class="footer-col-link">Personalized Gifts</a>
+        <a href="products.html?cat=Gifts" class="footer-col-link">Premium Frames</a>
+        <a href="products.html?cat=Art%20Materials" class="footer-col-link">Fine Art Supplies</a>
+        <a href="products.html?cat=Stationery" class="footer-col-link">Office Stationery</a>
+        <a href="about.html" class="footer-col-link">About Us</a>
+        <a href="admin.html" class="footer-col-link">Admin Panel</a>
+      </div>
+      <!-- Contact Column -->
+      <div>
+        <div class="footer-col-head">Get In Touch</div>
+        <div class="footer-contact-item">
+          <div class="footer-contact-icon">📞</div>
+          <div class="footer-contact-text"><a href="tel:+918762097098">+91 87620 97098</a></div>
+        </div>
+        <div class="footer-contact-item">
+          <div class="footer-contact-icon">✉️</div>
+          <div class="footer-contact-text"><a href="mailto:sathishmedia4u@gmail.com">sathishmedia4u@gmail.com</a></div>
+        </div>
+        <div class="footer-contact-item">
+          <div class="footer-contact-icon">📍</div>
+          <div class="footer-contact-text">358, Sathish Media Complex,<br>TVK Road,<br>Ammapet,<br>Salem - 636003</div>
+        </div>
+        <a href="https://wa.me/918762097098" target="_blank" rel="noopener" class="footer-wa-cta">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.4 0 9.795-4.39 9.798-9.789.002-2.614-1.012-5.071-2.859-6.92-1.847-1.849-4.305-2.867-6.926-2.868-5.405 0-9.803 4.394-9.806 9.794-.001 2.083.541 4.116 1.571 5.861L2.122 22l5.474-1.435z"/></svg>
+          WhatsApp Us Now
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom-bar">
+    <div class="footer-copyright">© 2026 <strong>Sathish Media</strong>. All Rights Reserved.</div>
+    <div class="footer-tagline">Premium Creative Media Production · Salem, Tamil Nadu</div>
+  </div>
+</footer>
+
+<script src="assets/js/portfolio.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+// ─── PORTFOLIO DETAIL PAGE ──────────────────────────────────────────
+const urlParams = new URLSearchParams(location.search);
+const portId = urlParams.get('id');
+const p = portId ? getPortfolioById(portId) : null;
+
+const main = document.getElementById('portfolio-detail-main');
+
+if (!p || p.visible === false) {
+  main.innerHTML = `
+    <div style="min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem;gap:1.5rem;padding-top:calc(var(--header-h)+3rem)">
+      <div style="font-size:4rem;opacity:.3;">😕</div>
+      <h1 style="font-size:1.5rem;font-weight:800;color:var(--text2);">Project not found</h1>
+      <a href="index.html#portfolio" class="btn-primary">← Back to Portfolio</a>
+    </div>`;
+} else {
+  // Map category code to name
+  const catName = getPortfolioCategoryName(p.category);
+
+  // Format date nicely
+  let formattedDate = 'Not specified';
+  if (p.date) {
+    const d = new Date(p.date);
+    if (!isNaN(d.getTime())) {
+      formattedDate = d.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+  }
+
+  // Update meta tags for SEO/AIO optimization
+  document.title = `${p.title} | Sathish Media Salem`;
+  document.getElementById('page-title').textContent = `${p.title} | Sathish Media`;
+
+  const pageUrl = window.location.href;
+  const pageDesc = p.shortDescription || p.description || `View project: ${p.title} by Sathish Media Salem.`;
+  const pageImg = p.image || '';
+
+  const updateMeta = (name, val, isProperty = false) => {
+    let el = isProperty ? document.querySelector(`meta[property="${name}"]`) : document.querySelector(`meta[name="${name}"]`);
+    if (!el) {
+      el = document.createElement('meta');
+      if (isProperty) el.setAttribute('property', name);
+      else el.setAttribute('name', name);
+      document.head.appendChild(el);
+    }
+    el.setAttribute('content', val);
+  };
+
+  updateMeta('description', pageDesc);
+  updateMeta('og:type', 'article', true);
+  updateMeta('og:url', pageUrl, true);
+  updateMeta('og:title', `${p.title} | Sathish Media Salem`, true);
+  updateMeta('og:description', pageDesc, true);
+  updateMeta('og:image', pageImg, true);
+  updateMeta('twitter:card', 'summary_large_image');
+  updateMeta('twitter:title', `${p.title} | Sathish Media Salem`);
+  updateMeta('twitter:description', pageDesc);
+  updateMeta('twitter:image', pageImg);
+
+  // WhatsApp configuration
+  const waNum = getPortfolioWhatsAppNumber();
+  const waMsg = 
+`Hello Sathish Media,
+
+I am interested in your portfolio work:
+
+Project Title: ${p.title}
+Project ID: ${p.id}
+Category: ${catName}
+
+Please share more information about similar project pricing and setup.`;
+
+  // Dynamic gallery items
+  let galleryHtml = '';
+  if (p.gallery && p.gallery.length > 0) {
+    const galleryItems = p.gallery.map(url => `
+      <div class="gallery-item" onclick="openImageModal('${url}')">
+        <img src="${url}" alt="Gallery image for ${p.title}" loading="lazy" onerror="this.src='assets/images/videography-photography/videography-and-photography.jpg'" />
+      </div>
+    `).join('');
+
+    galleryHtml = `
+      <section class="gallery-section">
+        <div class="section-inner">
+          <div class="section-header" style="text-align: center;">
+            <span class="section-badge">Work Gallery</span>
+            <h2 class="section-title">Project Gallery</h2>
+            <p class="section-desc" style="margin: 0 auto 3rem;">Detailed production snaps and behind-the-scenes visuals.</p>
+          </div>
+          <div class="gallery-grid">
+            ${galleryItems}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  main.innerHTML = `
+    <!-- Large Banner Image Hero -->
+    <div class="portfolio-hero">
+      <img src="${p.image}" class="portfolio-hero-bg" alt="${p.title}" onerror="this.src='assets/images/videography-photography/videography-and-photography.jpg'" />
+      <div class="portfolio-hero-overlay"></div>
+      <div class="portfolio-hero-content">
+        <div class="section-inner" style="max-width: 1280px; margin: 0 auto; padding: 0 2rem;">
+          <span class="detail-badge">${catName}</span>
+          <h1 class="detail-title" style="color: #fff; margin-top: 0.5rem; text-shadow: 0 4px 12px rgba(0,0,0,0.5);">${p.title}</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Overview Grid -->
+    <div class="section-inner project-grid">
+      <!-- Left Column Description -->
+      <div class="project-body fade-up">
+        <h2>Project Overview</h2>
+        <p>${p.description || p.shortDescription}</p>
+        
+        <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--border);">
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:12px;color:var(--text3);">
+            <span style="font-size:1rem;">✅</span> Real Campaigns Only
+          </div>
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:12px;color:var(--text3);">
+            <span style="font-size:1rem;">💬</span> Custom Consultations
+          </div>
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:12px;color:var(--text3);">
+            <span style="font-size:1rem;">🚀</span> Professional Execution
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column Sidebar Details -->
+      <div class="project-sidebar fade-up-d1">
+        <h3 class="sidebar-title">Project Details</h3>
+        <div class="meta-list">
+          <div>
+            <div class="meta-label">Client</div>
+            <div class="meta-value">${p.client || 'Confidential'}</div>
+          </div>
+          <div>
+            <div class="meta-label">Project Date</div>
+            <div class="meta-value">${formattedDate}</div>
+          </div>
+          <div>
+            <div class="meta-label">Category</div>
+            <div class="meta-value">${catName}</div>
+          </div>
+        </div>
+        <a href="https://wa.me/${waNum}?text=${encodeURIComponent(waMsg)}" target="_blank" rel="noopener" class="btn-wa-details">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 0.25rem;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24z"/></svg>
+          Enquire on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Gallery Section -->
+    ${galleryHtml}
+  `;
+
+  // Related projects (same category, exclude current)
+  const relatedList = getPortfolio()
+    .filter(item => item.category === p.category && item.id !== p.id && item.visible !== false)
+    .slice(0, 3);
+
+  if (relatedList.length > 0) {
+    const relatedSection = document.getElementById('related-section');
+    if (relatedSection) relatedSection.style.display = 'block';
+    
+    document.getElementById('related-grid').innerHTML = relatedList.map(item => {
+      const itemCatName = getPortfolioCategoryName(item.category);
+      return `
+        <div class="portfolio-item" onclick="location.href='portfolio-details.html?id=${item.id}'" style="border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border); background: var(--surface); position: relative; aspect-ratio: 4/3; cursor: pointer;">
+          <img src="${item.image}" alt="${item.title}" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.src='assets/images/videography-photography/videography-and-photography.jpg'" />
+          <div class="category-overlay"></div>
+          <div class="category-content">
+            <div class="category-tag" style="color:var(--accent); font-family:var(--font-mono); font-size:8.5px; letter-spacing:0.15em; font-weight:700; text-transform:uppercase; margin-bottom:0.4rem;">${itemCatName}</div>
+            <div class="category-name" style="font-size: 15px; font-weight: 800; line-height: 1.25;">${item.title}</div>
+            <div class="category-desc" style="font-size: 11px; opacity: 0.85; margin-top: 0.25rem;">${item.shortDescription || ''}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+}
+
+// Zoom-in modal helper for gallery items
+window.openImageModal = function(url) {
+  const modal = document.createElement('div');
+  modal.style.position = 'fixed';
+  modal.style.inset = '0';
+  modal.style.background = 'rgba(0,0,0,0.9)';
+  modal.style.zIndex = '99999';
+  modal.style.display = 'flex';
+  modal.style.alignItems = 'center';
+  modal.style.justifyContent = 'center';
+  modal.style.cursor = 'zoom-out';
+  modal.style.padding = '2rem';
+  
+  modal.innerHTML = `
+    <img src="${url}" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:8px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 20px 50px rgba(0,0,0,0.8);" />
+    <button style="position:absolute; top:1.5rem; right:1.5rem; background:none; border:none; color:#fff; font-size:2rem; cursor:pointer;">✕</button>
+  `;
+  
+  modal.addEventListener('click', () => modal.remove());
+  document.body.appendChild(modal);
+};
+</script>
+</body>
+</html>
